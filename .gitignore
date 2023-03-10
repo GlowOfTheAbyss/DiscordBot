@@ -43,3 +43,4 @@ bin/
 
 ### Discord ###
 token.txt
+*.json
