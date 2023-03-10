@@ -18,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // test
+
         final String token = TokenAnalyzer.getTokenAnalyzer().findToken();
 
         final DiscordClient client = DiscordClient.create(token);
