@@ -2,13 +2,11 @@ package org.glow.commands.systrmcommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.commands.Command;
-import org.glow.commands.LaunchedCommand;
 import org.glow.person.Player;
 
 import java.util.concurrent.TimeUnit;
-
-import static org.glow.Main.gateway;
 
 public class ShotDownCommand extends Command {
 
@@ -49,7 +47,7 @@ public class ShotDownCommand extends Command {
         builder.title("Выключаюсь");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
-        gateway.logout().block();
+        Main.systems.gateway.logout().block();
 
     }
 

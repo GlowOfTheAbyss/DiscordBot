@@ -2,16 +2,14 @@ package org.glow.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.common.util.Snowflake;
+import org.glow.Main;
 import org.glow.inventory.Inventory;
 import org.glow.inventory.SkillBook;
 import org.glow.location.Location;
-import org.glow.location.Map;
 import org.glow.location.region.mondstadt.Mondstadt;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.glow.Main.gateway;
 
 public class Player extends Person {
 
@@ -47,7 +45,7 @@ public class Player extends Person {
 
     @Override
     public String getName() {
-        return gateway.getUserById(getSnowflake()).block().getUsername();
+        return Main.systems.gateway.getUserById(getSnowflake()).block().getUsername();
     }
 
     @JsonIgnore
