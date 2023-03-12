@@ -27,8 +27,8 @@ public class Player extends Person {
 
         this.health = getMaxHealth();
         this.mana = getMaxMana();
-        this.energy = 5;
-        this.coins = 5000;
+        this.energy = 50;
+        this.coins = 90000;
 
         this.strength = 0;
         this.endurance = 0;

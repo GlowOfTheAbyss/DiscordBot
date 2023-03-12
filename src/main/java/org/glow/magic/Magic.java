@@ -1,18 +1,41 @@
 package org.glow.magic;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import org.glow.person.Player;
 
-@JsonDeserialize(as = MagicCreated.class)
-public interface Magic {
+public abstract class Magic {
 
-    String getSpellName();
+    private String spellName;
+    private int coastInMana;
 
-    int getCoastInMana();
+    private int price;
 
-    int getPrice();
+    public String getSpellName() {
+        return spellName;
+    }
 
-    void spellStart(Message message, Player player);
+    public void setSpellName(String spellName) {
+        this.spellName = spellName;
+    }
+
+    public int getCoastInMana() {
+        return coastInMana;
+    }
+
+    public void setCoastInMana(int coastInMana) {
+        this.coastInMana = coastInMana;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @JsonIgnore
+    public void cast(Message message, Player player) {}
 
 }

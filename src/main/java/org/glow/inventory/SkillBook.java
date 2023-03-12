@@ -34,4 +34,5 @@ public class SkillBook {
     public void setListSpellSize(int listSpellSize) {
         this.listSpellSize = listSpellSize;
     }
+
 }

@@ -1,6 +1,5 @@
 package org.glow.magic.spells;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.filemanager.Save;
@@ -9,26 +8,16 @@ import org.glow.person.Player;
 
 import java.util.Random;
 
-public class Healing implements Magic {
+public class Healing extends Magic {
 
-    @Override
-    public String getSpellName() {
-        return "Исцеление";
+    public Healing() {
+        setSpellName("Исцеление");
+        setCoastInMana(50);
+        setPrice(6_000);
     }
 
     @Override
-    public int getCoastInMana() {
-        return 50;
-    }
-
-    @Override
-    public int getPrice() {
-        return 6000;
-    }
-
-    @JsonIgnore
-    @Override
-    public void spellStart(Message message, Player player) {
+    public void cast(Message message, Player player) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 

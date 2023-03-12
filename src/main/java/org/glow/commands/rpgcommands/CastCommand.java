@@ -48,7 +48,7 @@ public class CastCommand extends Command {
 
                 if (magic.getSpellName().equalsIgnoreCase(spellName)) {
 
-                    magic.spellStart(message, player);
+                    magic.cast(message, player);
                     return;
 
                 }
