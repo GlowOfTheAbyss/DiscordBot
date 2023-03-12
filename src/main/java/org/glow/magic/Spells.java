@@ -1,5 +1,7 @@
 package org.glow.magic;
 
+import org.glow.magic.spells.Healing;
+
 import java.util.ArrayList;
 import java.util.List;
 

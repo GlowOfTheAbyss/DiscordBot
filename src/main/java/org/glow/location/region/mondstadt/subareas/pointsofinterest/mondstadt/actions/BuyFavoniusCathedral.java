@@ -5,7 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.filemanager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
-import org.glow.magic.Healing;
+import org.glow.magic.spells.Healing;
 import org.glow.magic.Magic;
 import org.glow.person.Player;
 
