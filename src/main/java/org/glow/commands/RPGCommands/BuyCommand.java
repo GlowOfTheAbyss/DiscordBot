@@ -1,4 +1,4 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
@@ -13,7 +13,7 @@ public class BuyCommand extends Command {
     private static final BuyCommand buyCommand = new BuyCommand();
 
     private BuyCommand() {
-        this.name = "buy";
+        setName("buy");
     }
 
     @Override

@@ -1,9 +1,9 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.item.Items;
 import org.glow.item.body.Body;
 import org.glow.item.lefthand.LeftHand;
@@ -17,7 +17,7 @@ public class EquipCommand extends Command {
     private static final EquipCommand equipCommand = new EquipCommand();
 
     private EquipCommand() {
-        this.name = "equip";
+        setName("equip");
     }
 
     @Override

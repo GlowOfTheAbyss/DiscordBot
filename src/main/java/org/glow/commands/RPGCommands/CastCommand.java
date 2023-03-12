@@ -1,4 +1,4 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -12,7 +12,7 @@ public class CastCommand extends Command {
     private static final CastCommand castCommand = new CastCommand();
 
     private CastCommand() {
-        this.name = "cast";
+        setName("cast");
     }
 
     @Override

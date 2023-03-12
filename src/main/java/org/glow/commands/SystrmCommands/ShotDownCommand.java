@@ -1,4 +1,4 @@
-package org.glow.commands.systrmcommands;
+package org.glow.commands.SystrmCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -13,7 +13,7 @@ public class ShotDownCommand extends Command {
     private static final ShotDownCommand shotDownCommand = new ShotDownCommand();
 
     private ShotDownCommand() {
-        this.name = "shot_down";
+        setName("shot_down");
     }
 
     @Override

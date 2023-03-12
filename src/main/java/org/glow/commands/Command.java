@@ -3,54 +3,21 @@ package org.glow.commands;
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.commands.rpgcommands.*;
-import org.glow.commands.systrmcommands.ShotDownCommand;
 import org.glow.person.Player;
 
-import java.util.ArrayList;
-import java.util.List;
+public abstract class Command implements LaunchedCommand {
 
-public class Command implements LaunchedCommand {
+    private String name;
 
-    private static final Command command = new Command();
+    public static final Snowflake admin = Snowflake.of(238764551221280770L);
 
-    private static final List<Command> commandList = new ArrayList<>();
-    static {
-        commandList.add(BuyCommand.getBuyCommand());
-        commandList.add(CastCommand.getCastCommand());
-        commandList.add(EquipCommand.getEquipCommand());
-        commandList.add(HealCommand.getHealCommand());
-        commandList.add(InventoryCommand.getInventoryCommand());
-        commandList.add(MoveCommand.getMoveCommand());
-        commandList.add(StatsCommand.getStatsCommand());
-        commandList.add(UnequipCommand.getUnequipCommand());
-        commandList.add(UserToPlayerCommand.getUserToPlayerCommand());
-
-        commandList.add(ShotDownCommand.getShotDownCommand());
-    }
-
-    protected String name;
-
-    /*---*/
-    protected static final Snowflake admin = Snowflake.of(238764551221280770L);
-
-    protected Command() {
-    }
-
-    public static Command getCommand() {
-        return command;
-    }
-
-    public List<Command> getCommandList() {
-        return commandList;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
     }
-
-    @Override
-    public void start(Message message) {}
 
     /*---*/
     protected Player userToPlayer(Message message) {

@@ -1,4 +1,4 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
@@ -11,7 +11,7 @@ public class HealCommand extends Command {
     private static final HealCommand healCommand = new HealCommand();
 
     private HealCommand() {
-        this.name = "heal";
+        setName("heal");
     }
 
     @Override

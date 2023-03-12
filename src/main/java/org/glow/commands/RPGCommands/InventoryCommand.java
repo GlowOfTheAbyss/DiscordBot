@@ -1,4 +1,4 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -11,7 +11,7 @@ public class InventoryCommand extends Command {
     private static final InventoryCommand inventoryCommand = new InventoryCommand();
 
     private InventoryCommand() {
-        this.name = "inventory";
+        setName("inventory");
     }
 
     @Override

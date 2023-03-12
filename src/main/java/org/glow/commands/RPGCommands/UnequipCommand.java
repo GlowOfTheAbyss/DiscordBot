@@ -1,9 +1,9 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.item.Items;
 import org.glow.item.NoneArmor;
 import org.glow.person.Player;
@@ -15,7 +15,7 @@ public class UnequipCommand extends Command {
     private static final UnequipCommand unequipCommand = new UnequipCommand();;
 
     private UnequipCommand() {
-        this.name = "unequip";
+        setName("unequip");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -10,7 +10,7 @@ public class StatsCommand extends Command {
     private static final StatsCommand statsCommand = new StatsCommand();
 
     private StatsCommand() {
-        this.name = "stats";
+        setName("stats");
     }
 
     @Override
