@@ -37,6 +37,7 @@ public class Map {
         if (pointsOfInterest.getName().equalsIgnoreCase(FavoniusCathedral.getFavoniusCathedral().getName())) {
             return CityMondstadt.getCityMondstadt();
         }
+
         if (pointsOfInterest.getName().equalsIgnoreCase(SchulzsBlacksmith.getSchulzsBlacksmith().getName())) {
             return CityMondstadt.getCityMondstadt();
         }
@@ -46,8 +47,10 @@ public class Map {
     }
 
     public List<Region> getRegions() {
+
         return List.of(Liyue.getLiyue(),
                 Mondstadt.getMondstadt());
+
     }
 
     public List<Subarea> getSubareas(Region region) {
@@ -80,6 +83,7 @@ public class Map {
             return List.of(BuyFavoniusCathedral.getBuyFavoniusCathedral(),
                     HealFavoniusCathedral.getHealFavoniusCathedral());
         }
+
         if (pointsOfInterest.getName().equalsIgnoreCase(SchulzsBlacksmith.getSchulzsBlacksmith().getName())) {
             return List.of(BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith());
         }
