@@ -29,7 +29,8 @@ public class Map {
             return Mondstadt.getMondstadt();
         }
 
-        return null;
+        throw new IllegalArgumentException("Region not found");
+
     }
 
     public Subarea getSubareaFromPointsOfInterest(PointsOfInterest pointsOfInterest) {
@@ -42,7 +43,7 @@ public class Map {
             return CityMondstadt.getCityMondstadt();
         }
 
-        return null;
+        throw new IllegalArgumentException("Subarea not found");
 
     }
 

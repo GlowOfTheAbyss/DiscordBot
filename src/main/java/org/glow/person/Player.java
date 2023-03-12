@@ -3,8 +3,8 @@ package org.glow.person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.common.util.Snowflake;
 import org.glow.Main;
-import org.glow.inventory.Inventory;
-import org.glow.inventory.SkillBook;
+import org.glow.storage.Inventory;
+import org.glow.storage.SkillBook;
 import org.glow.location.Location;
 import org.glow.location.region.mondstadt.Mondstadt;
 

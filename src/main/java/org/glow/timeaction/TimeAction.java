@@ -1,6 +1,6 @@
 package org.glow.timeaction;
 
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.person.Player;
 
 public class TimeAction implements Runnable {

@@ -2,7 +2,7 @@ package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.a
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
 import org.glow.magic.Magic;
@@ -17,7 +17,7 @@ public class BuyFavoniusCathedral extends Action {
     private static final List<Magic> shopSpellList = List.of(new Healing());
 
     private BuyFavoniusCathedral() {
-        this.name = "Купить | !buy";
+        setName("Купить | !buy");
     }
 
     @Override

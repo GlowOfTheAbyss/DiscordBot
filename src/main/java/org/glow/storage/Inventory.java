@@ -1,4 +1,4 @@
-package org.glow.inventory;
+package org.glow.storage;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.glow.item.Items;

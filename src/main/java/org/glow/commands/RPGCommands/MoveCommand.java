@@ -1,9 +1,9 @@
-package org.glow.commands.rpgcommands;
+package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.location.*;
 import org.glow.person.Player;
 
@@ -14,7 +14,7 @@ public class MoveCommand extends Command {
     private static final MoveCommand moveCommand = new MoveCommand();
 
     private MoveCommand(){
-        this.name = "move";
+        setName("move");
     }
 
     @Override

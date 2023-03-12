@@ -3,8 +3,8 @@ package org.glow;
 import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
-import org.glow.filemanager.Load;
-import org.glow.filemanager.TokenAnalyzer;
+import org.glow.fileManager.Load;
+import org.glow.fileManager.TokenAnalyzer;
 import org.glow.location.Map;
 import org.glow.timeaction.TimeAction;
 

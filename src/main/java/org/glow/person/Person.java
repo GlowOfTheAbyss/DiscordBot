@@ -2,8 +2,8 @@ package org.glow.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.common.util.Snowflake;
-import org.glow.inventory.Inventory;
-import org.glow.inventory.SkillBook;
+import org.glow.storage.Inventory;
+import org.glow.storage.SkillBook;
 
 public abstract class Person {
 

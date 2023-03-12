@@ -4,12 +4,11 @@ import org.glow.location.*;
 
 public class FavoniusCathedral extends PointsOfInterest {
 
-    private static final String name = "Собор Барбатоса";
-    private static final String image = "https://cdn.discordapp.com/attachments/882560343983915029/1065586700660789319/FavoniusCathedral.png";
-    private static final FavoniusCathedral favoniusCathedral = new FavoniusCathedral(name, image);
+    private static final FavoniusCathedral favoniusCathedral = new FavoniusCathedral();
 
-    public FavoniusCathedral(String name, String image) {
-        super(name, image);
+    private FavoniusCathedral() {
+        setName("Собор Барбатоса");
+        setImage("https://cdn.discordapp.com/attachments/882560343983915029/1065586700660789319/FavoniusCathedral.png");
     }
 
     public static FavoniusCathedral getFavoniusCathedral() {

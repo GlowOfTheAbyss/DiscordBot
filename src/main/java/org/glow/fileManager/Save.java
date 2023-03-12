@@ -1,4 +1,4 @@
-package org.glow.filemanager;
+package org.glow.fileManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.glow.person.Player;

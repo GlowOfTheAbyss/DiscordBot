@@ -4,12 +4,11 @@ import org.glow.location.*;
 
 public class SchulzsBlacksmith extends PointsOfInterest {
 
-    private static final String name = "Кузница Шульца";
-    private static final String image = "https://cdn.discordapp.com/attachments/882560343983915029/1065685456643162213/SchulzsBlacksmith.png";
-    private static final SchulzsBlacksmith schulzsBlacksmith = new SchulzsBlacksmith(name, image);
+    private static final SchulzsBlacksmith schulzsBlacksmith = new SchulzsBlacksmith();
 
-    public SchulzsBlacksmith(String name, String image) {
-        super(name, image);
+    private SchulzsBlacksmith() {
+        setName("Кузница Шульца");
+        setImage("https://cdn.discordapp.com/attachments/882560343983915029/1065685456643162213/SchulzsBlacksmith.png");
     }
 
     public static SchulzsBlacksmith getSchulzsBlacksmith() {

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import org.glow.person.Player;
 
-public abstract class Magic {
+public class Magic {
 
     private String spellName;
     private int coastInMana;

@@ -2,14 +2,14 @@ package org.glow.location;
 
 public class Location {
 
-    protected String name;
-    protected String image;
+    private String name;
+    private String image;
 
-    public Location() {
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Location(String name, String image) {
-        this.name = name;
+    public void setImage(String image) {
         this.image = image;
     }
 

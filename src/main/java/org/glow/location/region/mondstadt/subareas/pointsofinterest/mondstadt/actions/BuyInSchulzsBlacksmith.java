@@ -2,7 +2,7 @@ package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.a
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.item.Armor;
 import org.glow.item.Items;
 import org.glow.item.Shield;
@@ -34,7 +34,7 @@ public class BuyInSchulzsBlacksmith extends Action {
             new WhiteIronHeadArmor(), new WhiteIronBodyArmor(), new WhiteIronLegArmor());
 
     private BuyInSchulzsBlacksmith() {
-        this.name = "Купить | !buy";
+        setName("Купить | !buy");
     }
 
     @Override

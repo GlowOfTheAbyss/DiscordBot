@@ -1,4 +1,4 @@
-package org.glow.filemanager;
+package org.glow.fileManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -2,7 +2,7 @@ package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.a
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.Player;
 
@@ -11,7 +11,7 @@ public class HealFavoniusCathedral extends Action {
     private static final HealFavoniusCathedral healFavoniusCathedral = new HealFavoniusCathedral();
 
     private HealFavoniusCathedral() {
-        this.name = "Востановить здоровье | !heal";
+        setName("Востановить здоровье | !heal");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package org.glow.inventory;
+package org.glow.storage;
 
 import org.glow.magic.Magic;
 

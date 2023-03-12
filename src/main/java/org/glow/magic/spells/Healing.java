@@ -2,7 +2,7 @@ package org.glow.magic.spells;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.filemanager.Save;
+import org.glow.fileManager.Save;
 import org.glow.magic.Magic;
 import org.glow.person.Player;
 

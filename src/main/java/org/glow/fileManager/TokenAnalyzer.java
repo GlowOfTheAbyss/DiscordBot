@@ -1,4 +1,4 @@
-package org.glow.filemanager;
+package org.glow.fileManager;
 
 import java.io.IOException;
 import java.nio.file.Files;
