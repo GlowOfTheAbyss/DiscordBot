@@ -12,8 +12,11 @@ public class MessageReader {
     private static final List<Snowflake> readableChats = List.of(testChat);
 
     private static final MessageReader messageReader = new MessageReader();
+    private static CommandReader commandReader;
 
-    private MessageReader(){}
+    private MessageReader(){
+        commandReader = CommandReader.getCommandReader();
+    }
 
     public void readMessage(Message message) {
 
@@ -32,7 +35,7 @@ public class MessageReader {
 
         if (message.getContent().contains(prefix)) {
 
-            CommandReader.getCommandReader().readCommand(message);
+            commandReader.readCommand(message);
 
         }
 
