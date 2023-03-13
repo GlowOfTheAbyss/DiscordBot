@@ -12,9 +12,11 @@ import java.util.concurrent.Executors;
 public class CommandReader {
 
     private static final CommandReader commandReader = new CommandReader();
-    private static final HashSet<Command> commandList = new HashSet<>();
+    private static HashSet<Command> commandList;
 
     private CommandReader() {
+
+        commandList = new HashSet<>();
 
         commandList.add(BuyCommand.getBuyCommand());
         commandList.add(CastCommand.getCastCommand());
