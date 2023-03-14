@@ -23,30 +23,6 @@ public class Map {
         return locations;
     }
 
-    public Region getRegionFromSubarea(Subarea subarea) {
-
-        if (subarea.getName().equalsIgnoreCase(CityMondstadt.getCityMondstadt().getName())) {
-            return Mondstadt.getMondstadt();
-        }
-
-        throw new IllegalArgumentException("Region not found");
-
-    }
-
-    public Subarea getSubareaFromPointsOfInterest(PointsOfInterest pointsOfInterest) {
-
-        if (pointsOfInterest.getName().equalsIgnoreCase(FavoniusCathedral.getFavoniusCathedral().getName())) {
-            return CityMondstadt.getCityMondstadt();
-        }
-
-        if (pointsOfInterest.getName().equalsIgnoreCase(SchulzsBlacksmith.getSchulzsBlacksmith().getName())) {
-            return CityMondstadt.getCityMondstadt();
-        }
-
-        throw new IllegalArgumentException("Subarea not found");
-
-    }
-
     public List<Region> getRegions() {
 
         return List.of(Liyue.getLiyue(),
@@ -54,42 +30,62 @@ public class Map {
 
     }
 
+    public Region getRegionFromSubarea(Subarea subarea) {
+
+        if (subarea instanceof CityMondstadt) {
+            return Mondstadt.getMondstadt();
+        }
+
+        throw new IllegalArgumentException("Region not found");
+    }
+
+    public Subarea getSubareaFromPointsOfInterest(PointsOfInterest pointsOfInterest) {
+
+        if (pointsOfInterest instanceof FavoniusCathedral
+                || pointsOfInterest instanceof SchulzsBlacksmith) {
+            return CityMondstadt.getCityMondstadt();
+        }
+
+        throw new IllegalArgumentException("Subarea not found");
+
+    }
+
     public List<Subarea> getSubareas(Region region) {
 
-        if (region.getName().equalsIgnoreCase(Liyue.getLiyue().getName())) {
+        if (region instanceof Liyue) {
             return List.of();
         }
 
-        if (region.getName().equalsIgnoreCase(Mondstadt.getMondstadt().getName())) {
+        if (region instanceof Mondstadt) {
             return List.of(CityMondstadt.getCityMondstadt());
         }
 
-        return null;
+        throw new IllegalArgumentException("List Subarea not found");
 
     }
 
     public List<PointsOfInterest> getPointsOfInterests(Subarea subarea) {
 
-        if (subarea.getName().equalsIgnoreCase(CityMondstadt.getCityMondstadt().getName())) {
+        if (subarea instanceof CityMondstadt) {
             return List.of(FavoniusCathedral.getFavoniusCathedral(),
                     SchulzsBlacksmith.getSchulzsBlacksmith());
         }
 
-        return null;
+        throw new IllegalArgumentException("List Points of interest  not found");
     }
 
     public List<Action> getActions(PointsOfInterest pointsOfInterest) {
 
-        if (pointsOfInterest.getName().equalsIgnoreCase(FavoniusCathedral.getFavoniusCathedral().getName())) {
+        if (pointsOfInterest instanceof FavoniusCathedral) {
             return List.of(BuyFavoniusCathedral.getBuyFavoniusCathedral(),
                     HealFavoniusCathedral.getHealFavoniusCathedral());
         }
 
-        if (pointsOfInterest.getName().equalsIgnoreCase(SchulzsBlacksmith.getSchulzsBlacksmith().getName())) {
+        if (pointsOfInterest instanceof SchulzsBlacksmith) {
             return List.of(BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith());
         }
 
-        return null;
+        throw new IllegalArgumentException("List action  not found");
     }
 
     public static Map getMap() {
