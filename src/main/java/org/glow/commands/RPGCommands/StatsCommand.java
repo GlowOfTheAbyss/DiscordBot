@@ -24,13 +24,16 @@ public class StatsCommand extends Command {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         builder.title(player.getName());
-        builder.description("Локация: " + player.getLocation().getName() + "\n" + "\n"
-                + ":pig2: " + player.getCoins() + "\n"
+        builder.description("Локация: " + player.getLocationName() + "\n" + "\n"
+
+                + "Мора " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"
                 + "Здоровье: " + player.getHealth() + "\n"
                 + "Мана: " + player.getMana() + "\n" + "\n"
+
                 + "Уровень: " + player.getLevel() + "\n"
                 + "Боевой уровень: " + player.getCombatLevel() + "\n" + "\n"
+
                 + "Сила: " + player.getStrength() + "\n"
                 + "Выносливость: " + player.getEndurance() + "\n"
                 + "Ловкость: " + player.getAgility() + "\n"

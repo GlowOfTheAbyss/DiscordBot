@@ -24,9 +24,9 @@ public class BuyCommand extends Command {
             return;
         }
 
-        if (player.getLocation().getName().equals(SchulzsBlacksmith.getSchulzsBlacksmith().getName())) {
+        if (player.getLocation() instanceof SchulzsBlacksmith) {
             BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith().startAction(message, player);
-        } else if (player.getLocation().getName().equals(FavoniusCathedral.getFavoniusCathedral().getName())) {
+        } else if (player.getLocation() instanceof FavoniusCathedral) {
             BuyFavoniusCathedral.getBuyFavoniusCathedral().startAction(message, player);
         }
 

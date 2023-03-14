@@ -1,6 +1,6 @@
 package org.glow.item;
 
-public class Item {
+public abstract class Item {
 
     private String name;
     private int price;

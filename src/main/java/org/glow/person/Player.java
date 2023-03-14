@@ -3,6 +3,7 @@ package org.glow.person;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.common.util.Snowflake;
 import org.glow.Main;
+import org.glow.location.Map;
 import org.glow.storage.Inventory;
 import org.glow.storage.SkillBook;
 import org.glow.location.Location;
@@ -15,32 +16,33 @@ public class Player extends Person {
 
     private static final List<Player> playerList = new ArrayList<>();
 
-    private Location location;
+    private String locationName;
 
     public Player() {}
 
     public Player(Snowflake snowflake) {
 
-        this.stringSnowflake = snowflake.asString();
+        setStringSnowflake(snowflake.asString());
 
-        this.location = Mondstadt.getMondstadt();
+        setLocationName(Mondstadt.getMondstadt().getName());
 
-        this.health = getMaxHealth();
-        this.mana = getMaxMana();
-        this.energy = 50;
-        this.coins = 90000;
+        setStrength(0);
+        setEndurance(0);
+        setAgility(0);
+        setIntelligence(0);
+        setPerception(0);
+        setLuck(0);
 
-        this.strength = 0;
-        this.endurance = 0;
-        this.agility = 0;
-        this.intelligence = 0;
-        this.perception = 0;
-        this.luck = 0;
+        setHealth(getMaxHealth());
+        setMana(getMaxMana());
+        setEnergy(50);
+        setCoins(90000);
 
-        this.inventory = new Inventory();
-        this.skillBook = new SkillBook();
+        setInventory(new Inventory());
+        setSkillBook(new SkillBook());
 
         playerList.add(this);
+
     }
 
     @Override
@@ -50,20 +52,34 @@ public class Player extends Person {
 
     @JsonIgnore
     public int getMaxHealth() {
-        return 100 + (endurance * 10);
+        return 100 + (getEndurance() * 10);
     }
 
     @JsonIgnore
     public int getMaxMana() {
-        return 100 + ((int) (0.5 * intelligence)) * 10;
+        return 100 + ((int) (0.5 * getIntelligence())) * 10;
     }
 
+    public String getLocationName() {
+        return locationName;
+    }
+
+    @JsonIgnore
     public Location getLocation() {
-        return location;
+        for (Location location : Map.getLocations()) {
+            if (location.getName().equalsIgnoreCase(locationName)) {
+                return location;
+            }
+        }
+        throw new IllegalArgumentException("Location not found");
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationName(String locationName) {
+        this.locationName = locationName;
+    }
+
+    public void setLocationName(Location location) {
+        this.locationName = location.getName();
     }
 
     public static List<Player> getPlayerList() {

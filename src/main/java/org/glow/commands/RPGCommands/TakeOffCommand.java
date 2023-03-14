@@ -47,7 +47,7 @@ public class TakeOffCommand extends Command {
             return;
         }
 
-        String takeOffItemName = message.getContent().replaceFirst("!unequip ", "");
+        String takeOffItemName = message.getContent().replaceFirst("!take_off ", "");
         List<Item> equipList = player.getInventory().getEquippedItems();
 
         for (Item item : equipList) {

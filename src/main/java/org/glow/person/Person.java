@@ -7,24 +7,24 @@ import org.glow.storage.SkillBook;
 
 public abstract class Person {
 
-    protected String stringSnowflake;
-    protected String name;
+    private String stringSnowflake;
+    private String name;
 
-    protected int health;
-    protected int mana;
-    protected int energy;
-    protected int coins;
+    private int health;
+    private int mana;
+    private int energy;
+    private int coins;
 
-    protected int strength;
-    protected int endurance;
-    protected int agility;
-    protected int intelligence;
-    protected int perception;
-    protected int luck;
+    private int strength;
+    private int endurance;
+    private int agility;
+    private int intelligence;
+    private int perception;
+    private int luck;
 
-    protected Inventory inventory;
+    private Inventory inventory;
 
-    protected SkillBook skillBook;
+    private SkillBook skillBook;
 
     @JsonIgnore
     public Snowflake getSnowflake() {
@@ -146,6 +146,9 @@ public abstract class Person {
         return skillBook;
     }
 
+    public void setSkillBook(SkillBook skillBook) {
+        this.skillBook = skillBook;
+    }
 
 }
 

@@ -29,7 +29,7 @@ public class InventoryCommand extends Command {
         stringBuilder.append("Сумка: ");
 
         if (player.getInventory().getBag().isEmpty()) {
-            stringBuilder.append("пусто");
+            stringBuilder.append("Пусто");
         } else {
             for (Item items : player.getInventory().getBag()) {
                 stringBuilder.append(items.getName()).append(" ");
@@ -38,14 +38,17 @@ public class InventoryCommand extends Command {
 
         builder.description("Броня: " + player.getInventory().getArmor() + "\n"
                 + "Атака: " + player.getInventory().getAttack() + "\n" + "\n"
+
                 + "Голова: " +player.getInventory().getHead().getName() + "\n"
                 + "Тело: " + player.getInventory().getBody().getName() + "\n"
                 + "Ноги: " + player.getInventory().getLegs().getName() + "\n"
                 + "Правая рука: " + player.getInventory().getRightHand().getName() + "\n"
                 + "Левая рука: " + player.getInventory().getLeftHand().getName() + "\n" + "\n"
+
                 + "Шея: " + player.getInventory().getNeck().getName() + "\n"
                 + "Палец правой руки: " + player.getInventory().getRightFinger().getName() + "\n"
                 + "Палец левой руки: " + player.getInventory().getLeftFinger().getName() + "\n" + "\n"
+
                 + stringBuilder);
 
         message.getChannel().block().createMessage(builder.build()).block();

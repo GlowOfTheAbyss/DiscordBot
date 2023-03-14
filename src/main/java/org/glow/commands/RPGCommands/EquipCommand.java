@@ -6,7 +6,16 @@ import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.item.Item;
 import org.glow.item.body.Body;
+import org.glow.item.body.NoneBody;
+import org.glow.item.finger.Finger;
+import org.glow.item.finger.NoneFinger;
+import org.glow.item.head.NoneHead;
 import org.glow.item.lefthand.LeftHand;
+import org.glow.item.lefthand.NoneLeftHand;
+import org.glow.item.legs.NoneLegs;
+import org.glow.item.neck.Neck;
+import org.glow.item.neck.NoneNeck;
+import org.glow.item.righthand.NoneRightHand;
 import org.glow.item.righthand.RightHand;
 import org.glow.item.head.Head;
 import org.glow.item.legs.Legs;
@@ -29,140 +38,92 @@ public class EquipCommand extends Command {
         }
 
         String equipItemName = message.getContent().replaceFirst("!equip ", "");
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        for (Item items : player.getInventory().getBag()) {
+        for (Item item : player.getInventory().getBag()) {
 
-            if (equipItemName.equalsIgnoreCase(items.getName())) {
+            if (equipItemName.equalsIgnoreCase(item.getName())) {
 
-                if (Head.class.isAssignableFrom(items.getClass())) {
-                    if (player.getInventory().getHead().getName().equalsIgnoreCase("Пусто")) {
-                        player.getInventory().setHead((Head) items);
-                        player.getInventory().removeFromBag(items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    } else {
-                        if (inventoryFull(player)) {
-                            equipErrorMessage(message);
-                            return;
-                        }
+                equip(player, item);
+                Save.getSave().saveFile(player);
 
-                        player.getInventory().addToBag(player.getInventory().getHead());
-                        player.getInventory().setHead((Head) items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    }
-                    return;
-                }
+                builder.title("Вы экипировали " + item.getName());
+                message.getChannel().block().createMessage(builder.build()).block();
+                message.delete().block();
 
-                if (Body.class.isAssignableFrom(items.getClass())) {
-                    if (player.getInventory().getBody().getName().equalsIgnoreCase("Пусто")) {
-                        player.getInventory().setBody((Body) items);
-                        player.getInventory().removeFromBag(items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    } else {
-                        if (inventoryFull(player)) {
-                            equipErrorMessage(message);
-                            return;
-                        }
-
-                        player.getInventory().addToBag(player.getInventory().getBody());
-                        player.getInventory().setBody((Body) items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    }
-                    return;
-                }
-
-                if (Legs.class.isAssignableFrom(items.getClass())) {
-                    if (player.getInventory().getLegs().getName().equalsIgnoreCase("Пусто")) {
-                        player.getInventory().setLegs((Legs) items);
-                        player.getInventory().removeFromBag(items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    } else {
-                        if (inventoryFull(player)) {
-                            equipErrorMessage(message);
-                            return;
-                        }
-
-                        player.getInventory().addToBag(player.getInventory().getLegs());
-                        player.getInventory().setLegs((Legs) items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    }
-                    return;
-                }
-
-                if (RightHand.class.isAssignableFrom(items.getClass())) {
-                    if (player.getInventory().getRightHand().getName().equalsIgnoreCase("Пусто")) {
-                        player.getInventory().setRightHand((RightHand) items);
-                        player.getInventory().removeFromBag(items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    } else {
-                        if (inventoryFull(player)) {
-                            equipErrorMessage(message);
-                            return;
-                        }
-
-                        player.getInventory().addToBag(player.getInventory().getRightHand());
-                        player.getInventory().setRightHand((RightHand) items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    }
-                    return;
-                }
-
-                if (LeftHand.class.isAssignableFrom(items.getClass())) {
-                    if (player.getInventory().getLeftHand().getName().equalsIgnoreCase("Пусто")) {
-                        player.getInventory().setLeftHand((LeftHand) items);
-                        player.getInventory().removeFromBag(items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    } else {
-                        if (inventoryFull(player)) {
-                            equipErrorMessage(message);
-                            return;
-                        }
-
-                        player.getInventory().addToBag(player.getInventory().getLeftHand());
-                        player.getInventory().setLeftHand((LeftHand) items);
-                        Save.getSave().saveFile(player);
-                        equipMessage(message, items);
-                    }
-                    return;
-                }
             }
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title("Предмет не найден");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 
     }
 
-    private boolean inventoryFull(Player player) {
-        return player.getInventory().getBag().size() == 10;
-    }
+    private void equip(Player player, Item item) {
 
-    private void equipMessage(Message message, Item item) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title("Вы экипировали " + item.getName());
-
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
-
-    }
-
-    private void equipErrorMessage(Message message) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title("Слот для этого предмета уже занят, а инвентарь полон");
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        if (item instanceof Body) {
+            Item equippedItem = player.getInventory().getBody();
+            player.getInventory().setBody((Body) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneBody)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
+        if (item instanceof Finger) {
+            if (player.getInventory().getRightFinger() instanceof NoneFinger) {
+                player.getInventory().setRightFinger((Finger) item);
+            } else if (player.getInventory().getLeftFinger() instanceof NoneFinger) {
+                player.getInventory().setRightFinger((Finger) item);
+            } else {
+                Finger equippedItemRight = player.getInventory().getRightFinger();
+                Item equippedItemLeft = player.getInventory().getLeftFinger();
+                player.getInventory().setRightFinger((Finger) item);
+                player.getInventory().setLeftFinger(equippedItemRight);
+                player.getInventory().getBag().remove(item);
+                player.getInventory().getBag().add(equippedItemLeft);
+            }
+        }
+        if (item instanceof Head) {
+            Item equippedItem = player.getInventory().getHead();
+            player.getInventory().setHead((Head) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneHead)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
+        if (item instanceof LeftHand) {
+            Item equippedItem = player.getInventory().getLeftHand();
+            player.getInventory().setLeftHand((LeftHand) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneLeftHand)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
+        if (item instanceof Legs) {
+            Item equippedItem = player.getInventory().getLegs();
+            player.getInventory().setLegs((Legs) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneLegs)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
+        if (item instanceof Neck) {
+            Item equippedItem = player.getInventory().getNeck();
+            player.getInventory().setNeck((Neck) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneNeck)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
+        if (item instanceof RightHand) {
+            Item equippedItem = player.getInventory().getRightHand();
+            player.getInventory().setRightHand((RightHand) item);
+            player.getInventory().getBag().remove(item);
+            if (!(equippedItem instanceof NoneRightHand)) {
+                player.getInventory().getBag().add(equippedItem);
+            }
+        }
 
     }
 

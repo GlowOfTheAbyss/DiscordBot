@@ -21,7 +21,7 @@ public class HealCommand extends Command {
             return;
         }
 
-        if (player.getLocation().getName().equalsIgnoreCase(FavoniusCathedral.getFavoniusCathedral().getName())) {
+        if (player.getLocation() instanceof FavoniusCathedral) {
             HealFavoniusCathedral.getHealFavoniusCathedral().startAction(message, player);
         }
 

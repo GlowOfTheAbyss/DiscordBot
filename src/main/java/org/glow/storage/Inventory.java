@@ -138,23 +138,23 @@ public class Inventory {
         this.bag = bag;
     }
 
-    public boolean addToBag(Item items) {
-        if (bag.size() <= 10) {
-            bag.add(items);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean removeFromBag(Item items) {
-        if (bag.contains(items)) {
-            bag.remove(items);
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean addToBag(Item items) {
+//        if (bag.size() <= 10) {
+//            bag.add(items);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    public boolean removeFromBag(Item items) {
+//        if (bag.contains(items)) {
+//            bag.remove(items);
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public int getBagSize() {
         return bagSize;
@@ -163,4 +163,5 @@ public class Inventory {
     public void setBagSize(int bagSize) {
         this.bagSize = bagSize;
     }
+
 }

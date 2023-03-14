@@ -108,7 +108,7 @@ public class BuyInSchulzsBlacksmith extends Action {
                 }
 
                 player.setCoins(player.getCoins() - items.getPrice());
-                player.getInventory().addToBag(items);
+                player.getInventory().getBag().add(items);
                 Save.getSave().saveFile(player);
 
                 builder.title(player.getName() + ", вы приобрели " + items.getName());

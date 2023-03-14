@@ -37,12 +37,12 @@ public class MoveCommand extends Command {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        if (Region.class.isAssignableFrom(player.getLocation().getClass())) {
-            Region thisRegion = (Region) player.getLocation();
+        if (player.getLocation() instanceof Region thisRegion) {
+
             List<Region> regionList = Map.getMap().getRegions();
             List<Subarea> subareaList = Map.getMap().getSubareas(thisRegion);
 
-            builder.title("Вы находитесь в " + player.getLocation().getName());
+            builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -50,6 +50,7 @@ public class MoveCommand extends Command {
             for (Region region : regionList) {
                 stringBuilder.append(region.getName()).append("\n");
             }
+
             stringBuilder.append("\n");
             stringBuilder.append("**Вы можете перейти в локацию мондштата: **\n");
             for (Subarea subarea : subareaList) {
@@ -62,13 +63,13 @@ public class MoveCommand extends Command {
 
         }
 
-        if (Subarea.class.isAssignableFrom(player.getLocation().getClass())) {
-            Subarea thisSubarea = (Subarea) player.getLocation();
+        if (player.getLocation() instanceof Subarea thisSubarea) {
+
             Region region = Map.getMap().getRegionFromSubarea(thisSubarea);
             List<Subarea> subareasList = Map.getMap().getSubareas(region);
             List<PointsOfInterest> pointsOfInterestsList = Map.getMap().getPointsOfInterests(thisSubarea);
 
-            builder.title("Вы находитесь в " + player.getLocation().getName());
+            builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -89,13 +90,13 @@ public class MoveCommand extends Command {
 
         }
 
-        if (PointsOfInterest.class.isAssignableFrom(player.getLocation().getClass())) {
-            PointsOfInterest thisPointsOfInterest = (PointsOfInterest) player.getLocation();
+        if (player.getLocation() instanceof PointsOfInterest thisPointsOfInterest) {
+
             Subarea subarea = Map.getMap().getSubareaFromPointsOfInterest(thisPointsOfInterest);
             List<PointsOfInterest> pointsOfInterestsList = Map.getMap().getPointsOfInterests(subarea);
             List<Action> actionsList = Map.getMap().getActions(thisPointsOfInterest);
 
-            builder.title("Вы находитесь в " + player.getLocation().getName());
+            builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
@@ -126,7 +127,7 @@ public class MoveCommand extends Command {
         for (Location location : Map.getLocations()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {
 
-                player.setLocation(location);
+                player.setLocationName(location);
                 Save.getSave().saveFile(player);
                 descriptionGenerator(message, player);
                 return;

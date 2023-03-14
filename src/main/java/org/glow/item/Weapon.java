@@ -1,6 +1,6 @@
 package org.glow.item;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
 
     private int attack;
 
