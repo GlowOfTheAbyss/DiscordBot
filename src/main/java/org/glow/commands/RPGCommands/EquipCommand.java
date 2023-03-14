@@ -4,7 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
-import org.glow.item.Items;
+import org.glow.item.Item;
 import org.glow.item.body.Body;
 import org.glow.item.lefthand.LeftHand;
 import org.glow.item.righthand.RightHand;
@@ -30,7 +30,7 @@ public class EquipCommand extends Command {
 
         String equipItemName = message.getContent().replaceFirst("!equip ", "");
 
-        for (Items items : player.getInventory().getBag()) {
+        for (Item items : player.getInventory().getBag()) {
 
             if (equipItemName.equalsIgnoreCase(items.getName())) {
 
@@ -147,7 +147,7 @@ public class EquipCommand extends Command {
         return player.getInventory().getBag().size() == 10;
     }
 
-    private void equipMessage(Message message, Items item) {
+    private void equipMessage(Message message, Item item) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title("Вы экипировали " + item.getName());

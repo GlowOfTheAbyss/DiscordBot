@@ -4,7 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.item.Armor;
-import org.glow.item.Items;
+import org.glow.item.Item;
 import org.glow.item.Shield;
 import org.glow.item.Weapon;
 import org.glow.item.body.IronBodyArmor;
@@ -82,14 +82,14 @@ public class BuyInSchulzsBlacksmith extends Action {
 
     private void buyProduct(Message message, Player player, String wantToBuyProductName) {
 
-        List<Items> shopItemsList = new ArrayList<>();
+        List<Item> shopItemsList = new ArrayList<>();
         shopItemsList.addAll(shopWeaponList);
         shopItemsList.addAll(shopArmorList);
         shopItemsList.addAll(shopShieldList);
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        for (Items items : shopItemsList) {
+        for (Item items : shopItemsList) {
 
             if (wantToBuyProductName.equalsIgnoreCase(items.getName())) {
 

@@ -1,5 +1,5 @@
 package org.glow.item.finger;
 
-import org.glow.item.Items;
+import org.glow.item.Item;
 
-public abstract class Finger extends Items {}
+public abstract class Finger extends Item {}

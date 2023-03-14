@@ -1,7 +1,7 @@
 package org.glow.storage;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.glow.item.Items;
+import org.glow.item.Item;
 import org.glow.item.body.Body;
 import org.glow.item.body.NoneBody;
 import org.glow.item.finger.Finger;
@@ -32,7 +32,7 @@ public class Inventory {
     private Finger rightFinger;
     private Finger leftFinger;
 
-    private List<Items> bag = new ArrayList<>();
+    private List<Item> bag = new ArrayList<>();
     private int bagSize;
 
     public Inventory() {
@@ -52,7 +52,7 @@ public class Inventory {
     }
 
     @JsonIgnore
-    public List<Items> getEquippedItems() {
+    public List<Item> getEquippedItems() {
         return List.of(head, body, legs, rightHand, leftHand, neck, rightFinger, leftFinger);
     }
 
@@ -130,15 +130,15 @@ public class Inventory {
         this.leftFinger = leftFinger;
     }
 
-    public List<Items> getBag() {
+    public List<Item> getBag() {
         return bag;
     }
 
-    public void setBag(List<Items> bag) {
+    public void setBag(List<Item> bag) {
         this.bag = bag;
     }
 
-    public boolean addToBag(Items items) {
+    public boolean addToBag(Item items) {
         if (bag.size() <= 10) {
             bag.add(items);
             return true;
@@ -147,7 +147,7 @@ public class Inventory {
         }
     }
 
-    public boolean removeFromBag(Items items) {
+    public boolean removeFromBag(Item items) {
         if (bag.contains(items)) {
             bag.remove(items);
             return true;

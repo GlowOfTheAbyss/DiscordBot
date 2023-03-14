@@ -25,7 +25,7 @@ public class CommandReader {
         commandList.add(InventoryCommand.getInventoryCommand());
         commandList.add(MoveCommand.getMoveCommand());
         commandList.add(StatsCommand.getStatsCommand());
-        commandList.add(UnequipCommand.getUnequipCommand());
+        commandList.add(TakeOffCommand.getTakeOffCommand());
         commandList.add(UserToPlayerCommand.getUserToPlayerCommand());
 
         commandList.add(ShotDownCommand.getShotDownCommand());
