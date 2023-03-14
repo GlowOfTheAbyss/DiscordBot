@@ -76,28 +76,22 @@ public class TakeOffCommand extends Command {
 
         if (item instanceof Body) {
             player.getInventory().setBody(new NoneBody());
-        }
-        if (item instanceof Finger) {
+        } else if (item instanceof Finger) {
             if (player.getInventory().getRightFinger().getName().equalsIgnoreCase(item.getName())) {
                 player.getInventory().setRightFinger(new NoneFinger());
             }
             if (player.getInventory().getLeftFinger().getName().equalsIgnoreCase(item.getName())) {
                 player.getInventory().setLeftFinger(new NoneFinger());
             }
-        }
-        if (item instanceof Head) {
+        } else if (item instanceof Head) {
             player.getInventory().setHead(new NoneHead());
-        }
-        if (item instanceof LeftHand) {
+        } else if (item instanceof LeftHand) {
             player.getInventory().setLeftHand(new NoneLeftHand());
-        }
-        if (item instanceof Legs) {
+        } else if (item instanceof Legs) {
             player.getInventory().setLegs(new NoneLegs());
-        }
-        if (item instanceof Neck) {
+        } else if (item instanceof Neck) {
             player.getInventory().setNeck(new NoneNeck());
-        }
-        if (item instanceof RightHand) {
+        } else if (item instanceof RightHand) {
             player.getInventory().setRightHand(new NoneRightHand());
         }
 
