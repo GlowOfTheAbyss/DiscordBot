@@ -1,22 +1,13 @@
 package org.glow.item.legs;
 
-import org.glow.item.Armor;
-import org.glow.item.Items;
+public class IronLegArmor extends Legs {
 
-public class IronLegArmor implements Items, Armor, Legs {
+    public IronLegArmor() {
 
-    @Override
-    public int getArmor() {
-        return 4;
+        setName("Броня для ног из железа");
+        setPrice(1600);
+        setArmor(4);
+
     }
 
-    @Override
-    public String getName() {
-        return "Броня для ног из железа";
-    }
-
-    @Override
-    public int getPrice() {
-        return 1600;
-    }
 }

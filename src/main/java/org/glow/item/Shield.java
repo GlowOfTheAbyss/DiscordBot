@@ -1,7 +1,3 @@
 package org.glow.item;
 
-public interface Shield extends Items {
-
-    int getArmor();
-
-}
+public abstract class Shield extends Armor {}

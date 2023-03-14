@@ -5,7 +5,6 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.item.Items;
-import org.glow.item.NoneArmor;
 import org.glow.person.Player;
 
 import java.util.List;

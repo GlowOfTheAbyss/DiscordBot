@@ -1,7 +1,15 @@
 package org.glow.item;
 
-public interface Armor extends Items {
+public class Armor extends Items {
 
-    int getArmor();
+    private int armor;
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
 
 }

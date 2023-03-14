@@ -1,23 +1,13 @@
 package org.glow.item.righthand;
 
-import org.glow.item.Items;
-import org.glow.item.Weapon;
+public class DullBlade extends RightHand {
 
-public class DullBlade implements Items, Weapon, RightHand {
+    public DullBlade() {
 
-    @Override
-    public String getName() {
-        return "Тупой меч";
-    }
+        setName("Тупой меч");
+        setPrice(4500);
+        setAttack(15);
 
-    @Override
-    public int getPrice() {
-        return 4500;
-    }
-
-    @Override
-    public int getAttack() {
-        return 15;
     }
 
 }

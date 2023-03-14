@@ -1,9 +1,23 @@
 package org.glow.item;
 
-public interface Items {
+public class Items {
 
-    String getName();
+    private String name;
+    private int price;
 
-    int getPrice();
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }

@@ -2,12 +2,16 @@ package org.glow.storage;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.glow.item.Items;
-import org.glow.item.NoneArmor;
-import org.glow.item.NoneLeftHand;
-import org.glow.item.NoneRightHand;
 import org.glow.item.body.Body;
+import org.glow.item.body.NoneBody;
 import org.glow.item.finger.Finger;
+import org.glow.item.finger.NoneFinger;
+import org.glow.item.head.NoneHead;
 import org.glow.item.lefthand.LeftHand;
+import org.glow.item.lefthand.NoneLeftHand;
+import org.glow.item.legs.NoneLegs;
+import org.glow.item.neck.NoneNeck;
+import org.glow.item.righthand.NoneRightHand;
 import org.glow.item.righthand.RightHand;
 import org.glow.item.head.Head;
 import org.glow.item.legs.Legs;
@@ -33,15 +37,15 @@ public class Inventory {
 
     public Inventory() {
 
-        this.head = new NoneArmor();
-        this.body = new NoneArmor();
-        this.legs = new NoneArmor();
+        this.head = new NoneHead();
+        this.body = new NoneBody();
+        this.legs = new NoneLegs();
         this.rightHand = new NoneRightHand();
         this.leftHand = new NoneLeftHand();
 
-        this.neck = new NoneArmor();
-        this.rightFinger = new NoneArmor();
-        this.leftFinger = new NoneArmor();
+        this.neck = new NoneNeck();
+        this.rightFinger = new NoneFinger();
+        this.leftFinger = new NoneFinger();
 
         this.bagSize = 10;
 

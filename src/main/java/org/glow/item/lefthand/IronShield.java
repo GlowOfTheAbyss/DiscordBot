@@ -1,22 +1,13 @@
 package org.glow.item.lefthand;
 
-import org.glow.item.Items;
-import org.glow.item.Shield;
+public class IronShield extends LeftHand {
 
-public class IronShield implements Items, Shield, LeftHand {
+    public IronShield() {
 
-    @Override
-    public String getName() {
-        return "Щит из железа";
+        setName("Щит из железа");
+        setPrice(1600);
+        setArmor(4);
+
     }
 
-    @Override
-    public int getPrice() {
-        return 1600;
-    }
-
-    @Override
-    public int getArmor() {
-        return 4;
-    }
 }

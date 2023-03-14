@@ -1,23 +1,13 @@
 package org.glow.item.righthand;
 
-import org.glow.item.Items;
-import org.glow.item.Weapon;
+public class SilverSword extends RightHand {
 
-public class SilverSword implements Items, Weapon, RightHand {
+    public SilverSword() {
 
-    @Override
-    public String getName() {
-        return "Серебряный меч";
-    }
+        setName("Серебряный меч");
+        setPrice(9000);
+        setAttack(30);
 
-    @Override
-    public int getPrice() {
-        return 9000;
-    }
-
-    @Override
-    public int getAttack() {
-        return 30;
     }
 
 }
