@@ -51,6 +51,7 @@ public class EquipCommand extends Command {
                 message.getChannel().block().createMessage(builder.build()).block();
                 message.delete().block();
 
+                return;
             }
         }
 
@@ -69,8 +70,7 @@ public class EquipCommand extends Command {
             if (!(equippedItem instanceof NoneBody)) {
                 player.getInventory().getBag().add(equippedItem);
             }
-        }
-        if (item instanceof Finger) {
+        } else if (item instanceof Finger) {
             if (player.getInventory().getRightFinger() instanceof NoneFinger) {
                 player.getInventory().setRightFinger((Finger) item);
             } else if (player.getInventory().getLeftFinger() instanceof NoneFinger) {
@@ -83,40 +83,35 @@ public class EquipCommand extends Command {
                 player.getInventory().getBag().remove(item);
                 player.getInventory().getBag().add(equippedItemLeft);
             }
-        }
-        if (item instanceof Head) {
+        } else if (item instanceof Head) {
             Item equippedItem = player.getInventory().getHead();
             player.getInventory().setHead((Head) item);
             player.getInventory().getBag().remove(item);
             if (!(equippedItem instanceof NoneHead)) {
                 player.getInventory().getBag().add(equippedItem);
             }
-        }
-        if (item instanceof LeftHand) {
+        } else if (item instanceof LeftHand) {
             Item equippedItem = player.getInventory().getLeftHand();
             player.getInventory().setLeftHand((LeftHand) item);
             player.getInventory().getBag().remove(item);
             if (!(equippedItem instanceof NoneLeftHand)) {
                 player.getInventory().getBag().add(equippedItem);
             }
-        }
-        if (item instanceof Legs) {
+        } else if (item instanceof Legs) {
             Item equippedItem = player.getInventory().getLegs();
             player.getInventory().setLegs((Legs) item);
             player.getInventory().getBag().remove(item);
             if (!(equippedItem instanceof NoneLegs)) {
                 player.getInventory().getBag().add(equippedItem);
             }
-        }
-        if (item instanceof Neck) {
+        } else if (item instanceof Neck) {
             Item equippedItem = player.getInventory().getNeck();
             player.getInventory().setNeck((Neck) item);
             player.getInventory().getBag().remove(item);
             if (!(equippedItem instanceof NoneNeck)) {
                 player.getInventory().getBag().add(equippedItem);
             }
-        }
-        if (item instanceof RightHand) {
+        } else if (item instanceof RightHand) {
             Item equippedItem = player.getInventory().getRightHand();
             player.getInventory().setRightHand((RightHand) item);
             player.getInventory().getBag().remove(item);
