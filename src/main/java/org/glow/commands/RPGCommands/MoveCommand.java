@@ -40,7 +40,7 @@ public class MoveCommand extends Command {
 
         if (player.getLocation() instanceof Region thisRegion) {
 
-            List<Region> regionList = Map.getMap().getRegions();
+            Set<Region> regionList = Map.getMap().getRegions();
             Set<Subarea> subareaList = thisRegion.getSubareas();
 
             builder.title("Вы находитесь в " + player.getLocationName());
@@ -67,15 +67,27 @@ public class MoveCommand extends Command {
 
         if (player.getLocation() instanceof Subarea thisSubarea) {
 
-            Region region = thisSubarea.getRegion();
-            Set<Subarea> subareasList = region.getSubareas();
+            Region thisRegion = null;
+            for (Region region : Map.getMap().getRegions()) {
+                if (region.getSubareas().contains(thisSubarea)) {
+                    thisRegion = region;
+                }
+            }
+            if (thisRegion == null) {
+                builder.title("Локация в регионе не найдена");
+                message.getChannel().block().createMessage(builder.build()).block();
+                message.delete().block();
+                return;
+            }
+
+            Set<Subarea> subareasList = thisRegion.getSubareas();
             Set<PointsOfInterest> pointsOfInterestsList = thisSubarea.getPointsOfInterests();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(region.getName()).append("\n");
+            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n");
 
             stringBuilder.append("**Вы можете перейти в локацию: **\n");
             for (Subarea subarea : subareasList) {
@@ -95,15 +107,27 @@ public class MoveCommand extends Command {
 
         if (player.getLocation() instanceof PointsOfInterest thisPointsOfInterest) {
 
-            Subarea subarea = thisPointsOfInterest.getSubarea();
-            Set<PointsOfInterest> pointsOfInterestsList = subarea.getPointsOfInterests();
+            Subarea thisSubarea = null;
+            for (Subarea subarea : Map.getMap().getSubareas()) {
+                if (subarea.getPointsOfInterests().contains(thisPointsOfInterest)) {
+                    thisSubarea = subarea;
+                }
+            }
+            if (thisSubarea == null) {
+                builder.title("Точка интереса в локации не найдена");
+                message.getChannel().block().createMessage(builder.build()).block();
+                message.delete().block();
+                return;
+            }
+
+            Set<PointsOfInterest> pointsOfInterestsList = thisSubarea.getPointsOfInterests();
             Set<Action> actionsList = thisPointsOfInterest.getActions();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(subarea.getName()).append("\n").append("\n");
+            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisSubarea.getName()).append("\n").append("\n");
 
             stringBuilder.append("**Вы можете пройти к: **\n");
             for (PointsOfInterest pointsOfInterest : pointsOfInterestsList) {
