@@ -124,7 +124,7 @@ public class MoveCommand extends Command {
 
         String thisLocationName = message.getContent().replaceFirst("!move ", "");
 
-        for (Location location : Map.getLocations()) {
+        for (Location location : Map.getMap().getLocations()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {
 
                 player.setLocationName(location);

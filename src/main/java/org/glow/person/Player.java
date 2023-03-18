@@ -66,7 +66,7 @@ public class Player extends Person {
 
     @JsonIgnore
     public Location getLocation() {
-        for (Location location : Map.getLocations()) {
+        for (Location location : Map.getMap().getLocations()) {
             if (location.getName().equalsIgnoreCase(locationName)) {
                 return location;
             }

@@ -14,12 +14,12 @@ import java.util.List;
 
 public class Map {
 
-    private static final Map map = new Map();
-    private static final List<Location> locations = new ArrayList<>();
+    private static Map map;
+    private final List<Location> locations = new ArrayList<>();
 
     private Map() {}
 
-    public static List<Location> getLocations() {
+    public List<Location> getLocations() {
         return locations;
     }
 
@@ -89,10 +89,13 @@ public class Map {
     }
 
     public static Map getMap() {
+        if (map == null) {
+            map = new Map();
+        }
         return map;
     }
 
-    public static void createMap() {
+    public void createMap() {
         locations.add(Liyue.getLiyue());
 
         locations.add(Mondstadt.getMondstadt());
