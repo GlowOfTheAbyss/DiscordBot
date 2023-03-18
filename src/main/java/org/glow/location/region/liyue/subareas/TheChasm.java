@@ -13,7 +13,6 @@ public class TheChasm extends Subarea {
         setName("Разлом");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1086598614568161320/TheChasm.png");
 
-        setRegion(Liyue.getLiyue());
         setPointsOfInterests(Set.of());
     }
 

@@ -15,7 +15,6 @@ public class CityMondstadt extends Subarea {
         setName("Город Мондштадт");
         setImage("https://cdn.discordapp.com/attachments/882560343983915029/1065586686500802661/Mondstadt.png");
 
-        setRegion(Mondstadt.getMondstadt());
         setPointsOfInterests(Set.of(FavoniusCathedral.getFavoniusCathedral(),
                 SchulzsBlacksmith.getSchulzsBlacksmith()));
     }

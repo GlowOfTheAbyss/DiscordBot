@@ -15,7 +15,6 @@ public class FavoniusCathedral extends PointsOfInterest {
         setName("Собор Барбатоса");
         setImage("https://cdn.discordapp.com/attachments/882560343983915029/1065586700660789319/FavoniusCathedral.png");
 
-        setSubarea(CityMondstadt.getCityMondstadt());
         setActions(Set.of(HealFavoniusCathedral.getHealFavoniusCathedral(),
                 BuyInFavoniusCathedral.getBuyFavoniusCathedral()));
     }

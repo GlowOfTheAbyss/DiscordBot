@@ -14,7 +14,6 @@ public class StarfellValley extends Subarea {
         setName("Долина звездопадов");
         setImage("");
 
-        setRegion(Mondstadt.getMondstadt());
         setPointsOfInterests(Set.of(WhisperingWoods.getWhisperingWoods()));
     }
 

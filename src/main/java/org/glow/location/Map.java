@@ -15,6 +15,7 @@ import org.glow.location.region.mondstadt.subareas.pointsofinterest.starfellVall
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Map {
 
@@ -27,10 +28,19 @@ public class Map {
         return locations;
     }
 
-    public List<Region> getRegions() {
+    public Set<Region> getRegions() {
 
-        return List.of(Liyue.getLiyue(),
+        return Set.of(Liyue.getLiyue(),
                 Mondstadt.getMondstadt());
+
+    }
+
+    public Set<Subarea> getSubareas() {
+
+        return Set.of(LiyueHarbor.getLiyueHarbor(),
+                TheChasm.getTheChasm(),
+                CityMondstadt.getCityMondstadt(),
+                StarfellValley.getStarfellValley());
 
     }
 
