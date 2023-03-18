@@ -4,7 +4,7 @@ import org.glow.location.Subarea;
 
 public class CityMondstadt extends Subarea {
 
-    private static final CityMondstadt cityMondstadt = new CityMondstadt();
+    private static CityMondstadt cityMondstadt;
 
     private CityMondstadt() {
         setName("Город Мондштадт");
@@ -12,6 +12,9 @@ public class CityMondstadt extends Subarea {
     }
 
     public static CityMondstadt getCityMondstadt() {
+        if (cityMondstadt == null) {
+            cityMondstadt = new CityMondstadt();
+        }
         return cityMondstadt;
     }
 

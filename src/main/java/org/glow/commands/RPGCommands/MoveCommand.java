@@ -46,18 +46,19 @@ public class MoveCommand extends Command {
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
+
             stringBuilder.append("**Вы можете перейти в другой регион: **\n");
             for (Region region : regionList) {
                 stringBuilder.append(region.getName()).append("\n");
             }
-
             stringBuilder.append("\n");
+
             stringBuilder.append("**Вы можете перейти в локацию мондштата: **\n");
             for (Subarea subarea : subareaList) {
                 stringBuilder.append(subarea.getName()).append("\n");
             }
-            builder.description(stringBuilder.toString());
 
+            builder.description(stringBuilder.toString());
             message.getChannel().block().createMessage(builder.build()).block();
 
 
@@ -80,12 +81,13 @@ public class MoveCommand extends Command {
                 stringBuilder.append(subarea.getName()).append("\n");
             }
             stringBuilder.append("\n");
+
             stringBuilder.append("**Вы можете пройти к: **\n");
             for (PointsOfInterest pointsOfInterest : pointsOfInterestsList) {
                 stringBuilder.append(pointsOfInterest.getName()).append("\n");
             }
-            builder.description(stringBuilder.toString());
 
+            builder.description(stringBuilder.toString());
             message.getChannel().block().createMessage(builder.build()).block();
 
         }
@@ -107,12 +109,13 @@ public class MoveCommand extends Command {
                 stringBuilder.append(pointsOfInterest.getName()).append("\n");
             }
             stringBuilder.append("\n");
+
             stringBuilder.append("**Вы можете заняться: **\n");
             for (Action action : actionsList) {
                 stringBuilder.append(action.getName()).append("\n");
             }
-            builder.description(stringBuilder.toString());
 
+            builder.description(stringBuilder.toString());
             message.getChannel().block().createMessage(builder.build()).block();
         }
 
@@ -122,7 +125,7 @@ public class MoveCommand extends Command {
 
     private void move(Message message, Player player) {
 
-        String thisLocationName = message.getContent().replaceFirst("!move ", "");
+        String thisLocationName = message.getContent().replaceFirst("!" + getName() + " ", "");
 
         for (Location location : Map.getMap().getLocations()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {
