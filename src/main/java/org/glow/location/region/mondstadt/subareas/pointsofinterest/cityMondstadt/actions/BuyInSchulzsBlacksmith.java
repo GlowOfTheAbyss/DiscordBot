@@ -1,4 +1,4 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.actions;
+package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -18,7 +18,7 @@ import org.glow.item.head.WhiteIronHeadArmor;
 import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.SchulzsBlacksmith;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.SchulzsBlacksmith;
 import org.glow.person.Player;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import java.util.List;
 
 public class BuyInSchulzsBlacksmith extends Action {
 
-    private static final BuyInSchulzsBlacksmith buyInSchulzsBlacksmith = new BuyInSchulzsBlacksmith();
+    private static BuyInSchulzsBlacksmith buyInSchulzsBlacksmith;
 
     private static final List<Weapon> shopWeaponList = List.of(new DullBlade(), new SilverSword());
     private static final List<Shield> shopShieldList = List.of(new IronShield(), new WhiteIronShield());
@@ -131,6 +131,9 @@ public class BuyInSchulzsBlacksmith extends Action {
     }
 
     public static BuyInSchulzsBlacksmith getBuyInSchulzsBlacksmith() {
+        if (buyInSchulzsBlacksmith == null) {
+            buyInSchulzsBlacksmith = new BuyInSchulzsBlacksmith();
+        }
         return buyInSchulzsBlacksmith;
     }
 

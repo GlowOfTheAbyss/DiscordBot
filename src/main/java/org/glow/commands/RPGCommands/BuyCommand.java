@@ -2,10 +2,10 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.SchulzsBlacksmith;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.actions.BuyFavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.actions.BuyInSchulzsBlacksmith;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.FavoniusCathedral;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.SchulzsBlacksmith;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions.BuyInFavoniusCathedral;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions.BuyInSchulzsBlacksmith;
 import org.glow.person.Player;
 
 public class BuyCommand extends Command {
@@ -27,7 +27,7 @@ public class BuyCommand extends Command {
         if (player.getLocation() instanceof SchulzsBlacksmith) {
             BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith().startAction(message, player);
         } else if (player.getLocation() instanceof FavoniusCathedral) {
-            BuyFavoniusCathedral.getBuyFavoniusCathedral().startAction(message, player);
+            BuyInFavoniusCathedral.getBuyFavoniusCathedral().startAction(message, player);
         }
 
     }

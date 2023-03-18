@@ -1,15 +1,15 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.actions;
+package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.FavoniusCathedral;
 import org.glow.person.Player;
 
 public class HealFavoniusCathedral extends Action {
 
-    private static final HealFavoniusCathedral healFavoniusCathedral = new HealFavoniusCathedral();
+    private static HealFavoniusCathedral healFavoniusCathedral;
 
     private HealFavoniusCathedral() {
         setName("Востановить здоровье | !heal");
@@ -88,6 +88,9 @@ public class HealFavoniusCathedral extends Action {
     }
 
     public static HealFavoniusCathedral getHealFavoniusCathedral() {
+        if (healFavoniusCathedral == null) {
+            healFavoniusCathedral = new HealFavoniusCathedral();
+        }
         return healFavoniusCathedral;
     }
 }

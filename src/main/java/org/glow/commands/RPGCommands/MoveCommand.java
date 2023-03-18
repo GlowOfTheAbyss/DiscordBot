@@ -8,6 +8,7 @@ import org.glow.location.*;
 import org.glow.person.Player;
 
 import java.util.List;
+import java.util.Set;
 
 public class MoveCommand extends Command {
 
@@ -40,7 +41,7 @@ public class MoveCommand extends Command {
         if (player.getLocation() instanceof Region thisRegion) {
 
             List<Region> regionList = Map.getMap().getRegions();
-            List<Subarea> subareaList = Map.getMap().getSubareas(thisRegion);
+            Set<Subarea> subareaList = thisRegion.getSubareas();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
@@ -66,9 +67,9 @@ public class MoveCommand extends Command {
 
         if (player.getLocation() instanceof Subarea thisSubarea) {
 
-            Region region = Map.getMap().getRegionFromSubarea(thisSubarea);
-            List<Subarea> subareasList = Map.getMap().getSubareas(region);
-            List<PointsOfInterest> pointsOfInterestsList = Map.getMap().getPointsOfInterests(thisSubarea);
+            Region region = thisSubarea.getRegion();
+            Set<Subarea> subareasList = region.getSubareas();
+            Set<PointsOfInterest> pointsOfInterestsList = thisSubarea.getPointsOfInterests();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
@@ -94,9 +95,9 @@ public class MoveCommand extends Command {
 
         if (player.getLocation() instanceof PointsOfInterest thisPointsOfInterest) {
 
-            Subarea subarea = Map.getMap().getSubareaFromPointsOfInterest(thisPointsOfInterest);
-            List<PointsOfInterest> pointsOfInterestsList = Map.getMap().getPointsOfInterests(subarea);
-            List<Action> actionsList = Map.getMap().getActions(thisPointsOfInterest);
+            Subarea subarea = thisPointsOfInterest.getSubarea();
+            Set<PointsOfInterest> pointsOfInterestsList = subarea.getPointsOfInterests();
+            Set<Action> actionsList = thisPointsOfInterest.getActions();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());

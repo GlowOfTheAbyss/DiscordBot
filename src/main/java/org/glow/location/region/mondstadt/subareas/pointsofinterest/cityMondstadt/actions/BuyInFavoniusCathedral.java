@@ -1,22 +1,22 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.actions;
+package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
+import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.FavoniusCathedral;
 import org.glow.magic.Magic;
 import org.glow.magic.spells.Healing;
 import org.glow.person.Player;
 
 import java.util.List;
 
-public class BuyFavoniusCathedral extends Action {
+public class BuyInFavoniusCathedral extends Action {
 
-    private static final BuyFavoniusCathedral buyFavoniusCathedral = new BuyFavoniusCathedral();
+    private static BuyInFavoniusCathedral buyInFavoniusCathedral;
     private static final List<Magic> shopSpellList = List.of(new Healing());
 
-    private BuyFavoniusCathedral() {
+    private BuyInFavoniusCathedral() {
         setName("Купить | !buy");
     }
 
@@ -92,7 +92,10 @@ public class BuyFavoniusCathedral extends Action {
 
     }
 
-    public static BuyFavoniusCathedral getBuyFavoniusCathedral() {
-        return buyFavoniusCathedral;
+    public static BuyInFavoniusCathedral getBuyFavoniusCathedral() {
+        if (buyInFavoniusCathedral == null) {
+            buyInFavoniusCathedral = new BuyInFavoniusCathedral();
+        }
+        return buyInFavoniusCathedral;
     }
 }
