@@ -1,6 +1,8 @@
 package org.glow.location;
 
 import org.glow.location.region.liyue.Liyue;
+import org.glow.location.region.liyue.subareas.LiyueHarbor;
+import org.glow.location.region.liyue.subareas.TheChasm;
 import org.glow.location.region.mondstadt.Mondstadt;
 import org.glow.location.region.mondstadt.subareas.CityMondstadt;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.mondstadt.FavoniusCathedral;
@@ -36,6 +38,11 @@ public class Map {
             return Mondstadt.getMondstadt();
         }
 
+        if (subarea instanceof LiyueHarbor
+                || subarea instanceof TheChasm) {
+            return Liyue.getLiyue();
+        }
+
         throw new IllegalArgumentException("Region not found");
     }
 
@@ -53,7 +60,8 @@ public class Map {
     public List<Subarea> getSubareas(Region region) {
 
         if (region instanceof Liyue) {
-            return List.of();
+            return List.of(LiyueHarbor.getLiyueHarbor(),
+                    TheChasm.getTheChasm());
         }
 
         if (region instanceof Mondstadt) {
@@ -65,6 +73,14 @@ public class Map {
     }
 
     public List<PointsOfInterest> getPointsOfInterests(Subarea subarea) {
+
+        if (subarea instanceof LiyueHarbor) {
+            return List.of();
+        }
+
+        if (subarea instanceof TheChasm) {
+            return List.of();
+        }
 
         if (subarea instanceof CityMondstadt) {
             return List.of(FavoniusCathedral.getFavoniusCathedral(),
@@ -97,6 +113,8 @@ public class Map {
 
     public void createMap() {
         locations.add(Liyue.getLiyue());
+            locations.add(LiyueHarbor.getLiyueHarbor());
+            locations.add(TheChasm.getTheChasm());
 
         locations.add(Mondstadt.getMondstadt());
             locations.add(CityMondstadt.getCityMondstadt());
