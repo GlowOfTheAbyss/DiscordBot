@@ -7,7 +7,6 @@ import org.glow.fileManager.Save;
 import org.glow.location.*;
 import org.glow.person.Player;
 
-import java.util.List;
 import java.util.Set;
 
 public class MoveCommand extends Command {

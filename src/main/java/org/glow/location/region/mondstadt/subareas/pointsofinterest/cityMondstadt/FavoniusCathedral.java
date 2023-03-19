@@ -1,7 +1,6 @@
 package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt;
 
 import org.glow.location.*;
-import org.glow.location.region.mondstadt.subareas.CityMondstadt;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions.BuyInFavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions.HealFavoniusCathedral;
 

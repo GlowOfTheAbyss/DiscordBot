@@ -1,7 +1,6 @@
 package org.glow.location.region.mondstadt.subareas;
 
 import org.glow.location.Subarea;
-import org.glow.location.region.mondstadt.Mondstadt;
 import org.glow.location.region.mondstadt.subareas.pointsofinterest.starfellValley.WhisperingWoods;
 
 import java.util.Set;

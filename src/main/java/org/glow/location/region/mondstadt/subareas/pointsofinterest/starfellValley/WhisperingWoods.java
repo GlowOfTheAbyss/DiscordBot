@@ -8,7 +8,7 @@ public class WhisperingWoods extends PointsOfInterest {
 
     private WhisperingWoods() {
         setName("Шепчущий лес");
-        setImage("");
+        setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087118905698435193/WhisperingWoods.png");
     }
 
     public static WhisperingWoods getWhisperingWoods() {
