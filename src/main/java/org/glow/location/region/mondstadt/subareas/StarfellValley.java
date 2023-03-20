@@ -11,7 +11,7 @@ public class StarfellValley extends Subarea {
 
     private StarfellValley() {
         setName("Долина звездопадов");
-        setImage("");
+        setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087234584137183322/StarfellValley.png");
 
         setPointsOfInterests(Set.of(WhisperingWoods.getWhisperingWoods()));
     }
