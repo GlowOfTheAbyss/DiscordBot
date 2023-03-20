@@ -8,7 +8,7 @@ import org.glow.person.Player;
 
 public class UserToPlayerCommand extends Command {
 
-    private static final UserToPlayerCommand userToPlayerCommand = new UserToPlayerCommand();
+    private static UserToPlayerCommand userToPlayerCommand;
 
     private UserToPlayerCommand() {
         setName("add");
@@ -38,6 +38,9 @@ public class UserToPlayerCommand extends Command {
     }
 
     public static UserToPlayerCommand getUserToPlayerCommand() {
+        if (userToPlayerCommand == null) {
+            userToPlayerCommand = new UserToPlayerCommand();
+        }
         return userToPlayerCommand;
     }
 }

@@ -7,7 +7,7 @@ import org.glow.person.Player;
 
 public class StatsCommand extends Command {
 
-    private static final StatsCommand statsCommand = new StatsCommand();
+    private static StatsCommand statsCommand;
 
     private StatsCommand() {
         setName("stats");
@@ -46,6 +46,9 @@ public class StatsCommand extends Command {
     }
 
     public static StatsCommand getStatsCommand() {
+        if (statsCommand == null) {
+            statsCommand = new StatsCommand();
+        }
         return statsCommand;
     }
 }

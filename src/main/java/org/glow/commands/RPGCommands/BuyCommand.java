@@ -10,7 +10,7 @@ import org.glow.person.Player;
 
 public class BuyCommand extends Command {
 
-    private static final BuyCommand buyCommand = new BuyCommand();
+    private static BuyCommand buyCommand;
 
     private BuyCommand() {
         setName("buy");
@@ -33,6 +33,9 @@ public class BuyCommand extends Command {
     }
 
     public static BuyCommand getBuyCommand() {
+        if (buyCommand == null) {
+            buyCommand = new BuyCommand();
+        }
         return buyCommand;
     }
 }

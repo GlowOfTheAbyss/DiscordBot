@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class MoveCommand extends Command {
 
-    private static final MoveCommand moveCommand = new MoveCommand();
+    private static MoveCommand moveCommand;
 
     private MoveCommand(){
         setName("move");
@@ -169,6 +169,9 @@ public class MoveCommand extends Command {
     }
 
     public static MoveCommand getMoveCommand() {
+        if (moveCommand == null) {
+            moveCommand = new MoveCommand();
+        }
         return moveCommand;
     }
 

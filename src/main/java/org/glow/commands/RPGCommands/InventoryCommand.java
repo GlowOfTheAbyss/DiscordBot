@@ -8,7 +8,7 @@ import org.glow.person.Player;
 
 public class InventoryCommand extends Command {
 
-    private static final InventoryCommand inventoryCommand = new InventoryCommand();
+    private static InventoryCommand inventoryCommand;
 
     private InventoryCommand() {
         setName("inventory");
@@ -57,6 +57,9 @@ public class InventoryCommand extends Command {
     }
 
     public static InventoryCommand getInventoryCommand() {
+        if (inventoryCommand == null) {
+            inventoryCommand = new InventoryCommand();
+        }
         return inventoryCommand;
     }
 }

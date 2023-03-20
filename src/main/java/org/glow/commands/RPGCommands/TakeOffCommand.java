@@ -25,7 +25,7 @@ import java.util.List;
 
 public class TakeOffCommand extends Command {
 
-    private static final TakeOffCommand takeOffCommand = new TakeOffCommand();;
+    private static TakeOffCommand takeOffCommand;
 
     private TakeOffCommand() {
         setName("take_off");
@@ -100,6 +100,9 @@ public class TakeOffCommand extends Command {
     }
 
     public static TakeOffCommand getTakeOffCommand() {
+        if (takeOffCommand == null) {
+            takeOffCommand = new TakeOffCommand();
+        }
         return takeOffCommand;
     }
 

@@ -9,7 +9,7 @@ import org.glow.person.Player;
 
 public class CastCommand extends Command {
 
-    private static final CastCommand castCommand = new CastCommand();
+    private static CastCommand castCommand;
 
     private CastCommand() {
         setName("cast");
@@ -65,6 +65,9 @@ public class CastCommand extends Command {
     }
 
     public static CastCommand getCastCommand() {
+        if (castCommand == null) {
+            castCommand = new CastCommand();
+        }
         return castCommand;
     }
 }

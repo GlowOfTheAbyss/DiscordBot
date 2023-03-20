@@ -23,7 +23,7 @@ import org.glow.person.Player;
 
 public class EquipCommand extends Command {
 
-    private static final EquipCommand equipCommand = new EquipCommand();
+    private static EquipCommand equipCommand;
 
     private EquipCommand() {
         setName("equip");
@@ -123,6 +123,9 @@ public class EquipCommand extends Command {
     }
 
     public static EquipCommand getEquipCommand() {
+        if (equipCommand == null) {
+            equipCommand = new EquipCommand();
+        }
         return equipCommand;
     }
 }

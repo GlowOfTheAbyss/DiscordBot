@@ -8,7 +8,7 @@ import org.glow.person.Player;
 
 public class HealCommand extends Command {
 
-    private static final HealCommand healCommand = new HealCommand();
+    private static HealCommand healCommand;
 
     private HealCommand() {
         setName("heal");
@@ -28,6 +28,9 @@ public class HealCommand extends Command {
     }
 
     public static HealCommand getHealCommand() {
+        if (healCommand == null) {
+            healCommand = new HealCommand();
+        }
         return healCommand;
     }
 }
