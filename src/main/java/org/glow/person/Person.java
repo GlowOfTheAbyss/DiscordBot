@@ -45,6 +45,11 @@ public abstract class Person {
     }
 
     @JsonIgnore
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonIgnore
     public int getLevel() {
         return strength + endurance + agility + intelligence + perception + luck;
     }

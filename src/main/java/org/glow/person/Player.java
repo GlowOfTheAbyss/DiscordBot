@@ -57,7 +57,7 @@ public class Player extends Person {
 
     @JsonIgnore
     public int getMaxMana() {
-        return 100 + ((int) (0.5 * getIntelligence())) * 10;
+        return 100 + ((int) (0.5 * getIntelligence()) * 10);
     }
 
     public String getLocationName() {
