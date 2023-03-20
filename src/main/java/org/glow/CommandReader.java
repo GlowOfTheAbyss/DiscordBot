@@ -23,6 +23,7 @@ public class CommandReader {
         commandList.add(EquipCommand.getEquipCommand());
         commandList.add(HealCommand.getHealCommand());
         commandList.add(InventoryCommand.getInventoryCommand());
+        commandList.add(LevelUpCommand.getLevelUpCommand());
         commandList.add(MoveCommand.getMoveCommand());
         commandList.add(StatsCommand.getStatsCommand());
         commandList.add(TakeOffCommand.getTakeOffCommand());
