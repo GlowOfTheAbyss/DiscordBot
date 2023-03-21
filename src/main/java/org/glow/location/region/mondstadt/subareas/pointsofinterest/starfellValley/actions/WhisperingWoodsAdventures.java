@@ -1,6 +1,7 @@
 package org.glow.location.region.mondstadt.subareas.pointsofinterest.starfellValley.actions;
 
 import discord4j.core.object.entity.Message;
+import org.glow.actions.Battle;
 import org.glow.location.Action;
 import org.glow.person.NPC;
 import org.glow.person.Player;
@@ -25,16 +26,26 @@ public class WhisperingWoodsAdventures extends Action {
     public void startAction(Message message, Player player) {
 
         int random = new Random().nextInt(101);
-        int chestChance = 5 + ((int) 0.5 * player.getLuck());
+        int chestChance = 5 + ((int) (0.5 * player.getLuck()));
         if (chestChance > 10) {
             chestChance = 10;
         }
 
         if (random > chestChance) {
-            // enemy
+            enemy(message, player);
         } else {
             // chest
         }
+
+    }
+
+    private void enemy(Message message, Player player) {
+
+        NPC randomNPC = npcList.get(new Random().nextInt(npcList.size()));
+
+        Battle battle = new Battle(message, player, randomNPC);
+        battle.start();
+
 
     }
 
