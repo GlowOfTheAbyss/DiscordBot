@@ -60,6 +60,14 @@ public class WhisperingWoodsAdventures extends Action {
 
         NPC randomNPC = npcList.get(new Random().nextInt(npcList.size()));
 
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title("Вы встречаете противника " + randomNPC.getName());
+        builder.image(randomNPC.getImage());
+        builder.description(randomNPC.getName() + " HP : " + randomNPC.getHealth()
+                + randomNPC.getName() + " боевой уровень : " + randomNPC.getCombatLevel());
+
+        message.getChannel().block().createMessage(builder.build()).block();
+
         Battle battle = new Battle(message, player, randomNPC);
         battle.start();
 
