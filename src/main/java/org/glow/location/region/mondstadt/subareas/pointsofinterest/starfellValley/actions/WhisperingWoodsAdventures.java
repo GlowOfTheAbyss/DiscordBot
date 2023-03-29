@@ -108,7 +108,6 @@ public class WhisperingWoodsAdventures extends Action {
             builder.description("Но у ва нет места в инвентаре что бы его забрать");
 
             message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
 
             return;
         }
