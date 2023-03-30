@@ -19,8 +19,8 @@ public class HilichurlFighter extends NPC {
         setPerception(1);
         setLuck(0);
 
-        setHealth(80 * (getEndurance() * 10));
-        setMana(20 + ((int) (0.5 * getIntelligence()) * 10));
+        setHealth(80 * getEndurance());
+        setMana(20 + (int) (0.5 * getIntelligence()));
 
         setInventory(new Inventory());
         setSkillBook(new SkillBook());

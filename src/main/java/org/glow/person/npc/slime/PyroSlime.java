@@ -19,8 +19,8 @@ public class PyroSlime extends NPC {
         setPerception(1);
         setLuck(0);
 
-        setHealth(40 * (getEndurance() * 10));
-        setMana(((int) (0.5 * getIntelligence()) * 10));
+        setHealth(40 * getEndurance());
+        setMana((int) (0.5 * getIntelligence()));
 
         setInventory(new Inventory());
         setSkillBook(new SkillBook());

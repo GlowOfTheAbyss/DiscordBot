@@ -31,7 +31,9 @@ public class WhisperingWoodsAdventures extends Action {
 
     private static WhisperingWoodsAdventures whisperingWoodsAdventures;
 
-    private WhisperingWoodsAdventures() {}
+    private WhisperingWoodsAdventures() {
+        setName("Отправиться на поиски монстров | !go");
+    }
 
     private static final List<NPC> npcList = List.of(new Hilichurl(),
             new HilichurlBerserker(),
@@ -63,7 +65,7 @@ public class WhisperingWoodsAdventures extends Action {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title("Вы встречаете противника " + randomNPC.getName());
         builder.image(randomNPC.getImage());
-        builder.description(randomNPC.getName() + " HP : " + randomNPC.getHealth()
+        builder.description(randomNPC.getName() + " HP : " + randomNPC.getHealth() + "\n"
                 + randomNPC.getName() + " боевой уровень : " + randomNPC.getCombatLevel());
 
         message.getChannel().block().createMessage(builder.build()).block();
