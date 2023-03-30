@@ -60,7 +60,20 @@ public class WhisperingWoodsAdventures extends Action {
 
     private void enemy(Message message, Player player) {
 
-        NPC randomNPC = npcList.get(new Random().nextInt(npcList.size()));
+        NPC randomNPC;
+
+        if (player.getCombatLevel() < 6) {
+
+            int random = new Random().nextInt(2);
+            if (random == 0) {
+                randomNPC = new HydroSlime();
+            } else {
+                randomNPC = new PyroSlime();
+            }
+
+        } else {
+            randomNPC = npcList.get(new Random().nextInt(npcList.size()));
+        }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title("Вы встречаете противника " + randomNPC.getName());
