@@ -19,8 +19,8 @@ public class HilichurlBerserker extends NPC {
         setPerception(2);
         setLuck(0);
 
-        setHealth(100 * getEndurance());
-        setMana(20 + (int) (0.5 * getIntelligence()));
+        setHealth((10 + getEndurance()) * 10);
+        setMana((2 + (int) (0.5 * getIntelligence())) * 10);
 
         setInventory(new Inventory());
         setSkillBook(new SkillBook());
