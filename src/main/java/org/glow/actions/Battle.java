@@ -42,7 +42,7 @@ public class Battle {
             }
 
             try {
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -94,8 +94,8 @@ public class Battle {
 
         builder.title(attacker.getName() + " попадает по " + defender.getName());
         builder.description("И наносит " + damage + " урона\n\n"
-                + attacker.getName() + "HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + "HP : " + defender.getHealth());
+                + attacker.getName() + " HP : " + attacker.getHealth() + "\n"
+                + defender.getName() + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -110,7 +110,7 @@ public class Battle {
 
         int damage = attack - defend;
         if (damage <= 0) {
-            damage = 1;
+            damage = 2;
         }
         defender.setHealth(defender.getHealth() - damage);
         if (defender instanceof Player) {
@@ -120,9 +120,9 @@ public class Battle {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         builder.title(attacker.getName() + " попадает по " + defender.getName());
-        builder.description("И наносит критический удар : " + damage + " урона\n\n"
-                + attacker.getName() + "HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + "HP : " + defender.getHealth());
+        builder.description("И наносит критический удар " + damage + " урона\n\n"
+                + attacker.getName() + " HP : " + attacker.getHealth() + "\n"
+                + defender.getName() + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -162,7 +162,7 @@ public class Battle {
 
         builder.title(defender.getName() + " уворачивается от атаки " + attacker.getName());
         builder.description(attacker.getName() + "HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + "HP : " + defender.getHealth());
+                + defender.getName() + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
