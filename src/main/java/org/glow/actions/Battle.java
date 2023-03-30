@@ -82,6 +82,9 @@ public class Battle {
         int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
 
         int damage = attack - defend;
+        if (damage <= 0) {
+            damage = 1;
+        }
         defender.setHealth(defender.getHealth() - damage);
         if (defender instanceof Player) {
             Save.getSave().saveFile((Player) defender);
@@ -106,6 +109,9 @@ public class Battle {
         int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
 
         int damage = attack - defend;
+        if (damage <= 0) {
+            damage = 1;
+        }
         defender.setHealth(defender.getHealth() - damage);
         if (defender instanceof Player) {
             Save.getSave().saveFile((Player) defender);
@@ -130,6 +136,9 @@ public class Battle {
         int defend = new Random().nextInt(7) + attacker.getInventory().getArmor();
 
         int damage = attack - defend;
+        if (damage <= 0) {
+            damage = 1;
+        }
 
         attacker.setHealth(attacker.getHealth() - damage);
         if (attacker instanceof Player) {
