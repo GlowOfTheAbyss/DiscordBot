@@ -35,8 +35,8 @@ public class Player extends Person {
 
         setHealth(getMaxHealth());
         setMana(getMaxMana());
-        setEnergy(50);
-        setCoins(90000);
+        setEnergy(5);
+        setCoins(10);
 
         setInventory(new Inventory());
         setSkillBook(new SkillBook());
