@@ -8,6 +8,7 @@ import org.glow.person.Player;
 public abstract class Command implements LaunchedCommand {
 
     private String name;
+    private String info;
 
     public static final Snowflake admin = Snowflake.of(238764551221280770L);
 
@@ -17,6 +18,14 @@ public abstract class Command implements LaunchedCommand {
 
     public String getName() {
         return name;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     /*---*/
