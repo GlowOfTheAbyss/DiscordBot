@@ -19,6 +19,8 @@ public class LevelUpCommand extends Command {
 
     private LevelUpCommand() {
         setName("level_up");
+        setInfo("комманда для прокачки уровня персонажа\n" +
+                "!level_up [характеристика которую нужно прокачать]");
     }
 
     @Override

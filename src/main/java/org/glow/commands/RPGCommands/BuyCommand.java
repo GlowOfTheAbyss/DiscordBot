@@ -14,6 +14,10 @@ public class BuyCommand extends Command {
 
     private BuyCommand() {
         setName("buy");
+        setInfo("""
+                комманда для покупки предметов в специальных местах
+                !buy - показать предметы доступные для покупки
+                !buy [название предмета] - купить предмет""");
     }
 
     @Override

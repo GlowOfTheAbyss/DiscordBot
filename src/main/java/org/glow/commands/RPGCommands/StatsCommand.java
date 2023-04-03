@@ -11,6 +11,7 @@ public class StatsCommand extends Command {
 
     private StatsCommand() {
         setName("stats");
+        setInfo("показывает статистику персонажа");
     }
 
     @Override

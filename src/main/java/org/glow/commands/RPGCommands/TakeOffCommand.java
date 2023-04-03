@@ -29,6 +29,8 @@ public class TakeOffCommand extends Command {
 
     private TakeOffCommand() {
         setName("take_off");
+        setInfo("команда для снятия экипированного предмета в инвентарь\n" +
+                "!take_off [имя предмета который необходимо снять]");
     }
 
     @Override

@@ -31,7 +31,11 @@ public class HelpCommand extends Command {
 
         for (Command command : CommandReader.getCommandReader().getCommandList()) {
 
-            stringBuilder.append(command.getName()).append(" : ").append(command.getInfo()).append("\n");
+            if (command instanceof HelpCommand) {
+                continue;
+            }
+
+            stringBuilder.append(command.getName()).append(" : ").append(command.getInfo()).append("\n\n");
 
         }
 

@@ -27,6 +27,8 @@ public class EquipCommand extends Command {
 
     private EquipCommand() {
         setName("equip");
+        setInfo("команда для экиперовки предмета из инвентаря\n" +
+                "!equip [название предмета]");
     }
 
     @Override

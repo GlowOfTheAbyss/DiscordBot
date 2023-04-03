@@ -15,6 +15,10 @@ public class MoveCommand extends Command {
 
     private MoveCommand(){
         setName("move");
+        setInfo("""
+                команда для передвижения по миру
+                !move - показывает текущее положение персонажа и список соседних локаций
+                !move [название локации] - отправится в указанную локацию""");
     }
 
     @Override

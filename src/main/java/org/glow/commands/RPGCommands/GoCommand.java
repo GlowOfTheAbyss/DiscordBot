@@ -13,6 +13,7 @@ public class GoCommand extends Command {
 
     private GoCommand() {
         setName("go");
+        setInfo("отправиться в приключения в специальных локациях");
     }
 
     @Override

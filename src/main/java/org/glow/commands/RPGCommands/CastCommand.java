@@ -13,6 +13,10 @@ public class CastCommand extends Command {
 
     private CastCommand() {
         setName("cast");
+        setInfo("""
+                комманда для использования извесных вам заклинаний
+                !cast - показывает извесные вам заклинания
+                !cast [название заклинания] [цель заклинания]""");
     }
 
     @Override

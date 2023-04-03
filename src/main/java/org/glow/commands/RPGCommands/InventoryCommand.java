@@ -12,6 +12,7 @@ public class InventoryCommand extends Command {
 
     private InventoryCommand() {
         setName("inventory");
+        setInfo("показывает инвентарь персонажа");
     }
 
     @Override
