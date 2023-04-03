@@ -12,6 +12,10 @@ public class HealCommand extends Command {
 
     private HealCommand() {
         setName("heal");
+        setInfo("""
+                команда для лечения персонажа в специальных заведениях
+                !heal - показывает подробную информацию о услуге
+                !heal - количество здоровья что нужно востановить""");
     }
 
     @Override
