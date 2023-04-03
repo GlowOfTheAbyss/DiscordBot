@@ -24,17 +24,19 @@ public class HelpCommand extends Command {
         }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+
         builder.title("Список существующих команд");
-        message.getChannel().block().createMessage(builder.build()).block();
-        builder.title("");
+
+        StringBuilder stringBuilder = new StringBuilder();
 
         for (Command command : CommandReader.getCommandReader().getCommandList()) {
 
-            builder.description(command.getName() + " : " + command.getInfo());
-            message.getChannel().block().createMessage(builder.build()).block();
+            stringBuilder.append(command.getName()).append(" : ").append(command.getInfo()).append("\n");
 
         }
 
+        builder.description(stringBuilder.toString());
+        message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 
     }
