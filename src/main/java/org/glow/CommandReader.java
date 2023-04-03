@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 public class CommandReader {
 
     private static final CommandReader commandReader = new CommandReader();
-    private static HashSet<Command> commandList;
+    private final HashSet<Command> commandList;
 
     private CommandReader() {
 
@@ -23,6 +23,7 @@ public class CommandReader {
         commandList.add(EquipCommand.getEquipCommand());
         commandList.add(GoCommand.getGoCommand());
         commandList.add(HealCommand.getHealCommand());
+        commandList.add(HelpCommand.getHelpCommand());
         commandList.add(InventoryCommand.getInventoryCommand());
         commandList.add(LevelUpCommand.getLevelUpCommand());
         commandList.add(MoveCommand.getMoveCommand());
@@ -52,6 +53,10 @@ public class CommandReader {
 
     private String getCommand(Message message) {
         return message.getContent().split(" ")[0].replaceFirst("!", "");
+    }
+
+    public HashSet<Command> getCommandList() {
+        return commandList;
     }
 
     public static CommandReader getCommandReader() {
