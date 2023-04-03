@@ -13,7 +13,8 @@ public class ShotDownCommand extends Command {
     private static final ShotDownCommand shotDownCommand = new ShotDownCommand();
 
     private ShotDownCommand() {
-        setName("shot_down");
+        setName("shut_down");
+        setInfo("всем иногда нужен отдых");
     }
 
     @Override
