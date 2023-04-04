@@ -26,6 +26,7 @@ public class CommandReader {
         commandList.add(HelpCommand.getHelpCommand());
         commandList.add(InventoryCommand.getInventoryCommand());
         commandList.add(LevelUpCommand.getLevelUpCommand());
+        commandList.add(MineCommand.getMineCommand());
         commandList.add(MoveCommand.getMoveCommand());
         commandList.add(StatsCommand.getStatsCommand());
         commandList.add(TakeOffCommand.getTakeOffCommand());
