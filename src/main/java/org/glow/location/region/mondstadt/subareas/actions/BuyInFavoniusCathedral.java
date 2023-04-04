@@ -1,10 +1,10 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions;
+package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.FavoniusCathedral;
+import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.magic.Magic;
 import org.glow.magic.spells.Healing;
 import org.glow.person.Player;

@@ -12,7 +12,8 @@ public class LiyueHarbor extends Subarea {
         setName("Гавань Ли Юэ");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1086595990146002954/LiyueHarbor.png");
 
-        setPointsOfInterests(Set.of());
+        setSubareas(Set.of());
+        setActions(Set.of());
     }
 
     public static LiyueHarbor getLiyueHarbor() {

@@ -1,4 +1,4 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.actions;
+package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
@@ -18,7 +18,7 @@ import org.glow.item.head.WhiteIronHeadArmor;
 import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.pointsofinterest.cityMondstadt.SchulzsBlacksmith;
+import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
 import org.glow.person.Player;
 
 import java.util.ArrayList;

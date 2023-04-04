@@ -1,4 +1,4 @@
-package org.glow.location.region.mondstadt.subareas.pointsofinterest.starfellValley.actions;
+package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;

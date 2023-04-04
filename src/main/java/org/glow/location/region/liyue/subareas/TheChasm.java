@@ -12,7 +12,8 @@ public class TheChasm extends Subarea {
         setName("Разлом");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1086598614568161320/TheChasm.png");
 
-        setPointsOfInterests(Set.of());
+        setSubareas(Set.of());
+        setActions(Set.of());
     }
 
     public static TheChasm getTheChasm() {

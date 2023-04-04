@@ -4,13 +4,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Subarea extends Location {
-    private Set<PointsOfInterest> pointsOfInterests = new HashSet<>();
+    private Set<Subarea> subareas = new HashSet<>();
 
-    public Set<PointsOfInterest> getPointsOfInterests() {
-        return pointsOfInterests;
+    private Set<Action> actions = new HashSet<>();
+
+    public Set<Subarea> getSubareas() {
+        return subareas;
     }
 
-    public void setPointsOfInterests(Set<PointsOfInterest> pointsOfInterests) {
-        this.pointsOfInterests = pointsOfInterests;
+    public void setSubareas(Set<Subarea> subareas) {
+        this.subareas = subareas;
     }
+
+    public Set<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(Set<Action> actions) {
+        this.actions = actions;
+    }
+
 }

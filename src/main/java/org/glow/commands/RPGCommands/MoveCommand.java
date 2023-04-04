@@ -57,7 +57,7 @@ public class MoveCommand extends Command {
             }
             stringBuilder.append("\n");
 
-            stringBuilder.append("**Вы можете перейти в локацию мондштата: **\n");
+            stringBuilder.append("**Вы можете перейти в локацию " + thisRegion.getName() + ": **\n");
             for (Subarea subarea : subareaList) {
                 stringBuilder.append(subarea.getName()).append("\n");
             }
@@ -83,68 +83,40 @@ public class MoveCommand extends Command {
                 return;
             }
 
-            Set<Subarea> subareasList = thisRegion.getSubareas();
-            Set<PointsOfInterest> pointsOfInterestsList = thisSubarea.getPointsOfInterests();
+            Set<Subarea> regionSubareas = thisRegion.getSubareas();
+            Set<Subarea> subareas = thisSubarea.getSubareas();
+            Set<Action> actions = thisSubarea.getActions();
 
             builder.title("Вы находитесь в " + player.getLocationName());
             builder.image(player.getLocation().getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n");
+            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n\n");
 
             stringBuilder.append("**Вы можете перейти в локацию: **\n");
-            for (Subarea subarea : subareasList) {
+            for (Subarea subarea : regionSubareas) {
                 stringBuilder.append(subarea.getName()).append("\n");
             }
             stringBuilder.append("\n");
 
-            stringBuilder.append("**Вы можете пройти к: **\n");
-            for (PointsOfInterest pointsOfInterest : pointsOfInterestsList) {
-                stringBuilder.append(pointsOfInterest.getName()).append("\n");
+            if (!subareas.isEmpty()) {
+                stringBuilder.append("**Вы можете пройти к: **\n");
+                for (Subarea subarea : subareas) {
+                    stringBuilder.append(subarea.getName()).append("\n");
+                }
+                stringBuilder.append("\n");
             }
 
-            builder.description(stringBuilder.toString());
-            message.getChannel().block().createMessage(builder.build()).block();
-
-        }
-
-        if (player.getLocation() instanceof PointsOfInterest thisPointsOfInterest) {
-
-            Subarea thisSubarea = null;
-            for (Subarea subarea : Map.getMap().getSubareas()) {
-                if (subarea.getPointsOfInterests().contains(thisPointsOfInterest)) {
-                    thisSubarea = subarea;
+            if (!actions.isEmpty()) {
+                stringBuilder.append("**Вы можете заняться: **\n");
+                for (Action action : actions) {
+                    stringBuilder.append(action.getName()).append("\n");
                 }
             }
-            if (thisSubarea == null) {
-                builder.title("Точка интереса в локации не найдена");
-                message.getChannel().block().createMessage(builder.build()).block();
-                message.delete().block();
-                return;
-            }
-
-            Set<PointsOfInterest> pointsOfInterestsList = thisSubarea.getPointsOfInterests();
-            Set<Action> actionsList = thisPointsOfInterest.getActions();
-
-            builder.title("Вы находитесь в " + player.getLocationName());
-            builder.image(player.getLocation().getImage());
-
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisSubarea.getName()).append("\n").append("\n");
-
-            stringBuilder.append("**Вы можете пройти к: **\n");
-            for (PointsOfInterest pointsOfInterest : pointsOfInterestsList) {
-                stringBuilder.append(pointsOfInterest.getName()).append("\n");
-            }
-            stringBuilder.append("\n");
-
-            stringBuilder.append("**Вы можете заняться: **\n");
-            for (Action action : actionsList) {
-                stringBuilder.append(action.getName()).append("\n");
-            }
 
             builder.description(stringBuilder.toString());
             message.getChannel().block().createMessage(builder.build()).block();
+
         }
 
         message.delete().block();
