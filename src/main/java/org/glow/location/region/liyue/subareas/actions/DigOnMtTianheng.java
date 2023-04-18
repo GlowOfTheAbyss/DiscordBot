@@ -33,6 +33,9 @@ public class DigOnMtTianheng extends Action {
 
     private void chest(Message message, Player player) {
 
+        player.setEnergy(player.getEnergy() + 1);
+        Save.getSave().saveFile(player);
+
         int random = new Random().nextInt(101);
         int exquisiteChestChance = 5;
 
@@ -42,9 +45,6 @@ public class DigOnMtTianheng extends Action {
             Chests.getChests().getCommonChest(message, player);
         }
 
-        player.setEnergy(player.getEnergy() + 1);
-        Save.getSave().saveFile(player);
-
     }
 
     private void deposit(Message message, Player player) {
@@ -52,10 +52,10 @@ public class DigOnMtTianheng extends Action {
         int random = new Random().nextInt(101);
         int whiteIronDepositChance = 10;
 
-        if (whiteIronDepositChance > random) {
-            ironDeposit(message, player);
-        } else {
+        if (whiteIronDepositChance >= random) {
             whiteIronDeposit(message, player);
+        } else {
+            ironDeposit(message, player);
         }
 
     }

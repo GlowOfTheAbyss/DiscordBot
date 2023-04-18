@@ -4,6 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.Battle;
 import org.glow.actions.Chests;
+import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.NPC;
 import org.glow.person.Player;
@@ -78,6 +79,9 @@ public class WhisperingWoodsAdventures extends Action {
     }
 
     private void chest(Message message, Player player) {
+
+        player.setEnergy(player.getEnergy() + 1);
+        Save.getSave().saveFile(player);
 
         int random = new Random().nextInt(101);
         int exquisiteChestChance = 20 + ((int) (0.5 * player.getLuck()));
