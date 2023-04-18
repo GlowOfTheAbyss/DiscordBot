@@ -3,18 +3,7 @@ package org.glow.location.region.mondstadt.subareas.actions;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.Battle;
-import org.glow.fileManager.Save;
-import org.glow.item.Item;
-import org.glow.item.body.IronBodyArmor;
-import org.glow.item.body.WhiteIronBodyArmor;
-import org.glow.item.head.IronHeadArmor;
-import org.glow.item.head.WhiteIronHeadArmor;
-import org.glow.item.lefthand.IronShield;
-import org.glow.item.lefthand.WhiteIronShield;
-import org.glow.item.legs.IronLegArmor;
-import org.glow.item.legs.WhiteIronLegArmor;
-import org.glow.item.righthand.DullBlade;
-import org.glow.item.righthand.SilverSword;
+import org.glow.actions.Chests;
 import org.glow.location.Action;
 import org.glow.person.NPC;
 import org.glow.person.Player;
@@ -91,60 +80,16 @@ public class WhisperingWoodsAdventures extends Action {
     private void chest(Message message, Player player) {
 
         int random = new Random().nextInt(101);
-        int itemChance = 5 + ((int) (0.5 * player.getLuck()));
-        if (itemChance > 10) {
-            itemChance = 10;
+        int exquisiteChestChance = 20 + ((int) (0.5 * player.getLuck()));
+        if (exquisiteChestChance > 40) {
+            exquisiteChestChance = 40;
         }
 
-        if (itemChance >= random) {
-            item(message, player);
+        if (exquisiteChestChance >= random) {
+            Chests.getChests().getExquisiteChest(message, player);
+        } else {
+            Chests.getChests().getCommonChest(message, player);
         }
-
-        int randomCoins = new Random().nextInt(11) + 4 * player.getLuck() * 10;
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title("Вы нашли сундук");
-        builder.description("В сундуке было " + randomCoins  + " :pig2:\n\n"
-                +":pig2: " + player.getCoins() + "\n"
-                + "Энергия: " + player.getEnergy() + "\n"
-                + "Здоровье: " + player.getHealth() + "\n"
-                + "Мана: " + player.getMana() + "\n");
-
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
-
-    }
-
-    private void item(Message message, Player player) {
-
-        List<Item> items = List.of(new DullBlade(), new SilverSword(), new IronShield(),
-                new WhiteIronShield(), new IronHeadArmor(), new IronBodyArmor(),
-                new IronLegArmor(), new WhiteIronHeadArmor(), new WhiteIronBodyArmor(),
-                new WhiteIronLegArmor());
-
-        Item randomItem = items.get(new Random().nextInt(items.size()));
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (player.getInventory().getBag().size() >= player.getInventory().getBagSize()) {
-
-            builder.title("Вы нашли предмет " + randomItem.getName());
-            builder.description("Но у ва нет места в инвентаре что бы его забрать");
-
-            message.getChannel().block().createMessage(builder.build()).block();
-
-            return;
-        }
-
-        player.getInventory().getBag().add(randomItem);
-        Save.getSave().saveFile(player);
-
-        builder.title("Вы нашли предмет " + randomItem.getName());
-        builder.description(":pig2: " + player.getCoins() + "\n"
-                + "Энергия: " + player.getEnergy() + "\n"
-                + "Здоровье: " + player.getHealth() + "\n"
-                + "Мана: " + player.getMana() + "\n");
-
-        message.getChannel().block().createMessage(builder.build()).block();
 
     }
 
