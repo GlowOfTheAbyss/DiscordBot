@@ -50,7 +50,7 @@ public class WhisperingWoodsAdventures extends Action {
             chestChance = 5;
         }
 
-        if (chestChance > random) {
+        if (chestChance >= random) {
             chest(message, player);
         } else {
             enemy(message, player);
@@ -96,7 +96,7 @@ public class WhisperingWoodsAdventures extends Action {
             itemChance = 10;
         }
 
-        if (itemChance > random) {
+        if (itemChance >= random) {
             item(message, player);
         }
 
