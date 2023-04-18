@@ -25,6 +25,10 @@ public class MineCommand extends Command {
             return;
         }
 
+        if (player.getEnergy() <= 0) {
+            notEnoughEnergyMessage(message);
+        }
+
         if (player.getLocation() instanceof MtTianheng) {
 
             player.setEnergy(player.getEnergy() - 1);

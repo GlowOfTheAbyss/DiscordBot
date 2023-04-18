@@ -60,15 +60,17 @@ public class Battle {
 
             if (attackerAttack > defenderDefend * 2) {
                 superHit();
+            } else {
+                hit();
             }
-            hit();
 
         } else {
 
             if (defenderDefend > attackerAttack * 2) {
                 parrying();
+            } else {
+                dodge();
             }
-            dodge();
 
         }
 

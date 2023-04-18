@@ -46,8 +46,15 @@ public abstract class Command implements LaunchedCommand {
         return !player.getSnowflake().equals(admin);
     }
 
-    protected boolean lengthCheck(Message message, int lenght) {
-        return message.getContent().split(" ").length == lenght;
+    protected boolean lengthCheck(Message message, int length) {
+        return message.getContent().split(" ").length == length;
+    }
+
+    protected void notEnoughEnergyMessage(Message message) {
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title("Не достаточно энергии");
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
     }
 
 }

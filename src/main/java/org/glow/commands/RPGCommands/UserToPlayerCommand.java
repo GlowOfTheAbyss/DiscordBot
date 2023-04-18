@@ -33,7 +33,7 @@ public class UserToPlayerCommand extends Command {
         Save.getSave().saveFile(newPlayer);
 
         builder.title("Игрок: " + newPlayer.getName() + " успешно создан");
-        builder.description("Используй !help!");
+        builder.description("Используй !help");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 
