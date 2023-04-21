@@ -43,7 +43,7 @@ public class PersonManager {
     }
 
     public Location getPlayerLocation(Player player) {
-        for (Location location : Map.getMap().getLocations()) {
+        for (Location location : Map.getInstance().getLocations()) {
             if (location.getName().equalsIgnoreCase(player.getLocationName())) {
                 return location;
             }

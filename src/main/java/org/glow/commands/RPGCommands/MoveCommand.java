@@ -5,6 +5,9 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.location.*;
+import org.glow.location.region.liyue.Liyue;
+import org.glow.location.region.mondstadt.Mondstadt;
+import org.glow.location.region.mondstadt.subareas.CityMondstadt;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -40,83 +43,154 @@ public class MoveCommand extends Command {
 
     private void descriptionGenerator(Message message, Player player) {
 
+        if (PersonManager.getInstance().getPlayerLocation(player) instanceof Region thisRegion) {
+            playerInRegion(message, player, thisRegion);
+        }
+
+        if (PersonManager.getInstance().getPlayerLocation(player) instanceof Subarea thisSubarea) {
+            playerInSubarea(message, player, thisSubarea);
+        }
+
+    }
+
+    private void playerInRegion(Message message, Player player, Region thisRegion) {
+
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        Location location = PersonManager.getInstance().getPlayerLocation(player);
 
-        if (location instanceof Region thisRegion) {
+        Set<Region> regions = Map.getInstance().getRegions();
+        Set<Subarea> subareas = thisRegion.getSubareas();
 
-            Set<Region> regionList = Map.getMap().getRegions();
-            Set<Subarea> subareaList = thisRegion.getSubareas();
+        builder.title("Вы находитесь в " + player.getLocationName());
+        builder.image(PersonManager.getInstance().getPlayerLocation(player).getImage());
 
-            builder.title("Вы находитесь в " + player.getLocationName());
-            builder.image(location.getImage());
+        StringBuilder stringBuilder = new StringBuilder();
 
-            StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("**Вы можете перейти в другой регион: **\n");
+        for (Region region : regions) {
+            stringBuilder.append(region.getName()).append("\n");
+        }
+        stringBuilder.append("\n");
 
-            stringBuilder.append("**Вы можете перейти в другой регион: **\n");
-            for (Region region : regionList) {
-                stringBuilder.append(region.getName()).append("\n");
-            }
-            stringBuilder.append("\n");
-
-            stringBuilder.append("**Вы можете перейти в локацию " + thisRegion.getName() + ": **\n");
-            for (Subarea subarea : subareaList) {
-                stringBuilder.append(subarea.getName()).append("\n");
-            }
-
-            builder.description(stringBuilder.toString());
-            message.getChannel().block().createMessage(builder.build()).block();
-
-
+        stringBuilder.append("**Вы можете перейти в локацию " + thisRegion.getName() + ": **\n");
+        for (Subarea subarea : subareas) {
+            stringBuilder.append(subarea.getName()).append("\n");
         }
 
-        if (location instanceof Subarea thisSubarea) {
+        builder.description(stringBuilder.toString());
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
 
-            Region thisRegion = Map.getMap().findLocationRegion(thisSubarea);
+    }
 
-            if (thisRegion == null) {
-                builder.title("Локация в регионе не найдена");
-                message.getChannel().block().createMessage(builder.build()).block();
-                message.delete().block();
-                return;
-            }
+    private void playerInSubarea(Message message, Player player, Subarea thisSubarea) {
 
-            Set<Subarea> regionSubareas = thisRegion.getSubareas();
-            Set<Subarea> subareas = thisSubarea.getSubareas();
-            Set<Action> actions = thisSubarea.getActions();
+        Region thisRegion = null;
 
-            builder.title("Вы находитесь в " + player.getLocationName());
-            builder.image(location.getImage());
+        if (Map.getInstance().getLiyueLocations().contains(thisSubarea)) {
+            thisRegion = Liyue.getLiyue();
+        } else if (Map.getInstance().getMondstadtLocations().contains(thisSubarea)) {
+            thisRegion = Mondstadt.getMondstadt();
+        }
 
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n\n");
+        if (thisRegion == null) {
+            regionNotFound(message, player, thisSubarea);
+        } else {
+            regionFound(message, player, thisSubarea, thisRegion);
+        }
 
-            stringBuilder.append("**Вы можете перейти в локацию: **\n");
-            for (Subarea subarea : regionSubareas) {
+    }
+
+    private void regionFound(Message message, Player player, Subarea thisSubarea, Region thisRegion) {
+
+        Set<Subarea> regionSubareas = thisRegion.getSubareas();
+        Set<Subarea> subareas = thisSubarea.getSubareas();
+        Set<Action> actions = thisSubarea.getActions();
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+
+        builder.title("Вы находитесь в " + player.getLocationName());
+        builder.image(PersonManager.getInstance().getPlayerLocation(player).getImage());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n\n");
+
+        stringBuilder.append("**Вы можете перейти в локацию: **\n");
+        for (Subarea subarea : regionSubareas) {
+            stringBuilder.append(subarea.getName()).append("\n");
+        }
+        stringBuilder.append("\n");
+
+        if (!subareas.isEmpty()) {
+            stringBuilder.append("**Вы можете пройти к: **\n");
+            for (Subarea subarea : subareas) {
                 stringBuilder.append(subarea.getName()).append("\n");
             }
             stringBuilder.append("\n");
-
-            if (!subareas.isEmpty()) {
-                stringBuilder.append("**Вы можете пройти к: **\n");
-                for (Subarea subarea : subareas) {
-                    stringBuilder.append(subarea.getName()).append("\n");
-                }
-                stringBuilder.append("\n");
-            }
-
-            if (!actions.isEmpty()) {
-                stringBuilder.append("**Вы можете заняться: **\n");
-                for (Action action : actions) {
-                    stringBuilder.append(action.getName()).append("\n");
-                }
-            }
-
-            builder.description(stringBuilder.toString());
-            message.getChannel().block().createMessage(builder.build()).block();
-
         }
 
+        if (!actions.isEmpty()) {
+            stringBuilder.append("**Вы можете заняться: **\n");
+            for (Action action : actions) {
+                stringBuilder.append(action.getName()).append("\n");
+            }
+        }
+
+        builder.description(stringBuilder.toString());
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
+
+    }
+
+    private void regionNotFound(Message message, Player player, Subarea thisSubarea) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        Subarea headSubarea = null;
+
+        if (Map.getInstance().getCityMondstadtLocations().contains(thisSubarea)) {
+            headSubarea = CityMondstadt.getCityMondstadt();
+        }
+
+        if (headSubarea == null) {
+            builder.title("Location Error");
+            builder.description("Region or Head subarea not found");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
+            return;
+        }
+
+        Set<Subarea> headSubareas = headSubarea.getSubareas();
+        Set<Subarea> subareas = thisSubarea.getSubareas();
+        Set<Action> actions = thisSubarea.getActions();
+
+        builder.title("Вы находитесь в " + player.getLocationName());
+        builder.image(PersonManager.getInstance().getPlayerLocation(player).getImage());
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(headSubarea.getName()).append("\n\n");
+
+        stringBuilder.append("**Вы можете перейти в локацию: **\n");
+        for (Subarea subarea : headSubareas) {
+            stringBuilder.append(subarea.getName()).append("\n");
+        }
+        stringBuilder.append("\n");
+
+        if (!subareas.isEmpty()) {
+            stringBuilder.append("**Вы можете пройти к: **\n");
+            for (Subarea subarea : subareas) {
+                stringBuilder.append(subarea.getName()).append("\n");
+            }
+            stringBuilder.append("\n");
+        }
+
+        if (!actions.isEmpty()) {
+            stringBuilder.append("**Вы можете заняться: **\n");
+            for (Action action : actions) {
+                stringBuilder.append(action.getName()).append("\n");
+            }
+        }
+
+        builder.description(stringBuilder.toString());
+        message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 
     }
@@ -125,7 +199,7 @@ public class MoveCommand extends Command {
 
         String thisLocationName = message.getContent().replaceFirst("!" + getName() + " ", "");
 
-        for (Location location : Map.getMap().getLocations()) {
+        for (Location location : Map.getInstance().getLocations()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {
 
                 PersonManager.getInstance().setPlayerLocation(player, location);
@@ -140,6 +214,7 @@ public class MoveCommand extends Command {
         builder.title("Локация " + thisLocationName + " не найдена");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
+
     }
 
     public static MoveCommand getMoveCommand() {

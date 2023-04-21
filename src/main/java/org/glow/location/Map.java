@@ -8,27 +8,35 @@ import org.glow.location.region.mondstadt.Mondstadt;
 import org.glow.location.region.mondstadt.subareas.CityMondstadt;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
-import org.glow.location.region.mondstadt.subareas.actions.BuyInFavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.actions.BuyInSchulzsBlacksmith;
-import org.glow.location.region.mondstadt.subareas.actions.HealFavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Map {
 
     private static Map map;
-    private final List<Location> locations = new ArrayList<>();
-
-    private Set<Subarea> liyueSubareas;
-    private Set<Subarea> mondstadtSubareas;
+    private final Set<Location> locations = new HashSet<>();
+    private final Set<Location> liyueLocations = new HashSet<>();
+    private final Set<Location> mondstadtLocations = new HashSet<>();
+    private final Set<Location> cityMondstadtLocations = new HashSet<>();
 
     private Map() {}
 
-    public List<Location> getLocations() {
+    public Set<Location> getLocations() {
         return locations;
+    }
+
+    public Set<Location> getLiyueLocations() {
+        return liyueLocations;
+    }
+
+    public Set<Location> getMondstadtLocations() {
+        return mondstadtLocations;
+    }
+
+    public Set<Location> getCityMondstadtLocations() {
+        return cityMondstadtLocations;
     }
 
     public Set<Region> getRegions() {
@@ -38,7 +46,7 @@ public class Map {
 
     }
 
-    public static Map getMap() {
+    public static Map getInstance() {
         if (map == null) {
             map = new Map();
         }
@@ -46,46 +54,23 @@ public class Map {
     }
 
     public void createMap() {
+
         locations.add(Liyue.getLiyue());
-            locations.add(LiyueHarbor.getLiyueHarbor());
-            locations.add(MtTianheng.getMtTianheng());
-            locations.add(TheChasm.getTheChasm());
+
+        liyueLocations.add(LiyueHarbor.getLiyueHarbor());
+        liyueLocations.add(MtTianheng.getMtTianheng());
+        liyueLocations.add(TheChasm.getTheChasm());
+        locations.addAll(liyueLocations);
 
         locations.add(Mondstadt.getMondstadt());
-            locations.add(CityMondstadt.getCityMondstadt());
-                locations.add(FavoniusCathedral.getFavoniusCathedral());
-                locations.add(SchulzsBlacksmith.getSchulzsBlacksmith());
 
-            locations.add(WhisperingWoods.getWhisperingWoods());
+        mondstadtLocations.add(CityMondstadt.getCityMondstadt());
+            cityMondstadtLocations.add(FavoniusCathedral.getFavoniusCathedral());
+            cityMondstadtLocations.add(SchulzsBlacksmith.getSchulzsBlacksmith());
+            locations.addAll(cityMondstadtLocations);
+        mondstadtLocations.add(WhisperingWoods.getWhisperingWoods());
 
-
-        liyueSubareas = Set.of(LiyueHarbor.getLiyueHarbor(),
-                TheChasm.getTheChasm(),
-                MtTianheng.getMtTianheng());
-
-        mondstadtSubareas = Set.of(CityMondstadt.getCityMondstadt(),
-                FavoniusCathedral.getFavoniusCathedral(),
-                SchulzsBlacksmith.getSchulzsBlacksmith(),
-                WhisperingWoods.getWhisperingWoods());
-
-        initializeActions();
-    }
-
-    public Region findLocationRegion(Subarea subarea) {
-        if (liyueSubareas.contains(subarea)) {
-            return Liyue.getLiyue();
-        } else if (mondstadtSubareas.contains(subarea)) {
-            return Mondstadt.getMondstadt();
-        } else {
-            throw new IllegalArgumentException("Region not found");
-        }
-    }
-
-    private void initializeActions() {
-
-        BuyInFavoniusCathedral.getBuyFavoniusCathedral();
-        BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith();
-        HealFavoniusCathedral.getHealFavoniusCathedral();
+        locations.addAll(mondstadtLocations);
 
     }
 

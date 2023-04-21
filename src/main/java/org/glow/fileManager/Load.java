@@ -2,6 +2,7 @@ package org.glow.fileManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.io.File;
@@ -31,7 +32,7 @@ public class Load {
                 }
 
                 Player player = objectMapper.readValue(new File(filePath.toUri()), Player.class);
-                Player.addPlayerList(player);
+                PersonManager.getInstance().addPlayer(player);
 
             }
 

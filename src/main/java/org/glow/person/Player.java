@@ -24,8 +24,8 @@ public class Player extends Person {
         setPerception(0);
         setLuck(0);
 
-        setHealth(PersonManager.getInstance().getPlayerMaxHealth(this));
-        setMana(PersonManager.getInstance().getplayerMaxMana(this));
+        setHealth(100);
+        setMana(100);
         setEnergy(5);
         setCoins(10);
 

@@ -23,7 +23,7 @@ public class Systems {
 
     public void start() {
 
-        Map.getMap().createMap();
+        Map.getInstance().createMap();
         Load.getLoad().loadFile();
 
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1, r -> {

@@ -32,7 +32,7 @@ public abstract class Command implements LaunchedCommand {
     /*---*/
     protected Player userToPlayer(Message message) {
         for (Player player : PersonManager.getInstance().getPlayers()) {
-            if (message.getAuthor().get().getId().equals(player.getSnowflake())) {
+            if (message.getAuthor().get().getId().equals(PersonManager.getInstance().getPlayerSnowflake(player))) {
                 return player;
             }
         }

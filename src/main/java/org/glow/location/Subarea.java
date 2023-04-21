@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class Subarea extends Location {
+
     private Set<Subarea> subareas = new HashSet<>();
 
     private Set<Action> actions = new HashSet<>();

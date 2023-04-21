@@ -23,6 +23,7 @@ public class Save {
         try {
             objectMapper.writeValue(new File(savePath.toUri()), player);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException("Save error");
         }
 

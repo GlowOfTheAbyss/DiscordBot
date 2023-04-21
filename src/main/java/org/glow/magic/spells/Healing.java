@@ -4,6 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.magic.Magic;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.Random;
@@ -36,7 +37,7 @@ public class Healing extends Magic {
         }
 
         Player targetPlayer = null;
-        for (Player playerFromList : Player.getPlayerList()) {
+        for (Player playerFromList : PersonManager.getInstance().getPlayers()) {
             if (playerFromList.getSnowflake().equals(message.getMemberMentions().get(0).getId())) {
                 targetPlayer = playerFromList;
             }
@@ -52,13 +53,13 @@ public class Healing extends Magic {
 
         player.setMana(player.getMana() - getCoastInMana());
         targetPlayer.setHealth(targetPlayer.getHealth() + heal);
-        if (targetPlayer.getHealth() > targetPlayer.getMaxHealth()) {
-            targetPlayer.setHealth(targetPlayer.getMaxHealth());
+        if (targetPlayer.getHealth() > PersonManager.getInstance().getPlayerMaxHealth(targetPlayer)) {
+            targetPlayer.setHealth(PersonManager.getInstance().getPlayerMaxHealth(player));
         }
         Save.getSave().saveFile(player);
         Save.getSave().saveFile(targetPlayer);
 
-        builder.title(player.getName() + " востанавил " + heal + " здоровье " + targetPlayer.getName());
+        builder.title(PersonManager.getInstance().getPersonName(player) + " востанавил " + heal + " здоровье " + PersonManager.getInstance().getPersonName(targetPlayer));
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 
