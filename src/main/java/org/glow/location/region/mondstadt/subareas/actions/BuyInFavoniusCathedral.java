@@ -45,7 +45,7 @@ public class BuyInFavoniusCathedral extends Action {
         builder.description("**Вы можете приобрести:**\n" + "\n"
                 + "Свитки скилов:\n"
                 + shopSpellList.get(0).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(0).getPrice() + " :pig2:\n"
-                + shopSpellList.get(1).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(1).getPrice() + " :pig2:\n");
+                + shopSpellList.get(1).getSpellName() + " | " + shopSpellList.get(1).getCoastInMana() + " маны | " + shopSpellList.get(1).getPrice() + " :pig2:\n");
 
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
@@ -71,6 +71,15 @@ public class BuyInFavoniusCathedral extends Action {
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
+                }
+
+                for (Magic famousSpell : player.getSkillBook().getListSpell()) {
+                    if (famousSpell.getSpellName().equals(magic.getSpellName())) {
+                        builder.title(PersonManager.getInstance().getPersonName(player) + ", вы уже владеете данным заклинанием");
+                        message.getChannel().block().createMessage(builder.build()).block();
+                        message.delete().block();
+                        return;
+                    }
                 }
 
                 player.setCoins(player.getCoins() - magic.getPrice());

@@ -159,8 +159,8 @@ public class Battle {
 
         builder.title(personManager.getPersonName(defender) + " парирует атаку " + personManager.getPersonName(attacker));
         builder.description("И наносит " + damage + " урона\n\n"
-                + personManager.getPersonName(attacker) + "HP : " + attacker.getHealth() + "\n"
-                + personManager.getPersonName(defender) + "HP : " + defender.getHealth());
+                + personManager.getPersonName(attacker) + " HP : " + attacker.getHealth() + "\n"
+                + personManager.getPersonName(defender) + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -171,7 +171,7 @@ public class Battle {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         builder.title(personManager.getPersonName(defender) + " уворачивается от атаки " + personManager.getPersonName(attacker));
-        builder.description(personManager.getPersonName(attacker) + "HP : " + attacker.getHealth() + "\n"
+        builder.description(personManager.getPersonName(attacker) + " HP : " + attacker.getHealth() + "\n"
                 + personManager.getPersonName(defender) + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();

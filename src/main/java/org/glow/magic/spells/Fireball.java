@@ -15,7 +15,7 @@ import java.util.Random;
 public class Fireball extends Magic {
 
     public Fireball() {
-        setSpellName("Огненый_шар");
+        setSpellName("Огненный_шар");
         setCoastInMana(10);
         setPrice(0);
     }

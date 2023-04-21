@@ -24,7 +24,8 @@ public class Healing extends Magic {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         if (message.getContent().split(" ").length != 3) {
-            builder.title("Неверное количество аргументов");
+            builder.title("Команда должна иметь вид:");
+            builder.title("!cast Исецеление [@Игрок]");
             message.getChannel().block().createMessage(builder.build()).block();
             message.delete().block();
             return;
@@ -39,7 +40,7 @@ public class Healing extends Magic {
 
         Player targetPlayer = null;
         for (Player playerFromList : PersonManager.getInstance().getPlayers()) {
-            if (playerFromList.getSnowflake().equals(message.getMemberMentions().get(0).getId())) {
+            if (PersonManager.getInstance().getPlayerSnowflake(playerFromList).equals(message.getMemberMentions().get(0).getId())) {
                 targetPlayer = playerFromList;
             }
         }
@@ -50,7 +51,7 @@ public class Healing extends Magic {
             return;
         }
 
-        int heal = (1 + new Random().nextInt(2) + player.getIntelligence()) * 10;
+        int heal = new Random().nextInt(1, 3) + player.getIntelligence() * 10;
 
         player.setMana(player.getMana() - getCoastInMana());
         targetPlayer.setHealth(targetPlayer.getHealth() + heal);
