@@ -3,7 +3,7 @@ package org.glow;
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
 import org.glow.commands.RPGCommands.*;
-import org.glow.commands.SystrmCommands.ShotDownCommand;
+import org.glow.commands.SystrmCommands.ShutDownCommand;
 
 import java.util.HashSet;
 import java.util.concurrent.ExecutorService;
@@ -32,7 +32,7 @@ public class CommandReader {
         commandList.add(TakeOffCommand.getTakeOffCommand());
         commandList.add(UserToPlayerCommand.getUserToPlayerCommand());
 
-        commandList.add(ShotDownCommand.getShotDownCommand());
+        commandList.add(ShutDownCommand.getShutDownCommand());
 
     }
 
