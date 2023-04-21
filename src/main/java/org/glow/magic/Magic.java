@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import org.glow.person.Player;
 
-public class Magic {
+public class Magic implements Castable {
 
     private String spellName;
     private int coastInMana;
@@ -36,6 +36,7 @@ public class Magic {
     }
 
     @JsonIgnore
+    @Override
     public void cast(Message message, Player player) {}
 
 }

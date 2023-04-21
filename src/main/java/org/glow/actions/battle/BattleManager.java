@@ -19,6 +19,7 @@ public class BattleManager {
 
         Battle battle = new Battle(message, player, npc);
         battles.add(battle);
+        battle.start();
 
     }
 

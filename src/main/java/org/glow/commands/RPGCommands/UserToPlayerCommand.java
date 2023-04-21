@@ -30,10 +30,6 @@ public class UserToPlayerCommand extends Command {
             }
         }
 
-        for (Player player : PersonManager.getInstance().getPlayers()) {
-            System.out.println(PersonManager.getInstance().getPersonName(player));
-        }
-
         Player newPlayer = new Player(message.getAuthor().get().getId());
         Save.getSave().saveFile(newPlayer);
 

@@ -6,6 +6,7 @@ import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.magic.Magic;
+import org.glow.magic.spells.Fireball;
 import org.glow.magic.spells.Healing;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
@@ -15,7 +16,7 @@ import java.util.List;
 public class BuyInFavoniusCathedral extends Action {
 
     private static BuyInFavoniusCathedral buyInFavoniusCathedral;
-    private static final List<Magic> shopSpellList = List.of(new Healing());
+    private static final List<Magic> shopSpellList = List.of(new Healing(), new Fireball());
 
     private BuyInFavoniusCathedral() {
         setName("Купить | !buy");
@@ -43,7 +44,8 @@ public class BuyInFavoniusCathedral extends Action {
         builder.title(FavoniusCathedral.getFavoniusCathedral().getName());
         builder.description("**Вы можете приобрести:**\n" + "\n"
                 + "Свитки скилов:\n"
-                + shopSpellList.get(0).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(0).getPrice() + " :pig2:\n");
+                + shopSpellList.get(0).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(0).getPrice() + " :pig2:\n"
+                + shopSpellList.get(1).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(1).getPrice() + " :pig2:\n");
 
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();

@@ -10,6 +10,7 @@ import org.glow.person.Player;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class Battle {
 
@@ -361,6 +362,12 @@ public class Battle {
                 + "Мана: " + player.getMana() + "\n");
 
         message.getChannel().block().createMessage(builder.build()).block();
+
+    }
+
+    public Set<Person> getParticipants() {
+
+        return Set.of(attacker, defender);
 
     }
 

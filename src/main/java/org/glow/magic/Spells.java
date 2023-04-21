@@ -1,5 +1,6 @@
 package org.glow.magic;
 
+import org.glow.magic.spells.Fireball;
 import org.glow.magic.spells.Healing;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Spells {
 
     private Spells() {
         magicList.add(new Healing());
+        magicList.add(new Fireball());
     }
 
     public static Spells getSpells() {

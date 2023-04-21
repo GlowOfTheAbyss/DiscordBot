@@ -27,6 +27,7 @@ public class GoCommand extends Command {
 
         if (player.getEnergy() <= 0) {
             notEnoughEnergyMessage(message);
+            return;
         }
 
         if (PersonManager.getInstance().getPlayerLocation(player) instanceof WhisperingWoods) {
