@@ -1,14 +1,11 @@
 package org.glow.person;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import discord4j.common.util.Snowflake;
 import org.glow.storage.Inventory;
 import org.glow.storage.SkillBook;
 
 public abstract class Person {
 
-    private String stringSnowflake;
-    private String name;
+    private String snowflake;
 
     private int health;
     private int mana;
@@ -26,37 +23,12 @@ public abstract class Person {
 
     private SkillBook skillBook;
 
-    @JsonIgnore
-    public Snowflake getSnowflake() {
-        return Snowflake.of(stringSnowflake);
+    public String getSnowflake() {
+        return snowflake;
     }
 
-    public String getStringSnowflake() {
-        return stringSnowflake;
-    }
-
-    public void setStringSnowflake(String stringSnowflake) {
-        this.stringSnowflake = stringSnowflake;
-    }
-
-    @JsonIgnore
-    public String getName() {
-        return name;
-    }
-
-    @JsonIgnore
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonIgnore
-    public int getLevel() {
-        return strength + endurance + agility + intelligence + perception + luck;
-    }
-
-    @JsonIgnore
-    public int getCombatLevel() {
-        return strength + endurance + agility;
+    public void setSnowflake(String snowflake) {
+        this.snowflake = snowflake;
     }
 
     public int getHealth() {

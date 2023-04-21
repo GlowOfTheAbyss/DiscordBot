@@ -4,6 +4,8 @@ public abstract class NPC extends Person {
 
     private String image;
 
+    private String name;
+
     public String getImage() {
         return image;
     }
@@ -12,8 +14,12 @@ public abstract class NPC extends Person {
         this.image = image;
     }
 
-    @Override
-    public int getCoins() {
-        return getLevel() * 10;
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

@@ -4,6 +4,7 @@ import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.actions.HealFavoniusCathedral;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class HealCommand extends Command {
@@ -25,7 +26,7 @@ public class HealCommand extends Command {
             return;
         }
 
-        if (player.getLocation() instanceof FavoniusCathedral) {
+        if (PersonManager.getInstance().getPlayerLocation(player) instanceof FavoniusCathedral) {
             HealFavoniusCathedral.getHealFavoniusCathedral().startAction(message, player);
         }
 

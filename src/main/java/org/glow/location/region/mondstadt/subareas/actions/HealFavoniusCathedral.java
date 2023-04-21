@@ -5,6 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class HealFavoniusCathedral extends Action {
@@ -64,7 +65,7 @@ public class HealFavoniusCathedral extends Action {
         }
 
         if (player.getCoins() < healCoast) {
-            builder.title(player.getName() + " у вас недостаточно :pig2:");
+            builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
             message.getChannel().block().createMessage(builder.build()).block();
             message.delete().block();
             return;
@@ -72,12 +73,12 @@ public class HealFavoniusCathedral extends Action {
 
         player.setCoins(player.getCoins() - healCoast);
         player.setHealth(player.getHealth() + (healCoast));
-        if (player.getHealth() > player.getMaxHealth()) {
-            player.setHealth(player.getMaxHealth());
+        if (player.getHealth() > PersonManager.getInstance().getPlayerMaxHealth(player)) {
+            player.setHealth(PersonManager.getInstance().getPlayerMaxHealth(player));
         }
         Save.getSave().saveFile(player);
 
-        builder.title(player.getName() + " востановил " + healCoast + " поинтов здоровья");
+        builder.title(PersonManager.getInstance().getPersonName(player) + " востановил " + healCoast + " поинтов здоровья");
         builder.description(":pig2: " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"
                 + "Здоровье: " + player.getHealth() + "\n"

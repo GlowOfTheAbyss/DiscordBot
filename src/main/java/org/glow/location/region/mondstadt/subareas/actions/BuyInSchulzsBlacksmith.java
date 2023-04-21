@@ -19,6 +19,7 @@ import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.ArrayList;
@@ -94,14 +95,14 @@ public class BuyInSchulzsBlacksmith extends Action {
             if (wantToBuyProductName.equalsIgnoreCase(items.getName())) {
 
                 if (player.getCoins() < items.getPrice()) {
-                    builder.title(player.getName() + " у вас недостаточно :pig2:");
+                    builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
                 }
 
                 if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
-                    builder.title(player.getName() + " ваша сумка заполнена");
+                    builder.title(PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
@@ -111,7 +112,7 @@ public class BuyInSchulzsBlacksmith extends Action {
                 player.getInventory().getBag().add(items);
                 Save.getSave().saveFile(player);
 
-                builder.title(player.getName() + ", вы приобрели " + items.getName());
+                builder.title(PersonManager.getInstance().getPersonName(player) + ", вы приобрели " + items.getName());
                 builder.description(":pig2: " + player.getCoins() + "\n"
                         + "Энергия: " + player.getEnergy() + "\n"
                         + "Здоровье: " + player.getHealth() + "\n"

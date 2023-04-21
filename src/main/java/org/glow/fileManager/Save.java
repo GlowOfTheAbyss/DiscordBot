@@ -18,7 +18,7 @@ public class Save {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Path savePath = path.resolve(player.getStringSnowflake() + ".json");
+        Path savePath = path.resolve(player.getSnowflake() + ".json");
 
         try {
             objectMapper.writeValue(new File(savePath.toUri()), player);

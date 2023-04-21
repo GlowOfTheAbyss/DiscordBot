@@ -6,6 +6,7 @@ import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
 import org.glow.location.region.mondstadt.subareas.actions.BuyInFavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.actions.BuyInSchulzsBlacksmith;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class BuyCommand extends Command {
@@ -28,9 +29,9 @@ public class BuyCommand extends Command {
             return;
         }
 
-        if (player.getLocation() instanceof SchulzsBlacksmith) {
+        if (PersonManager.getInstance().getPlayerLocation(player) instanceof SchulzsBlacksmith) {
             BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith().startAction(message, player);
-        } else if (player.getLocation() instanceof FavoniusCathedral) {
+        } else if (PersonManager.getInstance().getPlayerLocation(player) instanceof FavoniusCathedral) {
             BuyInFavoniusCathedral.getBuyFavoniusCathedral().startAction(message, player);
         }
 

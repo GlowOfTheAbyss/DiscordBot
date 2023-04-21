@@ -19,6 +19,7 @@ import org.glow.item.neck.Neck;
 import org.glow.item.neck.NoneNeck;
 import org.glow.item.righthand.NoneRightHand;
 import org.glow.item.righthand.RightHand;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public class TakeOffCommand extends Command {
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
-            builder.title(player.getName() + " ваша сумка заполнена");
+            builder.title(PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
             message.getChannel().block().createMessage(builder.build()).block();
             message.delete().block();
             return;

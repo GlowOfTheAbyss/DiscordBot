@@ -22,6 +22,9 @@ public class Map {
     private static Map map;
     private final List<Location> locations = new ArrayList<>();
 
+    private Set<Subarea> liyueSubareas;
+    private Set<Subarea> mondstadtSubareas;
+
     private Map() {}
 
     public List<Location> getLocations() {
@@ -32,16 +35,6 @@ public class Map {
 
         return Set.of(Liyue.getLiyue(),
                 Mondstadt.getMondstadt());
-
-    }
-
-    public Set<Subarea> getSubareas() {
-
-        return Set.of(LiyueHarbor.getLiyueHarbor(),
-                TheChasm.getTheChasm(),
-                MtTianheng.getMtTianheng(),
-                CityMondstadt.getCityMondstadt(),
-                WhisperingWoods.getWhisperingWoods());
 
     }
 
@@ -66,7 +59,26 @@ public class Map {
             locations.add(WhisperingWoods.getWhisperingWoods());
 
 
+        liyueSubareas = Set.of(LiyueHarbor.getLiyueHarbor(),
+                TheChasm.getTheChasm(),
+                MtTianheng.getMtTianheng());
+
+        mondstadtSubareas = Set.of(CityMondstadt.getCityMondstadt(),
+                FavoniusCathedral.getFavoniusCathedral(),
+                SchulzsBlacksmith.getSchulzsBlacksmith(),
+                WhisperingWoods.getWhisperingWoods());
+
         initializeActions();
+    }
+
+    public Region findLocationRegion(Subarea subarea) {
+        if (liyueSubareas.contains(subarea)) {
+            return Liyue.getLiyue();
+        } else if (mondstadtSubareas.contains(subarea)) {
+            return Mondstadt.getMondstadt();
+        } else {
+            throw new IllegalArgumentException("Region not found");
+        }
     }
 
     private void initializeActions() {

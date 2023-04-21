@@ -5,6 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.Chests;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.Random;
@@ -62,7 +63,7 @@ public class DigOnMtTianheng extends Action {
 
     private void ironDeposit(Message message, Player player) {
 
-        String title = player.getName() + " находит залежь железа";
+        String title = PersonManager.getInstance().getPersonName(player) + " находит залежь железа";
         int extraction = 1 + new Random().nextInt(3) + player.getStrength() + player.getEndurance();
         extraction *= 10;
 
@@ -75,7 +76,7 @@ public class DigOnMtTianheng extends Action {
 
     private void whiteIronDeposit(Message message, Player player) {
 
-        String title = player.getName() + " находит залежь белого железа";
+        String title = PersonManager.getInstance().getPersonName(player) + " находит залежь белого железа";
         int extraction = 2 + new Random().nextInt(4) + player.getStrength() + (2 * player.getEndurance());
         extraction *= 10;
 
@@ -90,7 +91,7 @@ public class DigOnMtTianheng extends Action {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title(title);
-        builder.description(player.getName() + " получает " + coins + " :pig2:\n\n"
+        builder.description(PersonManager.getInstance().getPersonName(player) + " получает " + coins + " :pig2:\n\n"
                 + ":pig2: " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"
                 + "Здоровье: " + player.getHealth() + "\n"

@@ -1,10 +1,11 @@
-package org.glow.actions;
+package org.glow.actions.battle;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.item.Item;
 import org.glow.person.Person;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.List;
@@ -15,11 +16,13 @@ public class Battle {
     private Person attacker;
     private Person defender;
     private final Message message;
+    private PersonManager personManager;
 
     public Battle(Message message, Person attacker, Person defender) {
         this.attacker = attacker;
         this.defender = defender;
         this.message = message;
+        personManager = PersonManager.getInstance();
     }
 
     public void start() {
@@ -28,11 +31,15 @@ public class Battle {
 
             attack();
             if (attacker.getHealth() <= 0) {
+
                 win(defender, attacker);
                 break;
+
             } else if (defender.getHealth() <= 0) {
+
                 win(attacker, defender);
                 break;
+
             } else {
 
                 Person temp = attacker;
@@ -94,10 +101,10 @@ public class Battle {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title(attacker.getName() + " попадает по " + defender.getName());
+        builder.title(personManager.getPersonName(attacker) + " попадает по " + personManager.getPersonName(defender));
         builder.description("И наносит " + damage + " урона\n\n"
-                + attacker.getName() + " HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + " HP : " + defender.getHealth());
+                + personManager.getPersonName(attacker) + " HP : " + attacker.getHealth() + "\n"
+                + personManager.getPersonName(defender) + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -121,10 +128,10 @@ public class Battle {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title(attacker.getName() + " попадает по " + defender.getName());
+        builder.title(personManager.getPersonName(attacker) + " попадает по " + personManager.getPersonName(defender));
         builder.description("И наносит критический удар " + damage + " урона\n\n"
-                + attacker.getName() + " HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + " HP : " + defender.getHealth());
+                + personManager.getPersonName(attacker) + " HP : " + attacker.getHealth() + "\n"
+                + personManager.getPersonName(defender) + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -149,10 +156,10 @@ public class Battle {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title(defender.getName() + " парирует атаку " + attacker.getName());
+        builder.title(personManager.getPersonName(defender) + " парирует атаку " + personManager.getPersonName(attacker));
         builder.description("И наносит " + damage + " урона\n\n"
-                + attacker.getName() + "HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + "HP : " + defender.getHealth());
+                + personManager.getPersonName(attacker) + "HP : " + attacker.getHealth() + "\n"
+                + personManager.getPersonName(defender) + "HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -162,9 +169,9 @@ public class Battle {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title(defender.getName() + " уворачивается от атаки " + attacker.getName());
-        builder.description(attacker.getName() + "HP : " + attacker.getHealth() + "\n"
-                + defender.getName() + " HP : " + defender.getHealth());
+        builder.title(personManager.getPersonName(defender) + " уворачивается от атаки " + personManager.getPersonName(attacker));
+        builder.description(personManager.getPersonName(attacker) + "HP : " + attacker.getHealth() + "\n"
+                + personManager.getPersonName(defender) + " HP : " + defender.getHealth());
 
         message.getChannel().block().createMessage(builder.build()).block();
 
@@ -190,7 +197,7 @@ public class Battle {
         }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(player.getName() + " побеждает");
+        builder.title(personManager.getPersonName(player) + " побеждает");
         message.getChannel().block().createMessage(builder.build()).block();
         builder.title("");
 
@@ -198,11 +205,11 @@ public class Battle {
             loot(player, npc);
         }
 
-        int coins = 2 * npc.getCombatLevel() * 10;
+        int coins = 2 * personManager.getPersonCombatLevel(npc) * 10;
         player.setCoins(player.getCoins() + coins);
         Save.getSave().saveFile(player);
 
-        builder.description(player.getName() + " находит у " + npc.getName() + " " + coins + " :pig2:");
+        builder.description(personManager.getPersonName(player) + " находит у " + personManager.getPersonName(npc) + " " + coins + " :pig2:");
 
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
@@ -244,14 +251,14 @@ public class Battle {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title(npc.getName() + " побеждает " + player.getName());
+        builder.title(PersonManager.getInstance().getPersonName(npc)+ " побеждает " + PersonManager.getInstance().getPersonName(player));
         message.getChannel().block().createMessage(builder.build()).block();
         builder.title("");
 
         int traumaChance = 5;
         int itemChance = 10;
 
-        int lostCoins = 2 * npc.getCombatLevel() * 10;
+        int lostCoins = 2 * PersonManager.getInstance().getPersonCombatLevel(npc) * 10;
 
         int random = new Random().nextInt(101);
 
@@ -269,7 +276,7 @@ public class Battle {
             player.setHealth(10);
             Save.getSave().saveFile(player);
 
-            builder.description(player.getName() + " теряет " + lostCoins + " :pig2:\n\n"
+            builder.description(PersonManager.getInstance().getPersonName(player) + " теряет " + lostCoins + " :pig2:\n\n"
                     + ":pig2: " + player.getCoins() + "\n"
                     + "Энергия: " + player.getEnergy() + "\n"
                     + "Здоровье: " + player.getHealth() + "\n"
@@ -317,7 +324,7 @@ public class Battle {
         Save.getSave().saveFile(player);
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.description(player.getName() + " получает травму\n"
+        builder.description(PersonManager.getInstance().getPersonName(player) + " получает травму\n"
                 + skillName + " уменьшено на 1\n\n"
                 + ":pig2: " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"
@@ -344,7 +351,7 @@ public class Battle {
         Save.getSave().saveFile(player);
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.description(player.getName() + " теряет предмет\n"
+        builder.description(PersonManager.getInstance().getPersonName(player) + " теряет предмет\n"
                 + randomItem.getName() + " потерян\n\n"
                 + ":pig2: " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"

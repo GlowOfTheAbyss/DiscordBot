@@ -14,6 +14,7 @@ import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.item.righthand.DullBlade;
 import org.glow.item.righthand.SilverSword;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class Chests {
 
     public void getCommonChest(Message message, Player player) {
 
-        String title = player.getName() + " находит обычный сундук";
+        String title = PersonManager.getInstance().getPersonName(player) + " находит обычный сундук";
 
         int randomCoins = 2 + new Random().nextInt(4) + player.getLuck();
         randomCoins *= 10;
@@ -41,7 +42,7 @@ public class Chests {
 
     public void getExquisiteChest(Message message, Player player) {
 
-        String title = player.getName() + " находит богатый сундук";
+        String title = PersonManager.getInstance().getPersonName(player) + " находит богатый сундук";
 
         int random = new Random().nextInt(101);
         int itemChance = 5 + ((int) (0.5 * player.getLuck()));
@@ -101,7 +102,7 @@ public class Chests {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         builder.title(title);
-        builder.description(player.getName() + " находит " + coins + " :pig2:\n\n"
+        builder.description(PersonManager.getInstance().getPersonName(player) + " находит " + coins + " :pig2:\n\n"
                 + ":pig2: " + player.getCoins() + "\n"
                 + "Энергия: " + player.getEnergy() + "\n"
                 + "Здоровье: " + player.getHealth() + "\n"
@@ -115,7 +116,7 @@ public class Chests {
     private void itemFindMessage(Message message, Player player, Item item) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(player.getName() + " нашел " + item.getName());
+        builder.title(PersonManager.getInstance().getPersonName(player) + " нашел " + item.getName());
         builder.description(item.getName() + " добавлен в инвентарь");
 
         message.getChannel().block().createMessage(builder.build()).block();
@@ -125,7 +126,7 @@ public class Chests {
     private void fullInventoryMessage(Message message, Player player) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(player.getName() + " находит предмет, но у него нет места в инвентаре что бы его забрать");
+        builder.title(PersonManager.getInstance().getPersonName(player) + " находит предмет, но у него нет места в инвентаре что бы его забрать");
         builder.description("Предмет остается в сундуке");
 
         message.getChannel().block().createMessage(builder.build()).block();

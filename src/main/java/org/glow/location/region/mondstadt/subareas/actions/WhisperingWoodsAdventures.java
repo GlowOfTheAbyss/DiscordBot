@@ -2,11 +2,12 @@ package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.actions.Battle;
+import org.glow.actions.battle.Battle;
 import org.glow.actions.Chests;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.NPC;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 import org.glow.person.npc.hilichurl.Hilichurl;
 import org.glow.person.npc.hilichurl.HilichurlBerserker;
@@ -24,12 +25,6 @@ public class WhisperingWoodsAdventures extends Action {
     private WhisperingWoodsAdventures() {
         setName("Отправиться на поиски монстров | !go");
     }
-
-    private static final List<NPC> npcList = List.of(new Hilichurl(),
-            new HilichurlBerserker(),
-            new HilichurlFighter(),
-            new HydroSlime(),
-            new PyroSlime());
 
     @Override
     public void startAction(Message message, Player player) {
@@ -50,9 +45,15 @@ public class WhisperingWoodsAdventures extends Action {
 
     private void enemy(Message message, Player player) {
 
+        List<NPC> npcList = List.of(new Hilichurl(),
+                new HilichurlBerserker(),
+                new HilichurlFighter(),
+                new HydroSlime(),
+                new PyroSlime());
+
         NPC randomNPC;
 
-        if (player.getCombatLevel() < 6) {
+        if (PersonManager.getInstance().getPersonLevel(player) < 6) {
 
             int random = new Random().nextInt(2);
             if (random == 0) {
@@ -69,7 +70,7 @@ public class WhisperingWoodsAdventures extends Action {
         builder.title("Вы встречаете противника " + randomNPC.getName());
         builder.image(randomNPC.getImage());
         builder.description(randomNPC.getName() + " HP : " + randomNPC.getHealth() + "\n"
-                + randomNPC.getName() + " боевой уровень : " + randomNPC.getCombatLevel());
+                + randomNPC.getName() + " боевой уровень : " + PersonManager.getInstance().getPersonCombatLevel(randomNPC));
 
         message.getChannel().block().createMessage(builder.build()).block();
 

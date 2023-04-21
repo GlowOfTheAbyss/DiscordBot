@@ -4,6 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class UserToPlayerCommand extends Command {
@@ -20,7 +21,7 @@ public class UserToPlayerCommand extends Command {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        for (Player player : Player.getPlayerList()) {
+        for (Player player : PersonManager.getInstance().getPlayers()) {
             if (player.getSnowflake().equals(message.getAuthor().get().getId())) {
                 builder.title("Такой игрок уже существует");
                 message.getChannel().block().createMessage(builder.build()).block();
@@ -32,7 +33,7 @@ public class UserToPlayerCommand extends Command {
         Player newPlayer = new Player(message.getAuthor().get().getId());
         Save.getSave().saveFile(newPlayer);
 
-        builder.title("Игрок: " + newPlayer.getName() + " успешно создан");
+        builder.title("Игрок: " + PersonManager.getInstance().getPersonName(newPlayer) + " успешно создан");
         builder.description("Используй !help");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();

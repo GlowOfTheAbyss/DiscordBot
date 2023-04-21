@@ -6,7 +6,6 @@ import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.person.Player;
 
-import java.io.File;
 import java.util.List;
 
 public class LevelUpCommand extends Command {
@@ -114,7 +113,7 @@ public class LevelUpCommand extends Command {
             }
         }
 
-        return -1;
+        throw new IllegalArgumentException("Skill not found");
     }
 
     private void setSkillLevel(Player player, String thisSkill, int increase) {

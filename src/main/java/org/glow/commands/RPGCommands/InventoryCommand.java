@@ -4,6 +4,7 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.item.Item;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class InventoryCommand extends Command {
@@ -25,7 +26,7 @@ public class InventoryCommand extends Command {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        builder.title("Инвентарь " + player.getName());
+        builder.title("Инвентарь " + PersonManager.getInstance().getPersonName(player));
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Сумка: ");
 

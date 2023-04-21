@@ -5,6 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.location.*;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.Set;
@@ -40,14 +41,15 @@ public class MoveCommand extends Command {
     private void descriptionGenerator(Message message, Player player) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        Location location = PersonManager.getInstance().getPlayerLocation(player);
 
-        if (player.getLocation() instanceof Region thisRegion) {
+        if (location instanceof Region thisRegion) {
 
             Set<Region> regionList = Map.getMap().getRegions();
             Set<Subarea> subareaList = thisRegion.getSubareas();
 
             builder.title("Вы находитесь в " + player.getLocationName());
-            builder.image(player.getLocation().getImage());
+            builder.image(location.getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -68,14 +70,10 @@ public class MoveCommand extends Command {
 
         }
 
-        if (player.getLocation() instanceof Subarea thisSubarea) {
+        if (location instanceof Subarea thisSubarea) {
 
-            Region thisRegion = null;
-            for (Region region : Map.getMap().getRegions()) {
-                if (region.getSubareas().contains(thisSubarea)) {
-                    thisRegion = region;
-                }
-            }
+            Region thisRegion = Map.getMap().findLocationRegion(thisSubarea);
+
             if (thisRegion == null) {
                 builder.title("Локация в регионе не найдена");
                 message.getChannel().block().createMessage(builder.build()).block();
@@ -88,7 +86,7 @@ public class MoveCommand extends Command {
             Set<Action> actions = thisSubarea.getActions();
 
             builder.title("Вы находитесь в " + player.getLocationName());
-            builder.image(player.getLocation().getImage());
+            builder.image(location.getImage());
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("**Вы можете вернуться в: ").append("**\n").append(thisRegion.getName()).append("\n\n");
@@ -130,7 +128,7 @@ public class MoveCommand extends Command {
         for (Location location : Map.getMap().getLocations()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {
 
-                player.setLocationName(location);
+                PersonManager.getInstance().setPlayerLocation(player, location);
                 Save.getSave().saveFile(player);
                 descriptionGenerator(message, player);
                 return;

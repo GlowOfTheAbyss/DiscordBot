@@ -7,6 +7,7 @@ import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.magic.Magic;
 import org.glow.magic.spells.Healing;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.List;
@@ -57,14 +58,14 @@ public class BuyInFavoniusCathedral extends Action {
             if (magic.getSpellName().equalsIgnoreCase(wantToBuyProductName)) {
 
                 if (player.getCoins() < magic.getPrice()) {
-                    builder.title(player.getName() + " у вас недостаточно :pig2:");
+                    builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
                 }
 
                 if (player.getSkillBook().getListSpell().size() == player.getSkillBook().getListSpellSize()) {
-                    builder.title(player.getName() + " ваша книга заклинаний заполнена");
+                    builder.title(PersonManager.getInstance().getPersonName(player) + " ваша книга заклинаний заполнена");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
@@ -74,7 +75,7 @@ public class BuyInFavoniusCathedral extends Action {
                 player.getSkillBook().addListSpell(magic);
                 Save.getSave().saveFile(player);
 
-                builder.title(player.getName() + ", вы приобрели " + magic.getSpellName());
+                builder.title(PersonManager.getInstance().getPersonName(player) + ", вы приобрели " + magic.getSpellName());
                 builder.description(":pig2: " + player.getCoins() + "\n"
                         + "Энергия: " + player.getEnergy() + "\n"
                         + "Здоровье: " + player.getHealth() + "\n"

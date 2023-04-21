@@ -5,6 +5,7 @@ import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.location.region.liyue.subareas.MtTianheng;
 import org.glow.location.region.liyue.subareas.actions.DigOnMtTianheng;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class MineCommand extends Command {
@@ -27,14 +28,16 @@ public class MineCommand extends Command {
 
         if (player.getEnergy() <= 0) {
             notEnoughEnergyMessage(message);
+            return;
         }
 
-        if (player.getLocation() instanceof MtTianheng) {
+        if (PersonManager.getInstance().getPlayerLocation(player) instanceof MtTianheng) {
 
             player.setEnergy(player.getEnergy() - 1);
             Save.getSave().saveFile(player);
 
             DigOnMtTianheng.getDigOnMtTianheng().startAction(message, player);
+
         }
 
     }

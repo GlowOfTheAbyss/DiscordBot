@@ -3,6 +3,7 @@ package org.glow.commands;
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public abstract class Command implements LaunchedCommand {
@@ -30,7 +31,7 @@ public abstract class Command implements LaunchedCommand {
 
     /*---*/
     protected Player userToPlayer(Message message) {
-        for (Player player : Player.getPlayerList()) {
+        for (Player player : PersonManager.getInstance().getPlayers()) {
             if (message.getAuthor().get().getId().equals(player.getSnowflake())) {
                 return player;
             }

@@ -10,7 +10,7 @@ public class HydroSlime extends NPC {
 
         setName("Гидро слайм");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087251608884228126/HydroSlime.png");
-        setStringSnowflake("0");
+        setSnowflake("0");
 
         setStrength(0);
         setEndurance(1);

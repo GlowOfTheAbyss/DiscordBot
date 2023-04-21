@@ -10,7 +10,7 @@ public class HilichurlFighter extends NPC {
 
         setName("Хиличурл-боец");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087251591188447363/HilichurlFighter.png");
-        setStringSnowflake("0");
+        setSnowflake("0");
 
         setStrength(1);
         setEndurance(2);

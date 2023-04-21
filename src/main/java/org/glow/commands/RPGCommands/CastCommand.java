@@ -5,6 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.magic.Magic;
 import org.glow.magic.Spells;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class CastCommand extends Command {
@@ -30,7 +31,7 @@ public class CastCommand extends Command {
         if (message.getContent().split(" ").length == 1) {
 
             EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-            builder.title("Книга заклинаний " + player.getName());
+            builder.title("Книга заклинаний " + PersonManager.getInstance().getPersonName(player));
             StringBuilder stringBuilder = new StringBuilder();
 
             if (player.getSkillBook().getListSpell().isEmpty()) {

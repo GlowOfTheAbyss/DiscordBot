@@ -10,7 +10,7 @@ public class HilichurlBerserker extends NPC {
 
         setName("Хиличурл-берсерк");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087251592056684605/HilichurlBerserker.png");
-        setStringSnowflake("0");
+        setSnowflake("0");
 
         setStrength(2);
         setEndurance(3);
