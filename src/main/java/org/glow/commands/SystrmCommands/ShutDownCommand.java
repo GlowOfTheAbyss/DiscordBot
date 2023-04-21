@@ -8,11 +8,11 @@ import org.glow.person.Player;
 
 import java.util.concurrent.TimeUnit;
 
-public class ShotDownCommand extends Command {
+public class ShutDownCommand extends Command {
 
-    private static final ShotDownCommand shotDownCommand = new ShotDownCommand();
+    private static final ShutDownCommand shutDownCommand = new ShutDownCommand();
 
-    private ShotDownCommand() {
+    private ShutDownCommand() {
         setName("shut_down");
         setInfo("всем иногда нужен отдых");
     }
@@ -52,7 +52,7 @@ public class ShotDownCommand extends Command {
 
     }
 
-    public static ShotDownCommand getShotDownCommand() {
-        return shotDownCommand;
+    public static ShutDownCommand getShutDownCommand() {
+        return shutDownCommand;
     }
 }
