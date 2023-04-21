@@ -44,7 +44,7 @@ public abstract class Command implements LaunchedCommand {
     }
 
     protected boolean isNotAdmin(Player player) {
-        return !player.getSnowflake().equals(admin);
+        return !PersonManager.getInstance().getPlayerSnowflake(player).equals(admin);
     }
 
     protected boolean lengthCheck(Message message, int length) {
