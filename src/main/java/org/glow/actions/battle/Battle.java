@@ -87,7 +87,7 @@ public class Battle {
     private void hit() {
 
         int attack = new Random().nextInt(11) + (2 * attacker.getStrength())
-                + ((int) (0.5 * attacker.getLuck())) * attacker.getInventory().getAttack();
+                + ((int) (0.5 * attacker.getLuck())) + attacker.getInventory().getAttack();
 
         int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
 
@@ -114,7 +114,7 @@ public class Battle {
     private void superHit() {
 
         int attack = new Random().nextInt(11) + (4 * attacker.getStrength())
-                + attacker.getLuck() * attacker.getInventory().getAttack();
+                + attacker.getLuck() + attacker.getInventory().getAttack();
 
         int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
 
@@ -141,7 +141,7 @@ public class Battle {
     private void parrying() {
 
         int attack = new Random().nextInt(11) + (2 * defender.getStrength())
-                + ((int) (0.5 * defender.getLuck())) * defender.getInventory().getAttack();
+                + ((int) (0.5 * defender.getLuck())) + defender.getInventory().getAttack();
 
         int defend = new Random().nextInt(7) + attacker.getInventory().getArmor();
 
