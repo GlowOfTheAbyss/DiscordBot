@@ -2,8 +2,8 @@ package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.actions.battle.Battle;
 import org.glow.actions.Chests;
+import org.glow.actions.battle.BattleManager;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.NPC;
@@ -74,8 +74,7 @@ public class WhisperingWoodsAdventures extends Action {
 
         message.getChannel().block().createMessage(builder.build()).block();
 
-        Battle battle = new Battle(message, player, randomNPC);
-        battle.start();
+        BattleManager.getInstance().createBattle(message, player, randomNPC);
 
     }
 

@@ -16,7 +16,7 @@ public class Battle {
     private Person attacker;
     private Person defender;
     private final Message message;
-    private PersonManager personManager;
+    private final PersonManager personManager;
 
     public Battle(Message message, Person attacker, Person defender) {
         this.attacker = attacker;
@@ -178,6 +178,8 @@ public class Battle {
     }
 
     private void win(Person winner, Person loser) {
+
+        BattleManager.getInstance().finishBattle(this);
 
         if (winner instanceof Player) {
             playerWin((Player) winner, loser);
