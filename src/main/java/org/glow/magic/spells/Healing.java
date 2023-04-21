@@ -51,7 +51,8 @@ public class Healing extends Magic {
             return;
         }
 
-        int heal = new Random().nextInt(1, 3) + player.getIntelligence() * 10;
+        int heal = new Random().nextInt(1, 3) + player.getIntelligence();
+        heal *= 10;
 
         player.setMana(player.getMana() - getCoastInMana());
         targetPlayer.setHealth(targetPlayer.getHealth() + heal);
