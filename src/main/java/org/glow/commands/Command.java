@@ -3,6 +3,8 @@ package org.glow.commands;
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.actions.battle.Battle;
+import org.glow.actions.battle.BattleManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -56,6 +58,15 @@ public abstract class Command implements LaunchedCommand {
         builder.title("Не достаточно энергии");
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
+    }
+
+    protected boolean playerInBattle(Player player) {
+        for (Battle battle : BattleManager.getInstance().getBattles()) {
+            if (battle.getParticipants().contains(player)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

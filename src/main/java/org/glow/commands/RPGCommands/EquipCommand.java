@@ -39,8 +39,15 @@ public class EquipCommand extends Command {
             return;
         }
 
-        String equipItemName = message.getContent().replaceFirst("!equip ", "");
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        if (playerInBattle(player)) {
+            builder.title("Находясь в битве нельзя это использовать");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
+            return;
+        }
+
+        String equipItemName = message.getContent().replaceFirst("!equip ", "");
 
         for (Item item : player.getInventory().getBag()) {
 

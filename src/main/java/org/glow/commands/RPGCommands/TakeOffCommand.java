@@ -43,6 +43,13 @@ public class TakeOffCommand extends Command {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
+        if (playerInBattle(player)) {
+            builder.title("Находясь в битве нельзя это использовать");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
+            return;
+        }
+
         if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
             builder.title(PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
             message.getChannel().block().createMessage(builder.build()).block();

@@ -1,6 +1,7 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
+import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
@@ -26,6 +27,14 @@ public class BuyCommand extends Command {
 
         Player player = userToPlayer(message);
         if (player == null) {
+            return;
+        }
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        if (playerInBattle(player)) {
+            builder.title("Находясь в битве нельзя это использовать");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
             return;
         }
 

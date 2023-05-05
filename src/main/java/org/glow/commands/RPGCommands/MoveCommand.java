@@ -33,6 +33,14 @@ public class MoveCommand extends Command {
             return;
         }
 
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        if (playerInBattle(player)) {
+            builder.title("Находясь в битве нельзя это использовать");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
+            return;
+        }
+
         if (lengthCheck(message, 1)) {
             descriptionGenerator(message, player);
         } else {

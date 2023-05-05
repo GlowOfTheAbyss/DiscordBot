@@ -30,18 +30,26 @@ public class LevelUpCommand extends Command {
             return;
         }
 
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        if (playerInBattle(player)) {
+            builder.title("Находясь в битве нельзя это использовать");
+            message.getChannel().block().createMessage(builder.build()).block();
+            message.delete().block();
+            return;
+        }
+
         if (lengthCheck(message, 2)) {
 
             levelUp(message, player);
 
         } else {
-            EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
             builder.title("Ошибка");
             builder.description("Для команды !" + getName() + " требуется указать характеристику для прокачки" + "\n"
                     + "Пример: !" + getName() + " Сила");
             message.getChannel().block().createMessage(builder.build()).block();
             message.delete().block();
+
         }
 
     }
