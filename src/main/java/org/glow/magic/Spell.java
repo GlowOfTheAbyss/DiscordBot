@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import org.glow.person.Player;
 
-public class Magic implements Castable {
+public class Spell implements Castable {
 
     private String spellName;
     private int coastInMana;

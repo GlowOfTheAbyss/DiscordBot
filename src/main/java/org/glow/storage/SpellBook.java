@@ -1,30 +1,30 @@
 package org.glow.storage;
 
-import org.glow.magic.Magic;
+import org.glow.magic.Spell;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SkillBook {
+public class SpellBook {
 
-    private List<Magic> listSpell = new ArrayList<>();
+    private List<Spell> listSpell = new ArrayList<>();
 
     private int listSpellSize = 10;
 
-    public List<Magic> getListSpell() {
+    public List<Spell> getListSpell() {
         return listSpell;
     }
 
-    public void setListSpell(List<Magic> listSpell) {
+    public void setListSpell(List<Spell> listSpell) {
         this.listSpell = listSpell;
     }
 
-    public void addListSpell(Magic magic) {
-        listSpell.add(magic);
+    public void addListSpell(Spell spell) {
+        listSpell.add(spell);
     }
 
-    public void removeListSpell(Magic magic) {
-        listSpell.remove(magic);
+    public void removeListSpell(Spell spell) {
+        listSpell.remove(spell);
     }
 
     public int getListSpellSize() {
