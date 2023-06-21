@@ -2,9 +2,10 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.commands.Command;
-import org.glow.magic.Magic;
-import org.glow.magic.Spells;
+import org.glow.magic.Spell;
+import org.glow.magic.SpellManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -17,7 +18,9 @@ public class CastCommand extends Command {
         setInfo("""
                 комманда для использования извесных вам заклинаний
                 !cast - показывает извесные вам заклинания
-                !cast [название заклинания] [цель заклинания]""");
+                !cast [название заклинания] [цель заклинания]
+                """
+        );
     }
 
     @Override
@@ -30,42 +33,89 @@ public class CastCommand extends Command {
 
         if (message.getContent().split(" ").length == 1) {
 
-            EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-            builder.title("Книга заклинаний " + PersonManager.getInstance().getPersonName(player));
-            StringBuilder stringBuilder = new StringBuilder();
-
-            if (player.getSkillBook().getListSpell().isEmpty()) {
-                stringBuilder.append("Пусто");
-            } else {
-                for (Magic magic : player.getSkillBook().getListSpell()) {
-                    stringBuilder.append(magic.getSpellName()).append(" | ").append(magic.getCoastInMana()).append(" мана\n");
-                }
-            }
-
-            builder.description(stringBuilder.toString());
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
-
+            showSpellBook(message, player);
 
         } else {
-            String spellName = message.getContent().split(" ")[1];
-            for (Magic magic : Spells.getSpells().getMagicList()) {
 
-                if (magic.getSpellName().equalsIgnoreCase(spellName)) {
+            castSpell(message, player);
 
-                    magic.cast(message, player);
-                    return;
+        }
 
-                }
+    }
+
+    private void showSpellBook(Message message, Player player) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+
+        builder.title("Книга заклинаний " + PersonManager.getInstance().getPersonName(player));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (player.getSpellBook().getListSpell().isEmpty()) {
+
+            stringBuilder.append("Пусто");
+
+        } else {
+
+            for (Spell spell : player.getSpellBook().getListSpell()) {
+
+                stringBuilder.append(spell.getSpellName())
+                        .append(" | ")
+                        .append(spell.getCoastInMana())
+                        .append(" мана")
+                        .append("\n");
 
             }
 
-            EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-            builder.title("Заклинание " + spellName + " не найдено");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        }
+
+        builder.description(stringBuilder.toString());
+
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
+
+    }
+
+    private void castSpell(Message message, Player player) {
+
+        try {
+
+            Spell spell = findSpell(message);
+            spell.cast(message, player);
+
+        } catch (RuntimeException exception) {
+
+            errorMessage(message, exception.getMessage());
 
         }
+
+    }
+
+    private Spell findSpell(Message message) {
+
+        String croppedMessage = message.getContent()
+                .replaceFirst(Main.systems.commandPrefix + castCommand.getName(), "");
+
+        for (Spell spell : SpellManager.getInstance().getMagicList()) {
+
+            if (croppedMessage.contains(spell.getSpellName())) {
+
+                return spell;
+
+            }
+
+        }
+
+        throw new RuntimeException("Spell " + croppedMessage + " not found");
+
+    }
+
+    private void errorMessage(Message message, String error) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title(error);
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
 
     }
 
