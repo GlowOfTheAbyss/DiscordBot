@@ -3,14 +3,13 @@ package org.glow.magic.spells;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
-import org.glow.magic.Castable;
-import org.glow.magic.Magic;
+import org.glow.magic.Spell;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.Random;
 
-public class Healing extends Magic {
+public class Healing extends Spell {
 
     public Healing() {
         setSpellName("Исцеление");
