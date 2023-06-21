@@ -2,7 +2,7 @@ package org.glow.person.npc.slime;
 
 import org.glow.person.NPC;
 import org.glow.storage.Inventory;
-import org.glow.storage.SkillBook;
+import org.glow.storage.SpellBook;
 
 public class HydroSlime extends NPC {
 
@@ -23,7 +23,7 @@ public class HydroSlime extends NPC {
         setMana(((int) (0.5 * getIntelligence())) * 10);
 
         setInventory(new Inventory());
-        setSkillBook(new SkillBook());
+        setSpellBook(new SpellBook());
 
     }
 

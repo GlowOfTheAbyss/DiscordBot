@@ -1,7 +1,7 @@
 package org.glow.person;
 
 import org.glow.storage.Inventory;
-import org.glow.storage.SkillBook;
+import org.glow.storage.SpellBook;
 
 public abstract class Person {
 
@@ -21,7 +21,7 @@ public abstract class Person {
 
     private Inventory inventory;
 
-    private SkillBook skillBook;
+    private SpellBook spellBook;
 
     public String getSnowflake() {
         return snowflake;
@@ -119,12 +119,12 @@ public abstract class Person {
         this.inventory = inventory;
     }
 
-    public SkillBook getSkillBook() {
-        return skillBook;
+    public SpellBook getSpellBook() {
+        return spellBook;
     }
 
-    public void setSkillBook(SkillBook skillBook) {
-        this.skillBook = skillBook;
+    public void setSpellBook(SpellBook spellBook) {
+        this.spellBook = spellBook;
     }
 
 }

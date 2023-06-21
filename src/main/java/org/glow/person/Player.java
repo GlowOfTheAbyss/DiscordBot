@@ -2,7 +2,7 @@ package org.glow.person;
 
 import discord4j.common.util.Snowflake;
 import org.glow.storage.Inventory;
-import org.glow.storage.SkillBook;
+import org.glow.storage.SpellBook;
 import org.glow.location.region.mondstadt.Mondstadt;
 
 public class Player extends Person {
@@ -30,7 +30,7 @@ public class Player extends Person {
         setCoins(10);
 
         setInventory(new Inventory());
-        setSkillBook(new SkillBook());
+        setSpellBook(new SpellBook());
 
         PersonManager.getInstance().addPlayer(this);
 
