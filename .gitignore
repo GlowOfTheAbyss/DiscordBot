@@ -44,3 +44,8 @@ bin/
 ### Discord ###
 token.txt
 *.json
+/.idea/gradle.xml
+/.idea/misc.xml
+/.idea/uiDesigner.xml
+/.idea/vcs.xml
+/.idea/workspace.xml
