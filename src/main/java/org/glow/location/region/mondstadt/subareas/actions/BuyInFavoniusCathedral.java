@@ -5,7 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
-import org.glow.magic.Magic;
+import org.glow.magic.Spell;
 import org.glow.magic.spells.Fireball;
 import org.glow.magic.spells.Healing;
 import org.glow.person.PersonManager;
@@ -16,7 +16,7 @@ import java.util.List;
 public class BuyInFavoniusCathedral extends Action {
 
     private static BuyInFavoniusCathedral buyInFavoniusCathedral;
-    private static final List<Magic> shopSpellList = List.of(new Healing(), new Fireball());
+    private static final List<Spell> shopSpellList = List.of(new Healing(), new Fireball());
 
     private BuyInFavoniusCathedral() {
         setName("Купить | !buy");
@@ -56,25 +56,25 @@ public class BuyInFavoniusCathedral extends Action {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        for (Magic magic : shopSpellList) {
-            if (magic.getSpellName().equalsIgnoreCase(wantToBuyProductName)) {
+        for (Spell spell : shopSpellList) {
+            if (spell.getSpellName().equalsIgnoreCase(wantToBuyProductName)) {
 
-                if (player.getCoins() < magic.getPrice()) {
+                if (player.getCoins() < spell.getPrice()) {
                     builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
                 }
 
-                if (player.getSkillBook().getListSpell().size() == player.getSkillBook().getListSpellSize()) {
+                if (player.getSpellBook().getListSpell().size() == player.getSpellBook().getListSpellSize()) {
                     builder.title(PersonManager.getInstance().getPersonName(player) + " ваша книга заклинаний заполнена");
                     message.getChannel().block().createMessage(builder.build()).block();
                     message.delete().block();
                     return;
                 }
 
-                for (Magic famousSpell : player.getSkillBook().getListSpell()) {
-                    if (famousSpell.getSpellName().equals(magic.getSpellName())) {
+                for (Spell famousSpell : player.getSpellBook().getListSpell()) {
+                    if (famousSpell.getSpellName().equals(spell.getSpellName())) {
                         builder.title(PersonManager.getInstance().getPersonName(player) + ", вы уже владеете данным заклинанием");
                         message.getChannel().block().createMessage(builder.build()).block();
                         message.delete().block();
@@ -82,11 +82,11 @@ public class BuyInFavoniusCathedral extends Action {
                     }
                 }
 
-                player.setCoins(player.getCoins() - magic.getPrice());
-                player.getSkillBook().addListSpell(magic);
+                player.setCoins(player.getCoins() - spell.getPrice());
+                player.getSpellBook().addListSpell(spell);
                 Save.getSave().saveFile(player);
 
-                builder.title(PersonManager.getInstance().getPersonName(player) + ", вы приобрели " + magic.getSpellName());
+                builder.title(PersonManager.getInstance().getPersonName(player) + ", вы приобрели " + spell.getSpellName());
                 builder.description(":pig2: " + player.getCoins() + "\n"
                         + "Энергия: " + player.getEnergy() + "\n"
                         + "Здоровье: " + player.getHealth() + "\n"
