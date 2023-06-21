@@ -53,7 +53,7 @@ public class CommandReader {
     }
 
     private String getCommand(Message message) {
-        return message.getContent().split(" ")[0].replaceFirst("!", "");
+        return message.getContent().split(" ")[0].replaceFirst(Main.systems.commandPrefix, "");
     }
 
     public HashSet<Command> getCommandList() {
