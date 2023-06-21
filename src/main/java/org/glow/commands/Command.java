@@ -60,9 +60,15 @@ public abstract class Command implements LaunchedCommand {
         message.delete().block();
     }
 
-    protected boolean playerInBattle(Player player) {
+    protected boolean playerInBattle(Player player, Message message) {
         for (Battle battle : BattleManager.getInstance().getBattles()) {
             if (battle.getParticipants().contains(player)) {
+
+                EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+                builder.title("Находясь в битве нельзя это использовать");
+                message.getChannel().block().createMessage(builder.build()).block();
+                message.delete().block();
+
                 return true;
             }
         }
