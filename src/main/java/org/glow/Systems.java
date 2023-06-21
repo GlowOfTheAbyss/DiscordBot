@@ -16,9 +16,13 @@ public class Systems {
 
     public GatewayDiscordClient gateway;
 
+    public String commandPrefix;
+
     public Systems() {
         String token = TokenAnalyzer.getTokenAnalyzer().findToken();
         gateway = DiscordClient.create(token).login().block();
+
+        commandPrefix = "!";
     }
 
     public void start() {
