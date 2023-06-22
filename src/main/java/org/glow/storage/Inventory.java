@@ -51,21 +51,6 @@ public class Inventory {
 
     }
 
-    @JsonIgnore
-    public List<Item> getEquippedItems() {
-        return List.of(head, body, legs, rightHand, leftHand, neck, rightFinger, leftFinger);
-    }
-
-    @JsonIgnore
-    public int getArmor() {
-        return head.getArmor() + body.getArmor() + legs.getArmor() + leftHand.getArmor();
-    }
-
-    @JsonIgnore
-    public int getAttack() {
-        return rightHand.getAttack();
-    }
-
     public Head getHead() {
         return head;
     }

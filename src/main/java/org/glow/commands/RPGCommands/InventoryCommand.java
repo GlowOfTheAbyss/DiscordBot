@@ -6,6 +6,7 @@ import org.glow.commands.Command;
 import org.glow.item.Item;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
+import org.glow.storage.InventoryManager;
 
 public class InventoryCommand extends Command {
 
@@ -13,7 +14,9 @@ public class InventoryCommand extends Command {
 
     private InventoryCommand() {
         setName("inventory");
-        setInfo("показывает инвентарь персонажа");
+        setInfo("""
+                показывает инвентарь персонажа
+                """);
     }
 
     @Override
@@ -38,10 +41,10 @@ public class InventoryCommand extends Command {
             }
         }
 
-        builder.description("Броня: " + player.getInventory().getArmor() + "\n"
-                + "Атака: " + player.getInventory().getAttack() + "\n" + "\n"
+        builder.description("Броня: " + InventoryManager.getInstance().getArmor(player.getInventory()) + "\n"
+                + "Атака: " + InventoryManager.getInstance().getAttack(player.getInventory()) + "\n" + "\n"
 
-                + "Голова: " +player.getInventory().getHead().getName() + "\n"
+                + "Голова: " + player.getInventory().getHead().getName() + "\n"
                 + "Тело: " + player.getInventory().getBody().getName() + "\n"
                 + "Ноги: " + player.getInventory().getLegs().getName() + "\n"
                 + "Правая рука: " + player.getInventory().getRightHand().getName() + "\n"

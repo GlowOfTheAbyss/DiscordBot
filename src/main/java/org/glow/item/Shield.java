@@ -1,3 +1,3 @@
 package org.glow.item;
 
-public class Shield extends Armor {}
+public abstract class Shield extends Armor {}

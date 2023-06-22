@@ -1,6 +1,6 @@
 package org.glow.item;
 
-public class Item {
+public abstract class Item implements Equipped {
 
     private String name;
     private int price;
@@ -20,4 +20,5 @@ public class Item {
     public void setPrice(int price) {
         this.price = price;
     }
+
 }
