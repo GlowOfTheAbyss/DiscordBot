@@ -7,6 +7,7 @@ import org.glow.item.Item;
 import org.glow.person.Person;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
+import org.glow.storage.InventoryManager;
 
 import java.util.List;
 import java.util.Random;
@@ -87,9 +88,9 @@ public class Battle {
     private void hit() {
 
         int attack = new Random().nextInt(11) + (2 * attacker.getStrength())
-                + ((int) (0.5 * attacker.getLuck())) + attacker.getInventory().getAttack();
+                + ((int) (0.5 * attacker.getLuck())) + InventoryManager.getInstance().getAttack(attacker.getInventory());
 
-        int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
+        int defend = new Random().nextInt(7) + InventoryManager.getInstance().getArmor(defender.getInventory());
 
         int damage = attack - defend;
         if (damage <= 0) {
@@ -114,9 +115,9 @@ public class Battle {
     private void superHit() {
 
         int attack = new Random().nextInt(11) + (4 * attacker.getStrength())
-                + attacker.getLuck() + attacker.getInventory().getAttack();
+                + attacker.getLuck() + InventoryManager.getInstance().getAttack(attacker.getInventory());
 
-        int defend = new Random().nextInt(7) + defender.getInventory().getArmor();
+        int defend = new Random().nextInt(7) + InventoryManager.getInstance().getArmor(defender.getInventory());
 
         int damage = attack - defend;
         if (damage <= 0) {
@@ -141,9 +142,9 @@ public class Battle {
     private void parrying() {
 
         int attack = new Random().nextInt(11) + (2 * defender.getStrength())
-                + ((int) (0.5 * defender.getLuck())) + defender.getInventory().getAttack();
+                + ((int) (0.5 * defender.getLuck())) + InventoryManager.getInstance().getAttack(defender.getInventory());
 
-        int defend = new Random().nextInt(7) + attacker.getInventory().getArmor();
+        int defend = new Random().nextInt(7) + InventoryManager.getInstance().getArmor(attacker.getInventory());
 
         int damage = attack - defend;
         if (damage <= 0) {
@@ -221,13 +222,14 @@ public class Battle {
 
     private void loot(Player player, Person npc) {
 
-        if (npc.getInventory().getEquippedItems().isEmpty()) {
+        if (InventoryManager.getInstance().getEquippedItems(npc.getInventory()).isEmpty()) {
             return;
         }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
-        Item randomItem = npc.getInventory().getEquippedItems().get(new Random().nextInt(npc.getInventory().getEquippedItems().size()));
+        Item randomItem = InventoryManager.getInstance().getEquippedItems(npc.getInventory())
+                .get(new Random().nextInt(InventoryManager.getInstance().getEquippedItems(npc.getInventory()).size()));
 
         if (player.getInventory().getBag().size() >= player.getInventory().getBagSize()) {
             builder.title("Вы нашли предмет " + randomItem.getName());
