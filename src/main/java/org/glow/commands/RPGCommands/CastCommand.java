@@ -19,8 +19,7 @@ public class CastCommand extends Command {
                 комманда для использования извесных вам заклинаний
                 !cast - показывает извесные вам заклинания
                 !cast [название заклинания] [цель заклинания]
-                """
-        );
+                """);
     }
 
     @Override
@@ -107,15 +106,6 @@ public class CastCommand extends Command {
         }
 
         throw new RuntimeException("Spell " + croppedMessage + " not found");
-
-    }
-
-    private void errorMessage(Message message, String error) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(error);
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
 
     }
 

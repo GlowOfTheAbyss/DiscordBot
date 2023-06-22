@@ -12,6 +12,9 @@ public class HelpCommand extends Command {
 
     private HelpCommand() {
         setName("help");
+        setInfo("""
+                команда для помощи
+                """);
     }
 
 

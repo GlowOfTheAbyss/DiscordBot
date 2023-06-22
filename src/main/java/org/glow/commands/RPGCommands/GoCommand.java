@@ -15,7 +15,9 @@ public class GoCommand extends Command {
 
     private GoCommand() {
         setName("go");
-        setInfo("отправиться в приключения в специальных локациях");
+        setInfo("""
+                отправиться в приключения в специальных локациях
+                """);
     }
 
     @Override
@@ -26,11 +28,7 @@ public class GoCommand extends Command {
             return;
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
 

@@ -18,8 +18,10 @@ public class LevelUpCommand extends Command {
 
     private LevelUpCommand() {
         setName("level_up");
-        setInfo("комманда для прокачки уровня персонажа\n" +
-                "!level_up [характеристика которую нужно прокачать]");
+        setInfo("""
+                комманда для прокачки уровня персонажа
+                !level_up [характеристика которую нужно прокачать]
+                """);
     }
 
     @Override
@@ -31,10 +33,7 @@ public class LevelUpCommand extends Command {
         }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
 

@@ -16,7 +16,9 @@ public class MineCommand extends Command {
 
     private MineCommand() {
         setName("mine");
-        setInfo("отправиться в шахту в специальных местах");
+        setInfo("""
+                отправиться в шахту в специальных местах
+                """);
     }
 
     @Override
@@ -28,10 +30,7 @@ public class MineCommand extends Command {
         }
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
 

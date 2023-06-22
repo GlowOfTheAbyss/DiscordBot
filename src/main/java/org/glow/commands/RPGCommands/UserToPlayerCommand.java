@@ -13,7 +13,9 @@ public class UserToPlayerCommand extends Command {
 
     private UserToPlayerCommand() {
         setName("add");
-        setInfo("добавляет пользователя как нового игрока");
+        setInfo("""
+                добавляет пользователя как нового игрока
+                """);
     }
 
     @Override

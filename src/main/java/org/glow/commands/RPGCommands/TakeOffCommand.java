@@ -21,6 +21,7 @@ import org.glow.item.righthand.NoneRightHand;
 import org.glow.item.righthand.RightHand;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
+import org.glow.storage.InventoryManager;
 
 import java.util.List;
 
@@ -30,8 +31,10 @@ public class TakeOffCommand extends Command {
 
     private TakeOffCommand() {
         setName("take_off");
-        setInfo("команда для снятия экипированного предмета в инвентарь\n" +
-                "!take_off [имя предмета который необходимо снять]");
+        setInfo("""
+                команда для снятия экипированного предмета в инвентарь
+                !take_off [имя предмета который необходимо снять]
+                """);
     }
 
     @Override
@@ -41,14 +44,11 @@ public class TakeOffCommand extends Command {
             return;
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
         if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
             builder.title(PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
@@ -58,7 +58,7 @@ public class TakeOffCommand extends Command {
         }
 
         String takeOffItemName = message.getContent().replaceFirst("!take_off ", "");
-        List<Item> equipList = player.getInventory().getEquippedItems();
+        List<Item> equipList = InventoryManager.getInstance().getEquippedItems(player.getInventory());
 
         for (Item item : equipList) {
 

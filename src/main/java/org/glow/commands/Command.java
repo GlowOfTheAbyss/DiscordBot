@@ -75,4 +75,13 @@ public abstract class Command implements LaunchedCommand {
         return false;
     }
 
+    protected void errorMessage(Message message, String error) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title(error);
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
+
+    }
+
 }

@@ -22,7 +22,8 @@ public class MoveCommand extends Command {
         setInfo("""
                 команда для передвижения по миру
                 !move - показывает текущее положение персонажа и список соседних локаций
-                !move [название локации] - отправится в указанную локацию""");
+                !move [название локации] - отправится в указанную локацию
+                """);
     }
 
     @Override
@@ -33,11 +34,7 @@ public class MoveCommand extends Command {
             return;
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
 

@@ -14,7 +14,9 @@ public class ShutDownCommand extends Command {
 
     private ShutDownCommand() {
         setName("shut_down");
-        setInfo("всем иногда нужен отдых");
+        setInfo("""
+                всем иногда нужен отдых
+                """);
     }
 
     @Override

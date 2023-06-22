@@ -17,21 +17,19 @@ public class HealCommand extends Command {
         setInfo("""
                 команда для лечения персонажа в специальных заведениях
                 !heal - показывает подробную информацию о услуге
-                !heal [количество здоровья что нужно востановить]""");
+                !heal [количество здоровья что нужно востановить]
+                """);
     }
 
     @Override
     public void start(Message message) {
+
         Player player = userToPlayer(message);
         if (player == null) {
             return;
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        if (playerInBattle(player)) {
-            builder.title("Находясь в битве нельзя это использовать");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (playerInBattle(player, message)) {
             return;
         }
 
