@@ -26,10 +26,10 @@ public class TimeAction implements Runnable {
                 }
             }
 
-            if (player.getMana() < PersonManager.getInstance().getplayerMaxMana(player)) {
+            if (player.getMana() < PersonManager.getInstance().getPlayerMaxMana(player)) {
                 player.setMana(player.getMana() + 10);
-                if (player.getMana() > PersonManager.getInstance().getplayerMaxMana(player)) {
-                    player.setMana(PersonManager.getInstance().getplayerMaxMana(player));
+                if (player.getMana() > PersonManager.getInstance().getPlayerMaxMana(player)) {
+                    player.setMana(PersonManager.getInstance().getPlayerMaxMana(player));
                 }
             }
 

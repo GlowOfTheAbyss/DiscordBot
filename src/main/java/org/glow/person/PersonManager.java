@@ -56,11 +56,11 @@ public class PersonManager {
     }
 
     public int getPlayerMaxHealth(Player player) {
-        return 100 + (player.getEndurance() * 10);
+        return (10 + player.getEndurance()) * 10;
     }
 
-    public int getplayerMaxMana(Player player) {
-        return 100 + ((int) (0.5 * player.getIntelligence()) * 10);
+    public int getPlayerMaxMana(Player player) {
+        return (10 + ((int) (0.5 * player.getIntelligence()))) * 10;
     }
 
     public void addPlayer(Player player) {
