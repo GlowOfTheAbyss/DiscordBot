@@ -29,7 +29,6 @@ public class MineCommand extends Command {
             return;
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
         if (playerInBattle(player, message)) {
             return;
         }
