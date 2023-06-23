@@ -3,17 +3,22 @@ package org.glow.magic.spells;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.fileManager.Save;
+import org.glow.magic.Element;
 import org.glow.magic.Spell;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 import java.util.Random;
 
-public class Healing extends Spell {
+public class ShiningMiracle extends Spell {
 
-    public Healing() {
-        setSpellName("Исцеление");
-        setCoastInMana(50);
+    public ShiningMiracle() {
+        setSpellName("Чудесное сияние");
+        setSpellElement(Element.HYDRO);
+        setSpellInfo("""
+                Восстанавливает определённое количество HP любому игроку, включая самого мага.
+                """);
+        setCoastInMana(2);
         setPrice(6_000);
     }
 
