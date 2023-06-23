@@ -46,8 +46,8 @@ public class WhisperingWoodsAdventures extends Action {
     private void enemy(Message message, Player player) {
 
         List<NPC> npcList = List.of(new Hilichurl(),
-                new HilichurlBerserker(),
                 new HilichurlFighter(),
+                new HilichurlBerserker(),
                 new HydroSlime(),
                 new PyroSlime());
 

@@ -1,8 +1,11 @@
 package org.glow.person.npc.hilichurl;
 
+import org.glow.magic.Element;
 import org.glow.person.NPC;
 import org.glow.storage.Inventory;
 import org.glow.storage.SpellBook;
+
+import java.util.Random;
 
 public class HilichurlBerserker extends NPC {
 
@@ -10,17 +13,19 @@ public class HilichurlBerserker extends NPC {
 
         setName("Хиличурл-берсерк");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1087251592056684605/HilichurlBerserker.png");
+        setElement(Element.PHYSICAL);
+
         setSnowflake("0");
 
-        setStrength(2);
-        setEndurance(3);
-        setAgility(3);
+        setStrength(new Random().nextInt(3, 5));
+        setEndurance(1);
+        setAgility(1);
         setIntelligence(0);
-        setPerception(2);
+        setPerception(1);
         setLuck(0);
 
-        setHealth((10 + getEndurance()) * 10);
-        setMana((2 + (int) (0.5 * getIntelligence())) * 10);
+        setHealth((8 + getEndurance()) * 10);
+        setMana(0);
 
         setInventory(new Inventory());
         setSpellBook(new SpellBook());
