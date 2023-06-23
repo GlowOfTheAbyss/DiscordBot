@@ -1,7 +1,7 @@
 package org.glow.magic;
 
-import org.glow.magic.spells.Fireball;
-import org.glow.magic.spells.Healing;
+import org.glow.magic.spells.Dawn;
+import org.glow.magic.spells.ShiningMiracle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ public class SpellManager {
     private final List<Spell> spellList = new ArrayList<>();
 
     private SpellManager() {
-        spellList.add(new Healing());
-        spellList.add(new Fireball());
+        spellList.add(new ShiningMiracle());
+        spellList.add(new Dawn());
     }
 
     public static SpellManager getInstance() {

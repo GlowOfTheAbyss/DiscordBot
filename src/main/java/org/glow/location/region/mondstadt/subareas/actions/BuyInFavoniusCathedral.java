@@ -6,8 +6,8 @@ import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.magic.Spell;
-import org.glow.magic.spells.Fireball;
-import org.glow.magic.spells.Healing;
+import org.glow.magic.spells.Dawn;
+import org.glow.magic.spells.ShiningMiracle;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class BuyInFavoniusCathedral extends Action {
 
     private static BuyInFavoniusCathedral buyInFavoniusCathedral;
-    private static final List<Spell> shopSpellList = List.of(new Healing(), new Fireball());
+    private static final List<Spell> shopSpellList = List.of(new ShiningMiracle(), new Dawn());
 
     private BuyInFavoniusCathedral() {
         setName("Купить | !buy");

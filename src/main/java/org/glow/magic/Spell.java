@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import discord4j.core.object.entity.Message;
 import org.glow.person.Player;
 
-public class Spell implements Castable {
+public abstract class Spell implements Castable {
 
     private String spellName;
+    private Element spellElement;
+    private String spellInfo;
     private int coastInMana;
-
     private int price;
 
     public String getSpellName() {
@@ -17,6 +18,22 @@ public class Spell implements Castable {
 
     public void setSpellName(String spellName) {
         this.spellName = spellName;
+    }
+
+    public Element getSpellElement() {
+        return spellElement;
+    }
+
+    public void setSpellElement(Element spellElement) {
+        this.spellElement = spellElement;
+    }
+
+    public String getSpellInfo() {
+        return spellInfo;
+    }
+
+    public void setSpellInfo(String spellInfo) {
+        this.spellInfo = spellInfo;
     }
 
     public int getCoastInMana() {
@@ -34,9 +51,5 @@ public class Spell implements Castable {
     public void setPrice(int price) {
         this.price = price;
     }
-
-    @JsonIgnore
-    @Override
-    public void cast(Message message, Player player) {}
 
 }

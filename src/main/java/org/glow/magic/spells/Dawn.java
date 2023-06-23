@@ -5,6 +5,7 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.battle.Battle;
 import org.glow.actions.battle.BattleManager;
 import org.glow.fileManager.Save;
+import org.glow.magic.Element;
 import org.glow.magic.Spell;
 import org.glow.person.Person;
 import org.glow.person.PersonManager;
@@ -12,12 +13,16 @@ import org.glow.person.Player;
 
 import java.util.Random;
 
-public class Fireball extends Spell {
+public class Dawn extends Spell {
 
-    public Fireball() {
-        setSpellName("Огненный шар");
-        setCoastInMana(10);
-        setPrice(0);
+    public Dawn() {
+        setSpellName("Рассвет");
+        setSpellElement(Element.PYRO);
+        setSpellInfo("""
+                Собравшись на оружии пламя превращается в стремящегося вперёд феникса, который наносит большой Пиро урон всем врагам на своём пути.
+                """);
+        setCoastInMana(5);
+        setPrice(10_000);
     }
 
     @Override
