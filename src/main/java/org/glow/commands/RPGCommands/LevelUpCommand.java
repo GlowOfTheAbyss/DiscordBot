@@ -66,6 +66,7 @@ public class LevelUpCommand extends Command {
         }
 
         int skillCost = oneLevelCost + (perLevelCost * skillLevel);
+
         if (player.getCoins() < skillCost) {
             EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
 
@@ -78,6 +79,7 @@ public class LevelUpCommand extends Command {
                     + "Мана: " + player.getMana() + "\n");
             message.getChannel().block().createMessage(builder.build()).block();
             message.delete().block();
+            return;
         }
 
         player.setCoins(player.getCoins() - skillCost);
