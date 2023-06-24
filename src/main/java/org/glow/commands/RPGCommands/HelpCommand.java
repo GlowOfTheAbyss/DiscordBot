@@ -3,6 +3,7 @@ package org.glow.commands.RPGCommands;
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.CommandReader;
+import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.person.Player;
 
@@ -32,13 +33,20 @@ public class HelpCommand extends Command {
 
         StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append(Main.systems.commandPrefix)
+                .append(" префикс для всех комманд")
+                .append("\n\n");
+
         for (Command command : CommandReader.getCommandReader().getCommandList()) {
 
             if (command instanceof HelpCommand) {
                 continue;
             }
 
-            stringBuilder.append(command.getName()).append(" : ").append(command.getInfo()).append("\n\n");
+            stringBuilder.append(command.getName())
+                    .append(" : ")
+                    .append(command.getInfo())
+                    .append("\n\n");
 
         }
 
