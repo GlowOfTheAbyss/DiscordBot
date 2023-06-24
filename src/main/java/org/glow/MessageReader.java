@@ -7,9 +7,9 @@ import java.util.List;
 
 public class MessageReader {
 
-    private static final String prefix = "!";
     private static final Snowflake testChat = Snowflake.of(945704740866625547L);
-    private static final List<Snowflake> readableChats = List.of(testChat);
+    private static final Snowflake mainChat = Snowflake.of(851600858100531230L);
+    private static final List<Snowflake> readableChats = List.of(testChat, mainChat);
 
     private static final MessageReader messageReader = new MessageReader();
     private static CommandReader commandReader;
@@ -33,7 +33,7 @@ public class MessageReader {
             return;
         }
 
-        if (message.getContent().contains(prefix)) {
+        if (message.getContent().contains(Main.systems.commandPrefix)) {
 
             commandReader.readCommand(message);
 
