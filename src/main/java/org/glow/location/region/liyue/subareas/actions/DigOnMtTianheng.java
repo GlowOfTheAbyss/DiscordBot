@@ -2,7 +2,8 @@ package org.glow.location.region.liyue.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.actions.Chests;
+import org.glow.actions.chests.CommonChest;
+import org.glow.actions.chests.ExquisiteChest;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.PersonManager;
@@ -41,9 +42,9 @@ public class DigOnMtTianheng extends Action {
         int exquisiteChestChance = 5;
 
         if (exquisiteChestChance >= random) {
-            Chests.getChests().getExquisiteChest(message, player);
+            new ExquisiteChest(message, player).openChest();
         } else {
-            Chests.getChests().getCommonChest(message, player);
+            new CommonChest(message, player).openChest();
         }
 
     }
