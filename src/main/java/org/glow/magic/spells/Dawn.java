@@ -21,7 +21,7 @@ public class Dawn extends Spell {
         setSpellInfo("""
                 Собравшись на оружии пламя превращается в стремящегося вперёд феникса, который наносит большой Пиро урон всем врагам на своём пути.
                 """);
-        setCoastInMana(5);
+        setCoastInMana(50);
         setPrice(10_000);
     }
 

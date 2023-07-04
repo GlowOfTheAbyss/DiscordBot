@@ -5,7 +5,8 @@ import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import org.glow.fileManager.Load;
 import org.glow.fileManager.TokenAnalyzer;
-import org.glow.location.Map;
+import org.glow.location.LocationManager;
+import org.glow.message.MessageReader;
 import org.glow.timeaction.TimeAction;
 
 import java.util.concurrent.Executors;
@@ -27,7 +28,7 @@ public class Systems {
 
     public void start() {
 
-        Map.getInstance().createMap();
+        LocationManager.getInstance().generate();
         Load.getLoad().loadFile();
 
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1, r -> {

@@ -13,6 +13,9 @@ public abstract class Chest {
     private final EmbedCreateSpec.Builder builder;
 
     public Chest(Message message, Player player) {
+        this.message = message;
+        this.player = player;
+
         builder = EmbedCreateSpec.builder();
     }
 

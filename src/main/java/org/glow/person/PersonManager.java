@@ -3,7 +3,8 @@ package org.glow.person;
 import discord4j.common.util.Snowflake;
 import org.glow.Main;
 import org.glow.location.Location;
-import org.glow.location.Map;
+import org.glow.location.LocationManager;
+import org.glow.location.Region;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +43,16 @@ public class PersonManager {
         }
     }
 
-    public Location getPlayerLocation(Player player) {
-        for (Location location : Map.getInstance().getLocations()) {
-            if (location.getName().equalsIgnoreCase(player.getLocationName())) {
+    public Region getPlayerRegion(Player player) {
+
+        for (Region location : LocationManager.getInstance().getRegions()) {
+
+            if (player.getLocationName().equals(location.getName())) {
                 return location;
             }
+
         }
+
         throw new IllegalArgumentException("Location not found");
     }
 

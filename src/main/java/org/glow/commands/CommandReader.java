@@ -1,7 +1,7 @@
-package org.glow;
+package org.glow.commands;
 
 import discord4j.core.object.entity.Message;
-import org.glow.commands.Command;
+import org.glow.Main;
 import org.glow.commands.RPGCommands.*;
 import org.glow.commands.SystrmCommands.ShutDownCommand;
 

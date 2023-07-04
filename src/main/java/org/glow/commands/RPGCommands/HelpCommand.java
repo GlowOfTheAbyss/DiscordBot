@@ -2,7 +2,7 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.CommandReader;
+import org.glow.commands.CommandReader;
 import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.person.Player;

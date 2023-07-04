@@ -1,7 +1,6 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
@@ -37,12 +36,12 @@ public class GoCommand extends Command {
             return;
         }
 
-        if (PersonManager.getInstance().getPlayerLocation(player) instanceof WhisperingWoods) {
+        if (PersonManager.getInstance().getPlayerRegion(player) instanceof WhisperingWoods) {
 
             player.setEnergy(player.getEnergy() - 1);
             Save.getSave().saveFile(player);
 
-            WhisperingWoodsAdventures.getWhisperingWoodsAdventures().startAction(message, player);
+            new WhisperingWoodsAdventures(message, player).startAction();
         }
 
     }

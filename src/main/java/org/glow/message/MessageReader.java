@@ -1,7 +1,9 @@
-package org.glow;
+package org.glow.message;
 
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.Message;
+import org.glow.Main;
+import org.glow.commands.CommandReader;
 
 import java.util.List;
 

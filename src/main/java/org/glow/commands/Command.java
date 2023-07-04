@@ -2,11 +2,14 @@ package org.glow.commands;
 
 import discord4j.common.util.Snowflake;
 import discord4j.core.object.entity.Message;
+import discord4j.core.object.entity.channel.MessageChannel;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.battle.Battle;
 import org.glow.actions.battle.BattleManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
+
+import java.nio.channels.Channel;
 
 public abstract class Command implements LaunchedCommand {
 
@@ -75,10 +78,34 @@ public abstract class Command implements LaunchedCommand {
         return false;
     }
 
-    protected void errorMessage(Message message, String error) {
+    protected void sendMessageInChanel(Message message, String title) {
 
         EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(error);
+        builder.title(title);
+
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
+
+    }
+
+    protected void sendMessageInChanel(Message message, String title, String description) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title(title);
+        builder.description(description);
+
+        message.getChannel().block().createMessage(builder.build()).block();
+        message.delete().block();
+
+    }
+
+    protected void sendMessageInChanel(Message message, String title, String description, String image) {
+
+        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+        builder.title(title);
+        builder.image(image);
+        builder.description(description);
+
         message.getChannel().block().createMessage(builder.build()).block();
         message.delete().block();
 

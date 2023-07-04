@@ -1,6 +1,5 @@
 package org.glow.item.lefthand;
 
-import org.glow.item.Shield;
 import org.glow.storage.Inventory;
 
 public class LeftHand extends Shield {

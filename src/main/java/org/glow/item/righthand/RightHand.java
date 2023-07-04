@@ -1,6 +1,5 @@
 package org.glow.item.righthand;
 
-import org.glow.item.Weapon;
 import org.glow.storage.Inventory;
 
 public class RightHand extends Weapon {

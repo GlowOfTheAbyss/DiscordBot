@@ -1,11 +1,12 @@
 package org.glow.location.region.liyue.subareas;
 
-import org.glow.location.Subarea;
+import org.glow.location.Region;
+import org.glow.location.region.liyue.Liyue;
 import org.glow.location.region.liyue.subareas.actions.DigOnMtTianheng;
 
 import java.util.Set;
 
-public class MtTianheng extends Subarea {
+public class MtTianheng extends Region {
 
     private static MtTianheng mtTianheng;
 
@@ -13,8 +14,9 @@ public class MtTianheng extends Subarea {
         setName("Гора Тяньхен");
         setImage("");
 
-        setSubareas(Set.of());
-        setActions(Set.of(DigOnMtTianheng.getDigOnMtTianheng()));
+        setRegions(Set.of());
+        setActions(Set.of(new DigOnMtTianheng(null, null)));
+
     }
 
     public static MtTianheng getMtTianheng() {

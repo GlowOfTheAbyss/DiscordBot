@@ -49,7 +49,7 @@ public class EquipCommand extends Command {
 
         } catch (RuntimeException exception) {
 
-            errorMessage(message, exception.getMessage());
+            sendMessageInChanel(message, exception.getMessage());
 
         }
 

@@ -1,4 +1,6 @@
-package org.glow.item;
+package org.glow.item.righthand;
+
+import org.glow.item.Item;
 
 public abstract class Weapon extends Item {
 

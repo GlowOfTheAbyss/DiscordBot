@@ -18,7 +18,7 @@ public class ShiningMiracle extends Spell {
         setSpellInfo("""
                 Восстанавливает определённое количество HP любому игроку, включая самого мага.
                 """);
-        setCoastInMana(2);
+        setCoastInMana(20);
         setPrice(6_000);
     }
 

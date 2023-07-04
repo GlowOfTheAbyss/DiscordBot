@@ -1,5 +1,6 @@
 package org.glow.location.region.mondstadt;
 
+import org.glow.location.LocationManager;
 import org.glow.location.Region;
 import org.glow.location.region.mondstadt.subareas.CityMondstadt;
 import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
@@ -14,8 +15,9 @@ public class Mondstadt extends Region {
         setName("Мондштадт");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1086592288416866304/Mondstadt.webp");
 
-        setSubareas(Set.of(CityMondstadt.getCityMondstadt(),
+        setRegions(Set.of(CityMondstadt.getCityMondstadt(),
                 WhisperingWoods.getWhisperingWoods()));
+        setActions(Set.of());
 
     }
 

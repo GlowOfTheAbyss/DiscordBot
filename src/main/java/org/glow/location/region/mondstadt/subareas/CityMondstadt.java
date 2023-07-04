@@ -1,10 +1,11 @@
 package org.glow.location.region.mondstadt.subareas;
 
-import org.glow.location.Subarea;
+import org.glow.location.Region;
+import org.glow.location.region.mondstadt.Mondstadt;
 
 import java.util.Set;
 
-public class CityMondstadt extends Subarea {
+public class CityMondstadt extends Region {
 
     private static CityMondstadt cityMondstadt;
 
@@ -12,8 +13,7 @@ public class CityMondstadt extends Subarea {
         setName("Город Мондштадт");
         setImage("https://cdn.discordapp.com/attachments/882560343983915029/1065586686500802661/Mondstadt.png");
 
-
-        setSubareas(Set.of(FavoniusCathedral.getFavoniusCathedral(),
+        setRegions(Set.of(FavoniusCathedral.getFavoniusCathedral(),
                 SchulzsBlacksmith.getSchulzsBlacksmith()));
         setActions(Set.of());
 

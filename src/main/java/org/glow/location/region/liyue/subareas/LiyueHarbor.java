@@ -1,10 +1,11 @@
 package org.glow.location.region.liyue.subareas;
 
-import org.glow.location.Subarea;
+import org.glow.location.Region;
+import org.glow.location.region.liyue.Liyue;
 
 import java.util.Set;
 
-public class LiyueHarbor extends Subarea {
+public class LiyueHarbor extends Region {
 
     private static LiyueHarbor liyueHarbor;
 
@@ -12,8 +13,9 @@ public class LiyueHarbor extends Subarea {
         setName("Гавань Ли Юэ");
         setImage("https://cdn.discordapp.com/attachments/1066672288897978439/1086595990146002954/LiyueHarbor.png");
 
-        setSubareas(Set.of());
+        setRegions(Set.of());
         setActions(Set.of());
+
     }
 
     public static LiyueHarbor getLiyueHarbor() {
