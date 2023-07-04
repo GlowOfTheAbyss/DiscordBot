@@ -1,7 +1,6 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.location.region.mondstadt.subareas.actions.HealFavoniusCathedral;
@@ -33,8 +32,8 @@ public class HealCommand extends Command {
             return;
         }
 
-        if (PersonManager.getInstance().getPlayerLocation(player) instanceof FavoniusCathedral) {
-            HealFavoniusCathedral.getHealFavoniusCathedral().startAction(message, player);
+        if (PersonManager.getInstance().getPlayerRegion(player) instanceof FavoniusCathedral) {
+            new HealFavoniusCathedral(message, player).startAction();
         }
 
     }

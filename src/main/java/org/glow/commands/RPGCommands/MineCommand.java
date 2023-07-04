@@ -1,7 +1,6 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.location.region.liyue.subareas.MtTianheng;
@@ -38,12 +37,12 @@ public class MineCommand extends Command {
             return;
         }
 
-        if (PersonManager.getInstance().getPlayerLocation(player) instanceof MtTianheng) {
+        if (PersonManager.getInstance().getPlayerRegion(player) instanceof MtTianheng) {
 
             player.setEnergy(player.getEnergy() - 1);
             Save.getSave().saveFile(player);
 
-            DigOnMtTianheng.getDigOnMtTianheng().startAction(message, player);
+            new DigOnMtTianheng(message, player).startAction();
 
         }
 

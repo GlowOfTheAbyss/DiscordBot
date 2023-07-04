@@ -34,10 +34,10 @@ public class BuyCommand extends Command {
             return;
         }
 
-        if (PersonManager.getInstance().getPlayerLocation(player) instanceof SchulzsBlacksmith) {
-            BuyInSchulzsBlacksmith.getBuyInSchulzsBlacksmith().startAction(message, player);
-        } else if (PersonManager.getInstance().getPlayerLocation(player) instanceof FavoniusCathedral) {
-            BuyInFavoniusCathedral.getBuyFavoniusCathedral().startAction(message, player);
+        if (PersonManager.getInstance().getPlayerRegion(player) instanceof SchulzsBlacksmith) {
+            new BuyInSchulzsBlacksmith(message, player).startAction();
+        } else if (PersonManager.getInstance().getPlayerRegion(player) instanceof FavoniusCathedral) {
+            new BuyInFavoniusCathedral(message, player).startAction();
         }
 
     }

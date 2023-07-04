@@ -1,11 +1,14 @@
 package org.glow.location.region.liyue.subareas.actions;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.actions.chests.CommonChest;
 import org.glow.actions.chests.ExquisiteChest;
+import org.glow.commands.RPGCommands.MineCommand;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
+import org.glow.message.Parameters;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -13,100 +16,89 @@ import java.util.Random;
 
 public class DigOnMtTianheng extends Action {
 
-    private static DigOnMtTianheng digOnMtTianheng;
-
-    public DigOnMtTianheng() {
-        setName("Отправиться в заброшенную шахту | !mine");
+    public DigOnMtTianheng(Message message, Player player) {
+        super(message, player);
+        setName(Main.systems.commandPrefix + MineCommand.getMineCommand().getName());
+        setDesctiption("Отправиться в заброшенную шахту");
     }
 
     @Override
-    public void startAction(Message message, Player player) {
+    public void startAction() {
 
         int random = new Random().nextInt(101);
         int chestChance = 3;
 
         if (chestChance >= random) {
-            chest(message, player);
+            chest();
         } else {
-            deposit(message, player);
+            deposit();
         }
 
     }
 
-    private void chest(Message message, Player player) {
-
-        player.setEnergy(player.getEnergy() + 1);
-        Save.getSave().saveFile(player);
+    private void chest() {
 
         int random = new Random().nextInt(101);
         int exquisiteChestChance = 5;
 
         if (exquisiteChestChance >= random) {
-            new ExquisiteChest(message, player).openChest();
+            new ExquisiteChest(getMessage(), getPlayer()).openChest();
         } else {
-            new CommonChest(message, player).openChest();
+            new CommonChest(getMessage(), getPlayer()).openChest();
         }
 
     }
 
-    private void deposit(Message message, Player player) {
+    private void deposit() {
 
         int random = new Random().nextInt(101);
         int whiteIronDepositChance = 10;
 
         if (whiteIronDepositChance >= random) {
-            whiteIronDeposit(message, player);
+            whiteIronDeposit();
         } else {
-            ironDeposit(message, player);
+            ironDeposit();
         }
 
     }
 
-    private void ironDeposit(Message message, Player player) {
+    private void ironDeposit() {
 
-        String title = PersonManager.getInstance().getPersonName(player) + " находит залежь железа";
-        int extraction = 1 + new Random().nextInt(3) + player.getStrength() + player.getEndurance();
+        String title = PersonManager.getInstance().getPersonName(getPlayer()) + " находит залежь железа";
+        int extraction = new Random().nextInt(1, 4) + getPlayer().getStrength() + getPlayer().getEndurance();
         extraction *= 10;
 
-        player.setCoins(player.getCoins() + extraction);
-        Save.getSave().saveFile(player);
+        getPlayer().setCoins(getPlayer().getCoins() + extraction);
+        Save.getSave().saveFile(getPlayer());
 
-        sendMessage(message, player, title, extraction);
+        createMessage(title, extraction);
 
     }
 
-    private void whiteIronDeposit(Message message, Player player) {
+    private void whiteIronDeposit() {
 
-        String title = PersonManager.getInstance().getPersonName(player) + " находит залежь белого железа";
-        int extraction = 2 + new Random().nextInt(4) + player.getStrength() + (2 * player.getEndurance());
+        String title = PersonManager.getInstance().getPersonName(getPlayer()) + " находит залежь белого железа";
+        int extraction = new Random().nextInt(2, 7) + getPlayer().getStrength() + (2 * getPlayer().getEndurance());
         extraction *= 10;
 
-        player.setCoins(player.getCoins() + extraction);
-        Save.getSave().saveFile(player);
+        getPlayer().setCoins(getPlayer().getCoins() + extraction);
+        Save.getSave().saveFile(getPlayer());
 
-        sendMessage(message, player, title, extraction);
+        createMessage(title, extraction);
 
     }
 
-    private void sendMessage(Message message, Player player, String title, int coins) {
+    private void createMessage(String title, int coins) {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(title);
-        builder.description(PersonManager.getInstance().getPersonName(player) + " получает " + coins + " :pig2:\n\n"
-                + ":pig2: " + player.getCoins() + "\n"
-                + "Энергия: " + player.getEnergy() + "\n"
-                + "Здоровье: " + player.getHealth() + "\n"
-                + "Мана: " + player.getMana() + "\n");
+        String description = """
+                %s получает %s %s
+                
+                %s
+                """;
 
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
-    }
-
-    public static DigOnMtTianheng getDigOnMtTianheng() {
-        if (digOnMtTianheng == null) {
-            digOnMtTianheng = new DigOnMtTianheng();
-        }
-        return digOnMtTianheng;
+        sendMessageInChannel(title, String.format(description,
+                PersonManager.getInstance().getPersonName(getPlayer()), coins, Parameters.COINS.getName().replaceFirst("а", "ы"),
+                TextManager.getInstance().getPlayerParameters(getPlayer())));
     }
 
 }
