@@ -5,7 +5,6 @@ import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.battle.BattleManager;
 import org.glow.actions.chests.CommonChest;
 import org.glow.actions.chests.ExquisiteChest;
-import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.person.NPC;
 import org.glow.person.PersonManager;
@@ -21,30 +20,30 @@ import java.util.Random;
 
 public class WhisperingWoodsAdventures extends Action {
 
-    private static WhisperingWoodsAdventures whisperingWoodsAdventures;
-
-    private WhisperingWoodsAdventures() {
+    public WhisperingWoodsAdventures(Message message, Player player) {
+        super(message, player);
         setName("Отправиться на поиски монстров | !go");
     }
 
     @Override
-    public void startAction(Message message, Player player) {
+    public void startAction() {
 
         int random = new Random().nextInt(101);
-        int chestChance = 1 + ((int) (0.5 * player.getLuck()));
-        if (chestChance > 5) {
-            chestChance = 5;
+        int chestChance = 1 + ((int) (0.5 * getPlayer().getLuck()));
+        int maxChestChance = 5;
+        if (chestChance > maxChestChance) {
+            chestChance = maxChestChance;
         }
 
         if (chestChance >= random) {
-            chest(message, player);
+            chest();
         } else {
-            enemy(message, player);
+            enemy();
         }
 
     }
 
-    private void enemy(Message message, Player player) {
+    private void enemy() {
 
         List<NPC> npcList = List.of(new Hilichurl(),
                 new HilichurlFighter(),
@@ -54,7 +53,7 @@ public class WhisperingWoodsAdventures extends Action {
 
         NPC randomNPC;
 
-        if (PersonManager.getInstance().getPersonLevel(player) < 6) {
+        if (PersonManager.getInstance().getPersonLevel(getPlayer()) < 6) {
 
             int random = new Random().nextInt(2);
             if (random == 0) {
@@ -73,35 +72,28 @@ public class WhisperingWoodsAdventures extends Action {
         builder.description(randomNPC.getName() + " HP : " + randomNPC.getHealth() + "\n"
                 + randomNPC.getName() + " боевой уровень : " + PersonManager.getInstance().getPersonCombatLevel(randomNPC));
 
-        message.getChannel().block().createMessage(builder.build()).block();
+        getMessage().getChannel().block().createMessage(builder.build()).block();
 
-        BattleManager.getInstance().createBattle(message, player, randomNPC);
+        BattleManager.getInstance().createBattle(getMessage(), getPlayer(), randomNPC);
 
     }
 
-    private void chest(Message message, Player player) {
-
-        player.setEnergy(player.getEnergy() + 1);
-        Save.getSave().saveFile(player);
+    private void chest() {
 
         int random = new Random().nextInt(101);
-        int exquisiteChestChance = 20 + ((int) (0.5 * player.getLuck()));
-        if (exquisiteChestChance > 40) {
-            exquisiteChestChance = 40;
+        int exquisiteChestChance = 20 + ((int) (0.5 * getPlayer().getLuck()));
+        int maxExquisiteChestChance = 40;
+
+        if (exquisiteChestChance > maxExquisiteChestChance) {
+            exquisiteChestChance = maxExquisiteChestChance;
         }
 
         if (exquisiteChestChance >= random) {
-            new ExquisiteChest(message, player).openChest();
+            new ExquisiteChest(getMessage(), getPlayer()).openChest();
         } else {
-            new CommonChest(message, player).openChest();
+            new CommonChest(getMessage(), getPlayer()).openChest();
         }
 
     }
 
-    public static WhisperingWoodsAdventures getWhisperingWoodsAdventures() {
-        if (whisperingWoodsAdventures == null) {
-            whisperingWoodsAdventures = new WhisperingWoodsAdventures();
-        }
-        return whisperingWoodsAdventures;
-    }
 }

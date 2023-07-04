@@ -5,6 +5,6 @@ import org.glow.person.Player;
 
 public interface LaunchedAction {
 
-    void startAction(Message message, Player player);
+    void startAction();
 
 }

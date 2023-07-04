@@ -2,12 +2,15 @@ package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
+import org.glow.commands.RPGCommands.BuyCommand;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
 import org.glow.magic.Spell;
 import org.glow.magic.spells.Dawn;
 import org.glow.magic.spells.ShiningMiracle;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -15,99 +18,87 @@ import java.util.List;
 
 public class BuyInFavoniusCathedral extends Action {
 
-    private static BuyInFavoniusCathedral buyInFavoniusCathedral;
     private static final List<Spell> shopSpellList = List.of(new ShiningMiracle(), new Dawn());
 
-    private BuyInFavoniusCathedral() {
-        setName("Купить | !buy");
+    public BuyInFavoniusCathedral(Message message, Player player) {
+        super(message, player);
+        setName(Main.systems.commandPrefix + BuyCommand.getBuyCommand().getName());
+        setDesctiption("Купить заклинание");
     }
 
     @Override
-    public void startAction(Message message, Player player) {
+    public void startAction() {
 
-        if (message.getContent().split(" ").length == 1) {
+        if (getMessage().getContent().split(" ").length == 1) {
 
-            showProduct(message);
+            showProduct();
 
         } else {
 
-            String wantToBuyProductName = message.getContent().replaceFirst("!buy ", "");
-            buyProduct(message, player, wantToBuyProductName);
+            String wantToBuyProductName = getMessage().getContent().replaceFirst(getName() + " ", "");
+            buyProduct(wantToBuyProductName);
 
         }
 
     }
 
-    private void showProduct(Message message) {
+    private void showProduct() {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(FavoniusCathedral.getFavoniusCathedral().getName());
-        builder.description("**Вы можете приобрести:**\n" + "\n"
-                + "Свитки скилов:\n"
-                + shopSpellList.get(0).getSpellName() + " | " + shopSpellList.get(0).getCoastInMana() + " маны | " + shopSpellList.get(0).getPrice() + " :pig2:\n"
-                + shopSpellList.get(1).getSpellName() + " | " + shopSpellList.get(1).getCoastInMana() + " маны | " + shopSpellList.get(1).getPrice() + " :pig2:\n");
+        String description = """
+                **Вы можете приобрести**
+                                
+                Свитки скилов:
+                %s | %s маны | %s моры
+                %s | %s маны | %s моры
+                """;
 
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        sendMessageInChannel(FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
+                shopSpellList.get(0).getSpellName(), shopSpellList.get(0).getCoastInMana(), shopSpellList.get(0).getPrice(),
+                shopSpellList.get(1).getSpellName(), shopSpellList.get(1).getCoastInMana(), shopSpellList.get(1).getPrice()));
 
     }
 
-    private void buyProduct(Message message, Player player, String wantToBuyProductName) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+    private void buyProduct(String wantToBuyProductName) {
 
         for (Spell spell : shopSpellList) {
             if (spell.getSpellName().equalsIgnoreCase(wantToBuyProductName)) {
 
-                if (player.getCoins() < spell.getPrice()) {
-                    builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
-                    message.getChannel().block().createMessage(builder.build()).block();
-                    message.delete().block();
-                    return;
-                }
+                spellFind(spell);
+                return;
 
-                if (player.getSpellBook().getListSpell().size() == player.getSpellBook().getListSpellSize()) {
-                    builder.title(PersonManager.getInstance().getPersonName(player) + " ваша книга заклинаний заполнена");
-                    message.getChannel().block().createMessage(builder.build()).block();
-                    message.delete().block();
-                    return;
-                }
+            }
+        }
 
-                for (Spell famousSpell : player.getSpellBook().getListSpell()) {
-                    if (famousSpell.getSpellName().equals(spell.getSpellName())) {
-                        builder.title(PersonManager.getInstance().getPersonName(player) + ", вы уже владеете данным заклинанием");
-                        message.getChannel().block().createMessage(builder.build()).block();
-                        message.delete().block();
-                        return;
-                    }
-                }
+        sendMessageInChannel("Заклинание " + wantToBuyProductName + " не найдено");
 
-                player.setCoins(player.getCoins() - spell.getPrice());
-                player.getSpellBook().addListSpell(spell);
-                Save.getSave().saveFile(player);
+    }
 
-                builder.title(PersonManager.getInstance().getPersonName(player) + ", вы приобрели " + spell.getSpellName());
-                builder.description(":pig2: " + player.getCoins() + "\n"
-                        + "Энергия: " + player.getEnergy() + "\n"
-                        + "Здоровье: " + player.getHealth() + "\n"
-                        + "Мана: " + player.getMana() + "\n");
+    private void spellFind(Spell spell) {
 
-                message.getChannel().block().createMessage(builder.build()).block();
-                message.delete().block();
+        if (getPlayer().getCoins() < spell.getPrice()) {
+            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", у вас недостаточно моры");
+            return;
+        }
+
+        if (getPlayer().getSpellBook().getListSpell().size() == getPlayer().getSpellBook().getListSpellSize()) {
+            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", ваша книга заклинаний заполнена");
+            return;
+        }
+
+        for (Spell famousSpell : getPlayer().getSpellBook().getListSpell()) {
+            if (famousSpell.getSpellName().equals(spell.getSpellName())) {
+                sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", вы уже владеете данным заклинанием");
                 return;
             }
         }
 
-        builder.title("Заклинание " + wantToBuyProductName + " не найдено");
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        getPlayer().setCoins(getPlayer().getCoins() - spell.getPrice());
+        getPlayer().getSpellBook().addListSpell(spell);
+        Save.getSave().saveFile(getPlayer());
+
+        String title = (PersonManager.getInstance().getPersonName(getPlayer()) + ", вы приобрели " + spell.getSpellName());
+        sendMessageInChannel(title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
     }
 
-    public static BuyInFavoniusCathedral getBuyFavoniusCathedral() {
-        if (buyInFavoniusCathedral == null) {
-            buyInFavoniusCathedral = new BuyInFavoniusCathedral();
-        }
-        return buyInFavoniusCathedral;
-    }
 }

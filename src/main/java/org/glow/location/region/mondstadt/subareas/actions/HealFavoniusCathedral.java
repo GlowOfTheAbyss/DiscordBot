@@ -2,96 +2,85 @@ package org.glow.location.region.mondstadt.subareas.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
+import org.glow.commands.RPGCommands.HealCommand;
 import org.glow.fileManager.Save;
 import org.glow.location.Action;
 import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
+import org.glow.message.Parameters;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public class HealFavoniusCathedral extends Action {
 
-    private static HealFavoniusCathedral healFavoniusCathedral;
-
-    private HealFavoniusCathedral() {
-        setName("Востановить здоровье | !heal");
+    public HealFavoniusCathedral(Message message, Player player) {
+        super(message, player);
+        setName(Main.systems.commandPrefix + HealCommand.getHealCommand().getName());
+        setDesctiption("Востановить здоровье за мору");
     }
 
     @Override
-    public void startAction(Message message, Player player) {
+    public void startAction() {
 
-        if (message.getContent().split(" ").length == 1) {
+        if (getMessage().getContent().split(" ").length == 1) {
 
-            showInfo(message);
+            createInfo();
 
         } else {
 
-            heal(message, player);
+            heal();
 
         }
 
     }
 
-    private void showInfo(Message message) {
+    private void createInfo() {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(FavoniusCathedral.getFavoniusCathedral().getName());
-        builder.description("**Вы можете заплатить, что бы вас полечили:**\n" + "\n"
-                + "10 :pig2: = 10 HP");
+        String description = """
+                **Вы можете заплатить, что бы вас полечили:**
+                
+                %s %s = %s %s
+                """;
 
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        sendMessageInChannel(FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
+                10, Parameters.COINS, 10, Parameters.HEALTH));
 
     }
 
-    private void heal(Message message, Player player) {
+    private void heal() {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        if (message.getContent().split(" ").length != 2) {
-            builder.title("Неверное количество аргументов");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (getMessage().getContent().split(" ").length != 2) {
+            sendMessageInChannel("""
+                    Неверное количество аргументов
+                    Ожидается что будет: !heal [число]
+                    """);
             return;
         }
 
         int healCoast;
         try {
-            healCoast = Integer.parseInt(message.getContent().split(" ")[1]);
+            healCoast = Integer.parseInt(getMessage().getContent().split(" ")[1]);
         } catch (NumberFormatException exception) {
-            builder.title("Не найдено число");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+            sendMessageInChannel("Не найдено число");
             return;
         }
 
-        if (player.getCoins() < healCoast) {
-            builder.title(PersonManager.getInstance().getPersonName(player) + " у вас недостаточно :pig2:");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+        if (getPlayer().getCoins() < healCoast) {
+            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + " у вас недостаточно моры");
             return;
         }
 
-        player.setCoins(player.getCoins() - healCoast);
-        player.setHealth(player.getHealth() + (healCoast));
-        if (player.getHealth() > PersonManager.getInstance().getPlayerMaxHealth(player)) {
-            player.setHealth(PersonManager.getInstance().getPlayerMaxHealth(player));
+        getPlayer().setCoins(getPlayer().getCoins() - healCoast);
+        getPlayer().setHealth(getPlayer().getHealth() + (healCoast));
+        if (getPlayer().getHealth() > PersonManager.getInstance().getPlayerMaxHealth(getPlayer())) {
+            getPlayer().setHealth(PersonManager.getInstance().getPlayerMaxHealth(getPlayer()));
         }
-        Save.getSave().saveFile(player);
+        Save.getSave().saveFile(getPlayer());
 
-        builder.title(PersonManager.getInstance().getPersonName(player) + " востановил " + healCoast + " поинтов здоровья");
-        builder.description(":pig2: " + player.getCoins() + "\n"
-                + "Энергия: " + player.getEnergy() + "\n"
-                + "Здоровье: " + player.getHealth() + "\n"
-                + "Мана: " + player.getMana() + "\n");
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        String title = PersonManager.getInstance().getPersonName(getPlayer()) + " востановил " + healCoast + " поинтов здоровья";
+        sendMessageInChannel(title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
     }
 
-    public static HealFavoniusCathedral getHealFavoniusCathedral() {
-        if (healFavoniusCathedral == null) {
-            healFavoniusCathedral = new HealFavoniusCathedral();
-        }
-        return healFavoniusCathedral;
-    }
 }
