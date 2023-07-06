@@ -1,7 +1,6 @@
-package org.glow.location.region.liyue.subareas;
+package org.glow.map.regions.liyue.subRegions;
 
-import org.glow.location.Region;
-import org.glow.location.region.liyue.Liyue;
+import org.glow.map.regions.Region;
 
 import java.util.Set;
 

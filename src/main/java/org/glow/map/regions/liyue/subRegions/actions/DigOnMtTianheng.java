@@ -1,4 +1,4 @@
-package org.glow.location.region.liyue.subareas.actions;
+package org.glow.map.regions.liyue.subRegions.actions;
 
 import discord4j.core.object.entity.Message;
 import org.glow.Main;
@@ -6,7 +6,7 @@ import org.glow.actions.chests.CommonChest;
 import org.glow.actions.chests.ExquisiteChest;
 import org.glow.commands.RPGCommands.MineCommand;
 import org.glow.fileManager.Save;
-import org.glow.location.Action;
+import org.glow.map.location.action.Action;
 import org.glow.message.Parameters;
 import org.glow.message.TextManager;
 import org.glow.person.PersonManager;

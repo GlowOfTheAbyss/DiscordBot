@@ -1,10 +1,9 @@
-package org.glow.location.region.liyue;
+package org.glow.map.regions.liyue;
 
-import org.glow.location.LocationManager;
-import org.glow.location.Region;
-import org.glow.location.region.liyue.subareas.LiyueHarbor;
-import org.glow.location.region.liyue.subareas.MtTianheng;
-import org.glow.location.region.liyue.subareas.TheChasm;
+import org.glow.map.regions.Region;
+import org.glow.map.regions.liyue.subRegions.LiyueHarbor;
+import org.glow.map.regions.liyue.subRegions.MtTianheng;
+import org.glow.map.regions.liyue.subRegions.TheChasm;
 
 import java.util.Set;
 

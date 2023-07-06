@@ -1,7 +1,6 @@
-package org.glow.location.region.mondstadt.subareas.actions;
+package org.glow.map.regions.mondstadt.subRegions.actions;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.Main;
 import org.glow.commands.RPGCommands.BuyCommand;
 import org.glow.fileManager.Save;
@@ -19,8 +18,8 @@ import org.glow.item.head.IronHeadArmor;
 import org.glow.item.head.WhiteIronHeadArmor;
 import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
-import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
+import org.glow.map.location.action.Action;
+import org.glow.map.regions.mondstadt.subRegions.SchulzsBlacksmith;
 import org.glow.message.Characteristic;
 import org.glow.message.Parameters;
 import org.glow.message.TextManager;

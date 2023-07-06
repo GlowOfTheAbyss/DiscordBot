@@ -2,9 +2,9 @@ package org.glow.person;
 
 import discord4j.common.util.Snowflake;
 import org.glow.Main;
-import org.glow.location.Location;
-import org.glow.location.LocationManager;
-import org.glow.location.Region;
+import org.glow.map.location.Location;
+import org.glow.map.location.LocationManager;
+import org.glow.map.regions.Region;
 
 import java.util.ArrayList;
 import java.util.List;

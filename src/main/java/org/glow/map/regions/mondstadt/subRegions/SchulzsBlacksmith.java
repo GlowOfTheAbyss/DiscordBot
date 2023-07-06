@@ -1,7 +1,7 @@
-package org.glow.location.region.mondstadt.subareas;
+package org.glow.map.regions.mondstadt.subRegions;
 
-import org.glow.location.Region;
-import org.glow.location.region.mondstadt.subareas.actions.BuyInSchulzsBlacksmith;
+import org.glow.map.regions.Region;
+import org.glow.map.regions.mondstadt.subRegions.actions.BuyInSchulzsBlacksmith;
 
 import java.util.Set;
 

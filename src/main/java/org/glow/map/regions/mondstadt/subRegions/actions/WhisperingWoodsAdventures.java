@@ -1,11 +1,11 @@
-package org.glow.location.region.mondstadt.subareas.actions;
+package org.glow.map.regions.mondstadt.subRegions.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.actions.battle.BattleManager;
 import org.glow.actions.chests.CommonChest;
 import org.glow.actions.chests.ExquisiteChest;
-import org.glow.location.Action;
+import org.glow.map.location.action.Action;
 import org.glow.person.NPC;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;

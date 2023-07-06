@@ -1,4 +1,7 @@
-package org.glow.location;
+package org.glow.map.regions;
+
+import org.glow.map.location.action.Action;
+import org.glow.map.location.Location;
 
 import java.util.HashSet;
 import java.util.Set;

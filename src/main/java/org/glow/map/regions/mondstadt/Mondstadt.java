@@ -1,9 +1,8 @@
-package org.glow.location.region.mondstadt;
+package org.glow.map.regions.mondstadt;
 
-import org.glow.location.LocationManager;
-import org.glow.location.Region;
-import org.glow.location.region.mondstadt.subareas.CityMondstadt;
-import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
+import org.glow.map.regions.Region;
+import org.glow.map.regions.mondstadt.subRegions.CityMondstadt;
+import org.glow.map.regions.mondstadt.subRegions.WhisperingWoods;
 
 import java.util.Set;
 

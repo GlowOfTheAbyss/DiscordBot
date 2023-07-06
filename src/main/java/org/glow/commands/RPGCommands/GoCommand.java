@@ -3,8 +3,8 @@ package org.glow.commands.RPGCommands;
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
-import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
-import org.glow.location.region.mondstadt.subareas.actions.WhisperingWoodsAdventures;
+import org.glow.map.regions.mondstadt.subRegions.WhisperingWoods;
+import org.glow.map.regions.mondstadt.subRegions.actions.WhisperingWoodsAdventures;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 

@@ -3,8 +3,8 @@ package org.glow.commands.RPGCommands;
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
-import org.glow.location.region.liyue.subareas.MtTianheng;
-import org.glow.location.region.liyue.subareas.actions.DigOnMtTianheng;
+import org.glow.map.regions.liyue.subRegions.MtTianheng;
+import org.glow.map.regions.liyue.subRegions.actions.DigOnMtTianheng;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 

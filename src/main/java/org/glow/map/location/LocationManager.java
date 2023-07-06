@@ -1,14 +1,15 @@
-package org.glow.location;
+package org.glow.map.location;
 
-import org.glow.location.region.liyue.Liyue;
-import org.glow.location.region.liyue.subareas.LiyueHarbor;
-import org.glow.location.region.liyue.subareas.MtTianheng;
-import org.glow.location.region.liyue.subareas.TheChasm;
-import org.glow.location.region.mondstadt.Mondstadt;
-import org.glow.location.region.mondstadt.subareas.CityMondstadt;
-import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
-import org.glow.location.region.mondstadt.subareas.WhisperingWoods;
+import org.glow.map.regions.Region;
+import org.glow.map.regions.liyue.Liyue;
+import org.glow.map.regions.liyue.subRegions.LiyueHarbor;
+import org.glow.map.regions.liyue.subRegions.MtTianheng;
+import org.glow.map.regions.liyue.subRegions.TheChasm;
+import org.glow.map.regions.mondstadt.Mondstadt;
+import org.glow.map.regions.mondstadt.subRegions.CityMondstadt;
+import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
+import org.glow.map.regions.mondstadt.subRegions.SchulzsBlacksmith;
+import org.glow.map.regions.mondstadt.subRegions.WhisperingWoods;
 
 import java.util.HashSet;
 import java.util.Set;

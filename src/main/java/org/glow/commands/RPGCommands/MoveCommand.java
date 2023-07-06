@@ -4,7 +4,9 @@ import discord4j.core.object.entity.Message;
 import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
-import org.glow.location.*;
+import org.glow.map.location.action.Action;
+import org.glow.map.location.*;
+import org.glow.map.regions.Region;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 

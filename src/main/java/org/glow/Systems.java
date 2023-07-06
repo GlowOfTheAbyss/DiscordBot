@@ -5,7 +5,7 @@ import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.message.MessageCreateEvent;
 import org.glow.fileManager.Load;
 import org.glow.fileManager.TokenAnalyzer;
-import org.glow.location.LocationManager;
+import org.glow.map.location.LocationManager;
 import org.glow.message.MessageReader;
 import org.glow.timeaction.TimeAction;
 

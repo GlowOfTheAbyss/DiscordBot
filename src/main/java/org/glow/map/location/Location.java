@@ -1,4 +1,4 @@
-package org.glow.location;
+package org.glow.map.location;
 
 import java.util.Objects;
 

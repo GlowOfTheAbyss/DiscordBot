@@ -3,7 +3,7 @@ package org.glow.person;
 import discord4j.common.util.Snowflake;
 import org.glow.storage.Inventory;
 import org.glow.storage.SpellBook;
-import org.glow.location.region.mondstadt.Mondstadt;
+import org.glow.map.regions.mondstadt.Mondstadt;
 
 public class Player extends Person {
 

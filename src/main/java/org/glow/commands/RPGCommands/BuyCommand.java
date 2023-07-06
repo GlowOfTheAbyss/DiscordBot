@@ -2,10 +2,10 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
-import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.SchulzsBlacksmith;
-import org.glow.location.region.mondstadt.subareas.actions.BuyInFavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.actions.BuyInSchulzsBlacksmith;
+import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
+import org.glow.map.regions.mondstadt.subRegions.SchulzsBlacksmith;
+import org.glow.map.regions.mondstadt.subRegions.actions.BuyInFavoniusCathedral;
+import org.glow.map.regions.mondstadt.subRegions.actions.BuyInSchulzsBlacksmith;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 

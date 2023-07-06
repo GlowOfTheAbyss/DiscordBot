@@ -1,12 +1,11 @@
-package org.glow.location.region.mondstadt.subareas.actions;
+package org.glow.map.regions.mondstadt.subRegions.actions;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.Main;
 import org.glow.commands.RPGCommands.BuyCommand;
 import org.glow.fileManager.Save;
-import org.glow.location.Action;
-import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
+import org.glow.map.location.action.Action;
+import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
 import org.glow.magic.Spell;
 import org.glow.magic.spells.Dawn;
 import org.glow.magic.spells.ShiningMiracle;

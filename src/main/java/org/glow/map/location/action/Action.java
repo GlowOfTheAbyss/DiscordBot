@@ -1,4 +1,4 @@
-package org.glow.location;
+package org.glow.map.location.action;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;

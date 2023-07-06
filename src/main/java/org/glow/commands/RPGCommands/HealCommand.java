@@ -2,8 +2,8 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
-import org.glow.location.region.mondstadt.subareas.FavoniusCathedral;
-import org.glow.location.region.mondstadt.subareas.actions.HealFavoniusCathedral;
+import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
+import org.glow.map.regions.mondstadt.subRegions.actions.HealFavoniusCathedral;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 

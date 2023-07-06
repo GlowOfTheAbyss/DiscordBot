@@ -1,8 +1,7 @@
-package org.glow.location.region.liyue.subareas;
+package org.glow.map.regions.liyue.subRegions;
 
-import org.glow.location.Region;
-import org.glow.location.region.liyue.Liyue;
-import org.glow.location.region.liyue.subareas.actions.DigOnMtTianheng;
+import org.glow.map.regions.Region;
+import org.glow.map.regions.liyue.subRegions.actions.DigOnMtTianheng;
 
 import java.util.Set;
 
