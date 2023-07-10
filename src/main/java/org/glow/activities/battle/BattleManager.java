@@ -1,8 +1,7 @@
-package org.glow.actions.battle;
+package org.glow.activities.battle;
 
 import discord4j.core.object.entity.Message;
 import org.glow.person.Person;
-import org.glow.person.Player;
 
 import java.util.ArrayList;
 import java.util.List;
