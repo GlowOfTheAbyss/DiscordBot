@@ -1,7 +1,6 @@
 package org.glow.map.location.action;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.person.Player;
 
 public abstract class Action implements LaunchedAction {
@@ -10,7 +9,7 @@ public abstract class Action implements LaunchedAction {
     private Player player;
 
     private String name;
-    private String desctiption;
+    private String description;
 
     public Action(Message message, Player player) {
         this.message = message;
@@ -41,31 +40,12 @@ public abstract class Action implements LaunchedAction {
         this.name = name;
     }
 
-    public String getDesctiption() {
-        return desctiption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesctiption(String desctiption) {
-        this.desctiption = desctiption;
-    }
-
-    protected void sendMessageInChannel(String title) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(title);
-        getMessage().getChannel().block().createMessage(builder.build()).block();
-        getMessage().delete().block();
-
-    }
-
-    protected void sendMessageInChannel(String title, String description) {
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-        builder.title(title);
-        builder.description(description);
-        getMessage().getChannel().block().createMessage(builder.build()).block();
-        getMessage().delete().block();
-
+    public void setDescription(String description) {
+        this.description = description;
     }
     
 }
