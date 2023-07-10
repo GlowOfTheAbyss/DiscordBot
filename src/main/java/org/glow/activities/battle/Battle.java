@@ -1,4 +1,4 @@
-package org.glow.actions.battle;
+package org.glow.activities.battle;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
