@@ -9,6 +9,7 @@ import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
 import org.glow.magic.Spell;
 import org.glow.magic.spells.Dawn;
 import org.glow.magic.spells.ShiningMiracle;
+import org.glow.message.MessageSender;
 import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
@@ -22,7 +23,7 @@ public class BuyInFavoniusCathedral extends Action {
     public BuyInFavoniusCathedral(Message message, Player player) {
         super(message, player);
         setName(Main.systems.commandPrefix + BuyCommand.getBuyCommand().getName());
-        setDesctiption("Купить заклинание");
+        setDescription("Купить заклинание");
     }
 
     @Override
@@ -51,7 +52,7 @@ public class BuyInFavoniusCathedral extends Action {
                 %s | %s маны | %s моры
                 """;
 
-        sendMessageInChannel(FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
                 shopSpellList.get(0).getSpellName(), shopSpellList.get(0).getCoastInMana(), shopSpellList.get(0).getPrice(),
                 shopSpellList.get(1).getSpellName(), shopSpellList.get(1).getCoastInMana(), shopSpellList.get(1).getPrice()));
 
@@ -68,25 +69,25 @@ public class BuyInFavoniusCathedral extends Action {
             }
         }
 
-        sendMessageInChannel("Заклинание " + wantToBuyProductName + " не найдено");
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), "Заклинание " + wantToBuyProductName + " не найдено");
 
     }
 
     private void spellFind(Spell spell) {
 
         if (getPlayer().getCoins() < spell.getPrice()) {
-            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", у вас недостаточно моры");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + ", у вас недостаточно моры");
             return;
         }
 
         if (getPlayer().getSpellBook().getListSpell().size() == getPlayer().getSpellBook().getListSpellSize()) {
-            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", ваша книга заклинаний заполнена");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + ", ваша книга заклинаний заполнена");
             return;
         }
 
         for (Spell famousSpell : getPlayer().getSpellBook().getListSpell()) {
             if (famousSpell.getSpellName().equals(spell.getSpellName())) {
-                sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + ", вы уже владеете данным заклинанием");
+                MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + ", вы уже владеете данным заклинанием");
                 return;
             }
         }
@@ -96,7 +97,7 @@ public class BuyInFavoniusCathedral extends Action {
         Save.getSave().saveFile(getPlayer());
 
         String title = (PersonManager.getInstance().getPersonName(getPlayer()) + ", вы приобрели " + spell.getSpellName());
-        sendMessageInChannel(title, TextManager.getInstance().getPlayerParameters(getPlayer()));
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
     }
 
