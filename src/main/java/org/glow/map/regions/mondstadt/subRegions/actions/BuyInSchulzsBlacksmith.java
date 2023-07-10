@@ -20,9 +20,7 @@ import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.map.location.action.Action;
 import org.glow.map.regions.mondstadt.subRegions.SchulzsBlacksmith;
-import org.glow.message.Characteristic;
-import org.glow.message.Parameters;
-import org.glow.message.TextManager;
+import org.glow.message.*;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -39,7 +37,7 @@ public class BuyInSchulzsBlacksmith extends Action {
     public BuyInSchulzsBlacksmith(Message message, Player player) {
         super(message, player);
         setName(Main.systems.commandPrefix + BuyCommand.getBuyCommand().getName());
-        setDesctiption("Купить оружие или броню");
+        setDescription("Купить оружие или броню");
     }
 
     @Override
@@ -82,21 +80,21 @@ public class BuyInSchulzsBlacksmith extends Action {
                 """;
 
         description = String.format(description,
-                shopWeaponList.get(0).getName(), shopWeaponList.get(0).getAttack(), Characteristic.ATTACK.getName(), shopWeaponList.get(0).getPrice(), Parameters.COINS.getName(),
-                shopWeaponList.get(1).getName(), shopWeaponList.get(1).getAttack(), Characteristic.ATTACK.getName(), shopWeaponList.get(1).getPrice(), Parameters.COINS.getName(),
+                shopWeaponList.get(0).getName(), shopWeaponList.get(0).getAttack(), Equipment.ATTACK.getName(), shopWeaponList.get(0).getPrice(), Parameters.COINS.getName(),
+                shopWeaponList.get(1).getName(), shopWeaponList.get(1).getAttack(), Equipment.ATTACK.getName(), shopWeaponList.get(1).getPrice(), Parameters.COINS.getName(),
 
-                shopShieldList.get(0).getName(), shopShieldList.get(0).getArmor(), Characteristic.DEFEND.getName(), shopShieldList.get(0).getPrice(), Parameters.COINS.getName(),
-                shopShieldList.get(1).getName(), shopShieldList.get(1).getArmor(), Characteristic.DEFEND.getName(), shopShieldList.get(1).getPrice(), Parameters.COINS.getName(),
+                shopShieldList.get(0).getName(), shopShieldList.get(0).getArmor(), Equipment.DEFEND.getName(), shopShieldList.get(0).getPrice(), Parameters.COINS.getName(),
+                shopShieldList.get(1).getName(), shopShieldList.get(1).getArmor(), Equipment.DEFEND.getName(), shopShieldList.get(1).getPrice(), Parameters.COINS.getName(),
 
-                shopArmorList.get(0).getName(), shopArmorList.get(0).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(0).getPrice(), Parameters.COINS.getName(),
-                shopArmorList.get(1).getName(), shopArmorList.get(1).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(1).getPrice(), Parameters.COINS.getName(),
-                shopArmorList.get(2).getName(), shopArmorList.get(2).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(2).getPrice(), Parameters.COINS.getName(),
+                shopArmorList.get(0).getName(), shopArmorList.get(0).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(0).getPrice(), Parameters.COINS.getName(),
+                shopArmorList.get(1).getName(), shopArmorList.get(1).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(1).getPrice(), Parameters.COINS.getName(),
+                shopArmorList.get(2).getName(), shopArmorList.get(2).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(2).getPrice(), Parameters.COINS.getName(),
 
-                shopArmorList.get(3).getName(), shopArmorList.get(3).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(3).getPrice(), Parameters.COINS.getName(),
-                shopArmorList.get(4).getName(), shopArmorList.get(4).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(4).getPrice(), Parameters.COINS.getName(),
-                shopArmorList.get(5).getName(), shopArmorList.get(5).getArmor(), Characteristic.DEFEND.getName(), shopArmorList.get(5).getPrice(), Parameters.COINS.getName());
+                shopArmorList.get(3).getName(), shopArmorList.get(3).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(3).getPrice(), Parameters.COINS.getName(),
+                shopArmorList.get(4).getName(), shopArmorList.get(4).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(4).getPrice(), Parameters.COINS.getName(),
+                shopArmorList.get(5).getName(), shopArmorList.get(5).getArmor(), Equipment.DEFEND.getName(), shopArmorList.get(5).getPrice(), Parameters.COINS.getName());
 
-        sendMessageInChannel(SchulzsBlacksmith.getSchulzsBlacksmith().getName(), description);
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), SchulzsBlacksmith.getSchulzsBlacksmith().getName(), description);
     }
 
     private void buyProduct(String wantToBuyProductName) {
@@ -115,19 +113,19 @@ public class BuyInSchulzsBlacksmith extends Action {
 
         }
 
-        sendMessageInChannel("Предмет " + wantToBuyProductName + " не найден");
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), "Предмет " + wantToBuyProductName + " не найден");
 
     }
 
     private void itemFind(Item item) {
 
         if (getPlayer().getCoins() < item.getPrice()) {
-            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + " у вас недостаточно :pig2:");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + " у вас недостаточно :pig2:");
             return;
         }
 
         if (getPlayer().getInventory().getBag().size() == getPlayer().getInventory().getBagSize()) {
-            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + " ваша сумка заполнена");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + " ваша сумка заполнена");
             return;
         }
 
@@ -136,7 +134,7 @@ public class BuyInSchulzsBlacksmith extends Action {
         Save.getSave().saveFile(getPlayer());
 
         String title = (PersonManager.getInstance().getPersonName(getPlayer()) + ", вы приобрели " + item.getName());
-        sendMessageInChannel(title, TextManager.getInstance().getPlayerParameters(getPlayer()));
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
     }
 
