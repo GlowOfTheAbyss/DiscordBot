@@ -19,4 +19,14 @@ public class Legs extends Armor {
         }
 
     }
+
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        Legs legs = inventory.getLegs();
+        inventory.setLegs(new NoneLegs());
+
+        inventory.getBag().add(legs);
+
+    }
 }

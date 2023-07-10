@@ -18,4 +18,14 @@ public class RightHand extends Weapon {
         }
 
     }
+
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        RightHand rightHand = inventory.getRightHand();
+        inventory.setRightHand(new NoneRightHand());
+
+        inventory.getBag().add(rightHand);
+
+    }
 }

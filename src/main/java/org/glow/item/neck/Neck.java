@@ -19,4 +19,14 @@ public class Neck extends Item {
         }
 
     }
+
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        Neck neck = inventory.getNeck();
+        inventory.setNeck(new NoneNeck());
+
+        inventory.getBag().add(neck);
+
+    }
 }

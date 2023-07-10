@@ -19,4 +19,13 @@ public class LeftHand extends Shield {
 
     }
 
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        LeftHand leftHand = inventory.getLeftHand();
+        inventory.setLeftHand(leftHand);
+
+        inventory.getBag().add(leftHand);
+
+    }
 }

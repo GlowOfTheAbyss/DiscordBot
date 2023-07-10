@@ -19,4 +19,14 @@ public class Head extends Armor {
         }
 
     }
+
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        Head head = inventory.getHead();
+        inventory.setHead(new NoneHead());
+
+        inventory.getBag().add(head);
+
+    }
 }

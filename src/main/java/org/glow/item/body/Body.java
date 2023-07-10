@@ -20,4 +20,14 @@ public class Body extends Armor {
 
     }
 
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        Body body = inventory.getBody();
+        inventory.setBody(new NoneBody());
+
+        inventory.getBag().add(body);
+
+    }
+
 }
