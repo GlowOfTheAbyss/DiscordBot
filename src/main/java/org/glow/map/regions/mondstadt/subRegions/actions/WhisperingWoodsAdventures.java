@@ -2,11 +2,14 @@ package org.glow.map.regions.mondstadt.subRegions.actions;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.actions.battle.BattleManager;
-import org.glow.actions.chests.CommonChest;
-import org.glow.actions.chests.ExquisiteChest;
+import org.glow.Main;
+import org.glow.activities.battle.BattleManager;
+import org.glow.activities.chests.CommonChest;
+import org.glow.activities.chests.ExquisiteChest;
+import org.glow.commands.RPGCommands.GoCommand;
+import org.glow.fileManager.Save;
 import org.glow.map.location.action.Action;
-import org.glow.person.NPC;
+import org.glow.person.npc.NPC;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 import org.glow.person.npc.hilichurl.Hilichurl;
@@ -22,11 +25,15 @@ public class WhisperingWoodsAdventures extends Action {
 
     public WhisperingWoodsAdventures(Message message, Player player) {
         super(message, player);
-        setName("Отправиться на поиски монстров | !go");
+        setName(Main.systems.commandPrefix + GoCommand.getGoCommand().getName());
+        setDescription("отправиться на поиски монстров");
     }
 
     @Override
     public void startAction() {
+
+        getPlayer().setEnergy(getPlayer().getEnergy() - 1);
+        Save.getSave().saveFile(getPlayer());
 
         int random = new Random().nextInt(101);
         int chestChance = 1 + ((int) (0.5 * getPlayer().getLuck()));
