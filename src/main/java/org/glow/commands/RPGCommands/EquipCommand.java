@@ -1,10 +1,11 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.item.Item;
+import org.glow.message.MessageSender;
 import org.glow.person.Player;
 import org.glow.storage.InventoryManager;
 
@@ -14,43 +15,38 @@ public class EquipCommand extends Command {
 
     private EquipCommand() {
         setName("equip");
-        setInfo("""
+        String info = """
                 команда для экиперовки предмета из инвентаря
-                !equip [название предмета]
-                """);
+                %s%s [название предмета]
+                """;
+        setInfo(String.format(info,
+                Main.systems.commandPrefix, getName()));
     }
 
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
-
-        if (playerInBattle(player, message)) {
-            return;
-        }
-
-        String equipItemName = message.getContent().replaceFirst("!equip ", "");
-
         try {
 
+            Player player = userToPlayer(message);
+
+            if (playerInBattle(player)) {
+                MessageSender.getInstance().sendMessageInChannel(message, "Находясь в битве нельзя это использовать");
+                return;
+            }
+
+            String equipItemName = message.getContent().replaceFirst("!equip ", "");
             Item item = InventoryManager.getInstance().findUnequippedItem(player.getInventory(), equipItemName);
 
             player.getInventory().getBag().remove(item);
             item.equipItem(player.getInventory());
             Save.getSave().saveFile(player);
 
-            EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-            builder.title("Вы экипировали " + item.getName());
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
+            String title = "Вы экипировали " + item.getName();
+            MessageSender.getInstance().sendMessageInChannel(message, title);
 
-        } catch (RuntimeException exception) {
-
-            sendMessageInChanel(message, exception.getMessage());
-
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
 
     }
