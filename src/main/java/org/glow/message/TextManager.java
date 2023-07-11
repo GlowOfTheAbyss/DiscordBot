@@ -2,6 +2,8 @@ package org.glow.message;
 
 import org.glow.item.Item;
 import org.glow.magic.Spell;
+import org.glow.person.Person;
+import org.glow.person.PersonManager;
 import org.glow.person.Player;
 import org.glow.storage.InventoryManager;
 
@@ -119,6 +121,19 @@ public class TextManager {
         }
 
         return stringBuilder.toString();
+
+    }
+
+    public String getBattleParameters(Person attacker, Person defender) {
+
+        String description = """
+                %s %s: %s
+                %s %s: %s
+                """;
+
+        return String.format(description,
+                PersonManager.getInstance().getPersonName(attacker), Parameters.HEALTH, attacker.getHealth(),
+                PersonManager.getInstance().getPersonName(defender), Parameters.HEALTH, defender.getHealth());
 
     }
 
