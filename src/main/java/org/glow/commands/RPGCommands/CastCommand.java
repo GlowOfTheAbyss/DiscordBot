@@ -1,11 +1,12 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.magic.Spell;
 import org.glow.magic.SpellManager;
+import org.glow.message.MessageSender;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -15,63 +16,39 @@ public class CastCommand extends Command {
 
     private CastCommand() {
         setName("cast");
-        setInfo("""
+        String info = """
                 комманда для использования извесных вам заклинаний
-                !cast - показывает извесные вам заклинания
-                !cast [название заклинания] [цель заклинания]
-                """);
+                %s%s - показывает извесные вам заклинания
+                %s%s [название заклинания] [цель заклинания]
+                """;
+        setInfo(String.format(info,
+                Main.systems.commandPrefix, getName(),
+                Main.systems.commandPrefix, getName()));
     }
 
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
+        try {
 
-        if (message.getContent().split(" ").length == 1) {
+            Player player = userToPlayer(message);
 
-            showSpellBook(message, player);
+            if (message.getContent().split(" ").length == 1) {
+                showSpellBook(message, player);
+            } else {
+                castSpell(message, player);
+            }
 
-        } else {
-
-            castSpell(message, player);
-
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
 
     }
 
     private void showSpellBook(Message message, Player player) {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        builder.title("Книга заклинаний " + PersonManager.getInstance().getPersonName(player));
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if (player.getSpellBook().getListSpell().isEmpty()) {
-
-            stringBuilder.append("Пусто");
-
-        } else {
-
-            for (Spell spell : player.getSpellBook().getListSpell()) {
-
-                stringBuilder.append(spell.getSpellName())
-                        .append(" | ")
-                        .append(spell.getCoastInMana())
-                        .append(" мана")
-                        .append("\n");
-
-            }
-
-        }
-
-        builder.description(stringBuilder.toString());
-
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        String title = "Книга заклинаний " + PersonManager.getInstance().getPersonName(player);
+        MessageSender.getInstance().sendMessageInChannel(message, title, TextManager.getInstance().getPlayerSkillBook(player));
 
     }
 
@@ -82,9 +59,9 @@ public class CastCommand extends Command {
             Spell spell = findSpell(message);
             spell.cast(message, player);
 
-        } catch (RuntimeException exception) {
+        } catch (IllegalArgumentException exception) {
 
-            sendMessageInChanel(message, exception.getMessage());
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
 
         }
 
@@ -96,16 +73,12 @@ public class CastCommand extends Command {
                 .replaceFirst(Main.systems.commandPrefix + castCommand.getName(), "");
 
         for (Spell spell : SpellManager.getInstance().getMagicList()) {
-
             if (croppedMessage.contains(spell.getSpellName())) {
-
                 return spell;
-
             }
-
         }
 
-        throw new RuntimeException("Spell " + croppedMessage + " not found");
+        throw new IllegalArgumentException("Заклинание " + croppedMessage + " не найдено");
 
     }
 
