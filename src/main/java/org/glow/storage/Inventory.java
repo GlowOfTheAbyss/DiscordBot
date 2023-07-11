@@ -29,8 +29,7 @@ public class Inventory {
     private LeftHand leftHand;
 
     private Neck neck;
-    private Finger rightFinger;
-    private Finger leftFinger;
+    private Finger finger;
 
     private List<Item> bag = new ArrayList<>();
     private int bagSize;
@@ -44,8 +43,7 @@ public class Inventory {
         this.leftHand = new NoneLeftHand();
 
         this.neck = new NoneNeck();
-        this.rightFinger = new NoneFinger();
-        this.leftFinger = new NoneFinger();
+        this.finger = new NoneFinger();
 
         this.bagSize = 10;
 
@@ -99,20 +97,12 @@ public class Inventory {
         this.neck = neck;
     }
 
-    public Finger getRightFinger() {
-        return rightFinger;
+    public Finger getFinger() {
+        return finger;
     }
 
-    public void setRightFinger(Finger rightFinger) {
-        this.rightFinger = rightFinger;
-    }
-
-    public Finger getLeftFinger() {
-        return leftFinger;
-    }
-
-    public void setLeftFinger(Finger leftFinger) {
-        this.leftFinger = leftFinger;
+    public void setFinger(Finger finger) {
+        this.finger = finger;
     }
 
     public List<Item> getBag() {
