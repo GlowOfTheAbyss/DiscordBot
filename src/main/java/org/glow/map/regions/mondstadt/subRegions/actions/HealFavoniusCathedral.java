@@ -6,6 +6,7 @@ import org.glow.commands.RPGCommands.HealCommand;
 import org.glow.fileManager.Save;
 import org.glow.map.location.action.Action;
 import org.glow.map.regions.mondstadt.subRegions.FavoniusCathedral;
+import org.glow.message.MessageSender;
 import org.glow.message.Parameters;
 import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
@@ -16,7 +17,7 @@ public class HealFavoniusCathedral extends Action {
     public HealFavoniusCathedral(Message message, Player player) {
         super(message, player);
         setName(Main.systems.commandPrefix + HealCommand.getHealCommand().getName());
-        setDesctiption("Востановить здоровье за мору");
+        setDescription("Востановить здоровье за мору");
     }
 
     @Override
@@ -42,7 +43,7 @@ public class HealFavoniusCathedral extends Action {
                 %s %s = %s %s
                 """;
 
-        sendMessageInChannel(FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
                 10, Parameters.COINS, 10, Parameters.HEALTH));
 
     }
@@ -50,7 +51,8 @@ public class HealFavoniusCathedral extends Action {
     private void heal() {
 
         if (getMessage().getContent().split(" ").length != 2) {
-            sendMessageInChannel("""
+            MessageSender.getInstance().sendMessageInChannel(getMessage(),
+                    """
                     Неверное количество аргументов
                     Ожидается что будет: !heal [число]
                     """);
@@ -61,12 +63,12 @@ public class HealFavoniusCathedral extends Action {
         try {
             healCoast = Integer.parseInt(getMessage().getContent().split(" ")[1]);
         } catch (NumberFormatException exception) {
-            sendMessageInChannel("Не найдено число");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), "Не найдено число");
             return;
         }
 
         if (getPlayer().getCoins() < healCoast) {
-            sendMessageInChannel(PersonManager.getInstance().getPersonName(getPlayer()) + " у вас недостаточно моры");
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), PersonManager.getInstance().getPersonName(getPlayer()) + " у вас недостаточно моры");
             return;
         }
 
@@ -78,7 +80,7 @@ public class HealFavoniusCathedral extends Action {
         Save.getSave().saveFile(getPlayer());
 
         String title = PersonManager.getInstance().getPersonName(getPlayer()) + " востановил " + healCoast + " поинтов здоровья";
-        sendMessageInChannel(title, TextManager.getInstance().getPlayerParameters(getPlayer()));
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
     }
 
