@@ -1,7 +1,7 @@
 package org.glow.person.npc.hilichurl;
 
 import org.glow.magic.Element;
-import org.glow.person.NPC;
+import org.glow.person.npc.NPC;
 import org.glow.storage.Inventory;
 import org.glow.storage.SpellBook;
 

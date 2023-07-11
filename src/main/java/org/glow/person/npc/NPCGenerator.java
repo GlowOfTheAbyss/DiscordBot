@@ -1,7 +1,5 @@
 package org.glow.person.npc;
 
-import org.glow.person.NPC;
-
 import java.util.Random;
 
 public class NPCGenerator {

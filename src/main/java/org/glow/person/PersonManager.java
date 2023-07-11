@@ -5,6 +5,7 @@ import org.glow.Main;
 import org.glow.map.location.Location;
 import org.glow.map.location.LocationManager;
 import org.glow.map.regions.Region;
+import org.glow.person.npc.NPC;
 
 import java.util.ArrayList;
 import java.util.List;

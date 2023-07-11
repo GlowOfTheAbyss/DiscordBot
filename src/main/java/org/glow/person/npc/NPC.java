@@ -1,6 +1,7 @@
-package org.glow.person;
+package org.glow.person.npc;
 
 import org.glow.magic.Element;
+import org.glow.person.Person;
 
 public abstract class NPC extends Person {
 
