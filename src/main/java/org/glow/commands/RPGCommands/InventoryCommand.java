@@ -1,12 +1,11 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
-import org.glow.item.Item;
+import org.glow.message.MessageSender;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
-import org.glow.storage.InventoryManager;
 
 public class InventoryCommand extends Command {
 
@@ -22,42 +21,27 @@ public class InventoryCommand extends Command {
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
+        try {
+
+            Player player = userToPlayer(message);
+
+            String title = "Инвентарь " + PersonManager.getInstance().getPersonName(player);
+
+            String description = """
+                    %s
+                    
+                    %s
+                    """;
+
+            description = String.format(description,
+                    TextManager.getInstance().getPlayerEquippedItems(player),
+                    TextManager.getInstance().getPlayerInventory(player));
+
+            MessageSender.getInstance().sendMessageInChannel(message, title, description);
+
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        builder.title("Инвентарь " + PersonManager.getInstance().getPersonName(player));
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Сумка: ");
-
-        if (player.getInventory().getBag().isEmpty()) {
-            stringBuilder.append("Пусто");
-        } else {
-            for (Item items : player.getInventory().getBag()) {
-                stringBuilder.append(items.getName()).append(" ");
-            }
-        }
-
-        builder.description("Броня: " + InventoryManager.getInstance().getArmor(player.getInventory()) + "\n"
-                + "Атака: " + InventoryManager.getInstance().getAttack(player.getInventory()) + "\n" + "\n"
-
-                + "Голова: " + player.getInventory().getHead().getName() + "\n"
-                + "Тело: " + player.getInventory().getBody().getName() + "\n"
-                + "Ноги: " + player.getInventory().getLegs().getName() + "\n"
-                + "Правая рука: " + player.getInventory().getRightHand().getName() + "\n"
-                + "Левая рука: " + player.getInventory().getLeftHand().getName() + "\n" + "\n"
-
-                + "Шея: " + player.getInventory().getNeck().getName() + "\n"
-                + "Палец правой руки: " + player.getInventory().getRightFinger().getName() + "\n"
-                + "Палец левой руки: " + player.getInventory().getLeftFinger().getName() + "\n" + "\n"
-
-                + stringBuilder);
-
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
 
     }
 
