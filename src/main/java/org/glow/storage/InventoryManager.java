@@ -15,7 +15,7 @@ public class InventoryManager {
     public List<Item> getEquippedItems(Inventory inventory) {
         return List.of(inventory.getHead(), inventory.getBody(), inventory.getLegs(),
                 inventory.getRightHand(), inventory.getLeftHand(), inventory.getNeck(),
-                inventory.getRightFinger(), inventory.getLeftFinger());
+                inventory.getFinger());
     }
 
     public int getArmor(Inventory inventory) {
@@ -34,16 +34,12 @@ public class InventoryManager {
     public Item findUnequippedItem(Inventory inventory, String itemName) {
 
         for (Item item : inventory.getBag()) {
-
             if (item.getName().equalsIgnoreCase(itemName)) {
-
                 return item;
-
             }
-
         }
 
-        throw new RuntimeException("Item " + itemName + " not found");
+        throw new IllegalArgumentException("Предмет " + itemName + " не найден");
 
     }
 
