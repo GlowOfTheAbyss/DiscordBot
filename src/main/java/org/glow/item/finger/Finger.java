@@ -8,22 +8,25 @@ public class Finger extends Item {
     @Override
     public void equipItem(Inventory inventory) {
 
-        Finger leftFinger = inventory.getLeftFinger();
-        Finger rightFinger = inventory.getRightFinger();
+        Finger finger = inventory.getFinger();
 
-        inventory.setLeftFinger(this);
+        inventory.setFinger(this);
 
-        if (!(leftFinger instanceof NoneFinger)) {
+        if (!(finger instanceof NoneFinger)) {
 
-            inventory.setRightFinger(leftFinger);
-
-            if (!(rightFinger instanceof NoneFinger)) {
-
-                inventory.getBag().add(rightFinger);
-
-            }
+            inventory.getBag().add(finger);
 
         }
+
+    }
+
+    @Override
+    public void unequipItem(Inventory inventory) {
+
+        Finger finger = inventory.getFinger();
+        inventory.setFinger(new NoneFinger());
+
+        inventory.getBag().add(finger);
 
     }
 }
