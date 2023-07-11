@@ -2,9 +2,9 @@ package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
 import org.glow.commands.Command;
-import org.glow.fileManager.Save;
 import org.glow.map.regions.mondstadt.subRegions.WhisperingWoods;
 import org.glow.map.regions.mondstadt.subRegions.actions.WhisperingWoodsAdventures;
+import org.glow.message.MessageSender;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -22,26 +22,25 @@ public class GoCommand extends Command {
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
+        try {
+            Player player = userToPlayer(message);
 
-        if (playerInBattle(player, message)) {
-            return;
-        }
+            if (playerInBattle(player)) {
+                MessageSender.getInstance().sendMessageInChannel(message, "Находясь в битве нельзя это использовать");
+                return;
+            }
 
-        if (player.getEnergy() <= 0) {
-            notEnoughEnergyMessage(message);
-            return;
-        }
+            if (player.getEnergy() <= 0) {
+                MessageSender.getInstance().sendMessageInChannel(message, "Не достаточно энергии");
+                return;
+            }
 
-        if (PersonManager.getInstance().getPlayerRegion(player) instanceof WhisperingWoods) {
+            if (PersonManager.getInstance().getPlayerRegion(player) instanceof WhisperingWoods) {
+                new WhisperingWoodsAdventures(message, player).startAction();
+            }
 
-            player.setEnergy(player.getEnergy() - 1);
-            Save.getSave().saveFile(player);
-
-            new WhisperingWoodsAdventures(message, player).startAction();
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
 
     }

@@ -1,8 +1,9 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.Command;
+import org.glow.message.MessageSender;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -20,33 +21,34 @@ public class StatsCommand extends Command {
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
+        try {
+
+            Player player = userToPlayer(message);
+
+            String title = PersonManager.getInstance().getPersonName(player);
+            String description = """
+                    Локация: %s
+                    
+                    %s
+                    
+                    Уровень: %s
+                    Боевой уровень: %s
+                    
+                    %s
+                    """;
+            description = String.format(description,
+                    player.getLocationName(),
+                    TextManager.getInstance().getPlayerParameters(player),
+                    PersonManager.getInstance().getPersonLevel(player),
+                    PersonManager.getInstance().getPersonCombatLevel(player),
+                    TextManager.getInstance().getPlayerCharacteristic(player));
+
+            MessageSender.getInstance().sendMessageInChannel(message, title, description);
+
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        builder.title(PersonManager.getInstance().getPersonName(player));
-        builder.description("Локация: " + player.getLocationName() + "\n" + "\n"
-
-                + "Мора " + player.getCoins() + "\n"
-                + "Энергия: " + player.getEnergy() + "\n"
-                + "Здоровье: " + player.getHealth() + "\n"
-                + "Мана: " + player.getMana() + "\n" + "\n"
-
-                + "Уровень: " + PersonManager.getInstance().getPersonLevel(player) + "\n"
-                + "Боевой уровень: " + PersonManager.getInstance().getPersonCombatLevel(player) + "\n" + "\n"
-
-                + "Сила: " + player.getStrength() + "\n"
-                + "Выносливость: " + player.getEndurance() + "\n"
-                + "Ловкость: " + player.getAgility() + "\n"
-                + "Интеллект: " + player.getIntelligence() + "\n"
-                + "Внимание: " + player.getPerception() + "\n"
-                + "Удача: " + player.getLuck() + "\n");
-
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
     }
 
     public static StatsCommand getStatsCommand() {

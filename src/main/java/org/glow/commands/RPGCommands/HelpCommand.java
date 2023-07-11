@@ -1,11 +1,10 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
 import org.glow.commands.CommandReader;
 import org.glow.Main;
 import org.glow.commands.Command;
-import org.glow.person.Player;
+import org.glow.message.MessageSender;
 
 public class HelpCommand extends Command {
 
@@ -22,37 +21,23 @@ public class HelpCommand extends Command {
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
-
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
-        builder.title("Список существующих команд");
+        String title = "Список существующих команд";
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(Main.systems.commandPrefix)
-                .append(" префикс для всех комманд")
-                .append("\n\n");
-
         for (Command command : CommandReader.getCommandReader().getCommandList()) {
-
             if (command instanceof HelpCommand) {
                 continue;
             }
 
-            stringBuilder.append(command.getName())
+            stringBuilder.append(Main.systems.commandPrefix)
+                    .append(command.getName())
                     .append(" : ")
                     .append(command.getInfo())
                     .append("\n\n");
-
         }
 
-        builder.description(stringBuilder.toString());
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        MessageSender.getInstance().sendMessageInChannel(message, title, stringBuilder.toString());
 
     }
 

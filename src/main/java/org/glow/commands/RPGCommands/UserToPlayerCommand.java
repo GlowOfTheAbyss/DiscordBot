@@ -1,9 +1,10 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
+import org.glow.message.MessageSender;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -21,24 +22,24 @@ public class UserToPlayerCommand extends Command {
     @Override
     public void start(Message message) {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
-
         for (Player player : PersonManager.getInstance().getPlayers()) {
-            if (player.getSnowflake().equals(message.getAuthor().get().getId())) {
-                builder.title("Такой игрок уже существует");
-                message.getChannel().block().createMessage(builder.build()).block();
-                message.delete().block();
-                return;
+
+            if (PersonManager.getInstance().getPlayerSnowflake(player).equals(message.getAuthor().get().getId())) {
+                MessageSender.getInstance().sendMessageInChannel(message, "Такой игрок уже существует");
             }
+
         }
 
-        Player newPlayer = new Player(message.getAuthor().get().getId());
-        Save.getSave().saveFile(newPlayer);
+        Player player = new Player(message.getAuthor().get().getId());
+        Save.getSave().saveFile(player);
 
-        builder.title("Игрок: " + PersonManager.getInstance().getPersonName(newPlayer) + " успешно создан");
-        builder.description("Используй !help");
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
+        String title = "Игрок: " + PersonManager.getInstance().getPersonName(player) + " успешно создан";
+        String description = """
+                Используй команду %s%s
+                """;
+        description = String.format(description, Main.systems.commandPrefix, HelpCommand.getHelpCommand().getName());
+
+        MessageSender.getInstance().sendMessageInChannel(message, title, description);
 
     }
 

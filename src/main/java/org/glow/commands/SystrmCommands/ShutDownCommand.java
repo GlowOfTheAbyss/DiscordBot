@@ -1,9 +1,8 @@
 package org.glow.commands.SystrmCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.Main;
 import org.glow.commands.Command;
+import org.glow.message.MessageSender;
 import org.glow.person.Player;
 
 import java.util.concurrent.TimeUnit;
@@ -22,35 +21,32 @@ public class ShutDownCommand extends Command {
     @Override
     public void start(Message message) {
 
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
+        try {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+            Player player = userToPlayer(message);
 
-        if (isNotAdmin(player)) {
-            builder.title("У вас нет прав для этой команды");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
-            return;
-        }
-
-        for (int i = 15; i > 0; i = i - 5) {
-            builder.title("Бот выключиться через " + i + " минут");
-            message.getChannel().block().createMessage(builder.build()).block();
-
-            try {
-                TimeUnit.MINUTES.sleep(5);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            if (isNotAdmin(player)) {
+                MessageSender.getInstance().sendMessageInChannel(message, "У вас нет прав для этой команды");
             }
+
+            int allMinutes = 15;
+            int intervalOfMinutes = 5;
+
+            for (int i = allMinutes; i > 0; i = i - intervalOfMinutes) {
+
+                MessageSender.getInstance().sendMessageInChannel(message, "Бот выключиться через " + i + " минут");
+
+                TimeUnit.MINUTES.sleep(5);
+
+            }
+
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
+        } catch (InterruptedException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, "Ошибка во время сна таймера");
         }
 
-        builder.title("Выключаюсь");
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
-        Main.systems.gateway.logout().block();
+        MessageSender.getInstance().sendMessageInChannel(message, "Засыпаю");
 
     }
 
