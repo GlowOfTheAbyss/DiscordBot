@@ -1,7 +1,5 @@
 package org.glow.message;
 
-import org.glow.person.Player;
-
 public enum Characteristic {
 
     STRENGTH("Сила"),
@@ -9,10 +7,7 @@ public enum Characteristic {
     AGILITY("Ловкость"),
     INTELLIGENCE("Интеллект"),
     PERCEPTION("Внимание"),
-    LUCK("Удача"),
-
-    ATTACK("Атака"),
-    DEFEND("Защита");
+    LUCK("Удача");
 
     private final String name;
 
@@ -23,4 +18,5 @@ public enum Characteristic {
     public String getName() {
         return name;
     }
+
 }
