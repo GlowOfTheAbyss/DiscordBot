@@ -1,4 +1,4 @@
-package org.glow.actions.chests;
+package org.glow.activities.chests;
 
 import discord4j.core.object.entity.Message;
 import org.glow.fileManager.Save;

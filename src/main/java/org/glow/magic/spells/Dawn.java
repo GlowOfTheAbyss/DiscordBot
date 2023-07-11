@@ -2,8 +2,8 @@ package org.glow.magic.spells;
 
 import discord4j.core.object.entity.Message;
 import discord4j.core.spec.EmbedCreateSpec;
-import org.glow.actions.battle.Battle;
-import org.glow.actions.battle.BattleManager;
+import org.glow.activities.battle.Battle;
+import org.glow.activities.battle.BattleManager;
 import org.glow.fileManager.Save;
 import org.glow.magic.Element;
 import org.glow.magic.Spell;
