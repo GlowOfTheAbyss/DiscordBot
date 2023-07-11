@@ -1,29 +1,14 @@
 package org.glow.commands.RPGCommands;
 
 import discord4j.core.object.entity.Message;
-import discord4j.core.spec.EmbedCreateSpec;
+import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
 import org.glow.item.Item;
-import org.glow.item.body.Body;
-import org.glow.item.body.NoneBody;
-import org.glow.item.finger.Finger;
-import org.glow.item.finger.NoneFinger;
-import org.glow.item.head.Head;
-import org.glow.item.head.NoneHead;
-import org.glow.item.lefthand.LeftHand;
-import org.glow.item.lefthand.NoneLeftHand;
-import org.glow.item.legs.Legs;
-import org.glow.item.legs.NoneLegs;
-import org.glow.item.neck.Neck;
-import org.glow.item.neck.NoneNeck;
-import org.glow.item.righthand.NoneRightHand;
-import org.glow.item.righthand.RightHand;
+import org.glow.message.MessageSender;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 import org.glow.storage.InventoryManager;
-
-import java.util.List;
 
 public class TakeOffCommand extends Command {
 
@@ -31,81 +16,42 @@ public class TakeOffCommand extends Command {
 
     private TakeOffCommand() {
         setName("take_off");
-        setInfo("""
+        String info = """
                 команда для снятия экипированного предмета в инвентарь
-                !take_off [имя предмета который необходимо снять]
-                """);
+                %s%s [имя предмета который необходимо снять]
+                """;
+        setInfo(String.format(info,
+                Main.systems.commandPrefix, getName()));
     }
 
     @Override
     public void start(Message message) {
-        Player player = userToPlayer(message);
-        if (player == null) {
-            return;
-        }
 
-        if (playerInBattle(player, message)) {
-            return;
-        }
+        try {
 
-        EmbedCreateSpec.Builder builder = EmbedCreateSpec.builder();
+            Player player = userToPlayer(message);
 
-        if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
-            builder.title(PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
-            message.getChannel().block().createMessage(builder.build()).block();
-            message.delete().block();
-            return;
-        }
-
-        String takeOffItemName = message.getContent().replaceFirst("!take_off ", "");
-        List<Item> equipList = InventoryManager.getInstance().getEquippedItems(player.getInventory());
-
-        for (Item item : equipList) {
-
-            if (item.getName().equalsIgnoreCase(takeOffItemName)) {
-
-                takeOff(player, item);
-                Save.getSave().saveFile(player);
-
-                builder.title("Вы сняли " + item.getName());
-                message.getChannel().block().createMessage(builder.build()).block();
-                message.delete().block();
+            if (playerInBattle(player)) {
+                MessageSender.getInstance().sendMessageInChannel(message, "Находясь в битве нельзя это использовать");
                 return;
-
             }
 
+            if (player.getInventory().getBag().size() == player.getInventory().getBagSize()) {
+                MessageSender.getInstance().sendMessageInChannel(message, PersonManager.getInstance().getPersonName(player) + " ваша сумка заполнена");
+                return;
+            }
+
+            String itemName = message.getContent().replaceFirst(Main.systems.commandPrefix + getName(), "");
+            Item item = InventoryManager.getInstance().findUnequippedItem(player.getInventory(), itemName);
+            item.equipItem(player.getInventory());
+            Save.getSave().saveFile(player);
+
+            String title = "Вы сняли " + item.getName();
+            MessageSender.getInstance().sendMessageInChannel(message, title);
+
+        } catch (IllegalArgumentException exception) {
+            MessageSender.getInstance().sendMessageInChannel(message, exception.getMessage());
         }
-
-        builder.title("У вас не экипирован " + takeOffItemName);
-        message.getChannel().block().createMessage(builder.build()).block();
-        message.delete().block();
-
-    }
-
-    private void takeOff(Player player, Item item) {
-
-        if (item instanceof Body) {
-            player.getInventory().setBody(new NoneBody());
-        } else if (item instanceof Finger) {
-            if (player.getInventory().getRightFinger().getName().equalsIgnoreCase(item.getName())) {
-                player.getInventory().setRightFinger(new NoneFinger());
-            }
-            if (player.getInventory().getLeftFinger().getName().equalsIgnoreCase(item.getName())) {
-                player.getInventory().setLeftFinger(new NoneFinger());
-            }
-        } else if (item instanceof Head) {
-            player.getInventory().setHead(new NoneHead());
-        } else if (item instanceof LeftHand) {
-            player.getInventory().setLeftHand(new NoneLeftHand());
-        } else if (item instanceof Legs) {
-            player.getInventory().setLegs(new NoneLegs());
-        } else if (item instanceof Neck) {
-            player.getInventory().setNeck(new NoneNeck());
-        } else if (item instanceof RightHand) {
-            player.getInventory().setRightHand(new NoneRightHand());
-        }
-
-        player.getInventory().getBag().add(item);
 
     }
 
