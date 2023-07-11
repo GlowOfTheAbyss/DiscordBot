@@ -13,7 +13,7 @@ public class MessageReader {
     private static final Snowflake mainChat = Snowflake.of(851600858100531230L);
     private static final List<Snowflake> readableChats = List.of(testChat, mainChat);
 
-    private static final MessageReader messageReader = new MessageReader();
+    private static MessageReader messageReader;
     private static CommandReader commandReader;
 
     private MessageReader(){
@@ -44,6 +44,9 @@ public class MessageReader {
     }
 
     public static MessageReader getMessageReader() {
+        if (messageReader == null) {
+            messageReader = new MessageReader();
+        }
         return messageReader;
     }
 }
