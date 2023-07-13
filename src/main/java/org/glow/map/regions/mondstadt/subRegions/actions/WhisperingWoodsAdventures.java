@@ -25,7 +25,7 @@ public class WhisperingWoodsAdventures extends Action {
 
     public WhisperingWoodsAdventures(Message message, Player player) {
         super(message, player);
-        setName(Main.systems.commandPrefix + GoCommand.getGoCommand().getName());
+        setName(Main.getSystems().getCommandPrefix() + GoCommand.getGoCommand().getName());
         setDescription("отправиться на поиски монстров");
     }
 

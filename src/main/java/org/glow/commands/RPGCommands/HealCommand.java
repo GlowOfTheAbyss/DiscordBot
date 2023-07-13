@@ -21,8 +21,8 @@ public class HealCommand extends Command {
                 %s%s [количество здоровья что нужно востановить]
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName(),
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName(),
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override

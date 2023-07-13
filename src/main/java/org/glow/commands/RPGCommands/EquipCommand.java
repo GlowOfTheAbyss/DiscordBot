@@ -20,7 +20,7 @@ public class EquipCommand extends Command {
                 %s%s [название предмета]
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override

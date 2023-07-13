@@ -36,7 +36,7 @@ public class BuyInSchulzsBlacksmith extends Action {
 
     public BuyInSchulzsBlacksmith(Message message, Player player) {
         super(message, player);
-        setName(Main.systems.commandPrefix + BuyCommand.getBuyCommand().getName());
+        setName(Main.getSystems().getCommandPrefix() + BuyCommand.getBuyCommand().getName());
         setDescription("Купить оружие или броню");
     }
 

@@ -24,8 +24,8 @@ public class MoveCommand extends Command {
                 """;
 
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName(),
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName(),
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MoveCommand extends Command {
 
     private void move(Message message, Player player) {
 
-        String thisLocationName = message.getContent().replaceFirst(Main.systems.commandPrefix + getName() + " ", "");
+        String thisLocationName = message.getContent().replaceFirst(Main.getSystems().getCommandPrefix() + getName() + " ", "");
 
         for (Location location : LocationManager.getInstance().getRegions()) {
             if (location.getName().equalsIgnoreCase(thisLocationName)) {

@@ -35,7 +35,7 @@ public class MessageReader {
             return;
         }
 
-        if (message.getContent().contains(Main.systems.commandPrefix)) {
+        if (message.getContent().contains(Main.getSystems().getCommandPrefix())) {
 
             commandReader.readCommand(message);
 

@@ -21,7 +21,7 @@ public class TakeOffCommand extends Command {
                 %s%s [имя предмета который необходимо снять]
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TakeOffCommand extends Command {
                 return;
             }
 
-            String itemName = message.getContent().replaceFirst(Main.systems.commandPrefix + getName(), "");
+            String itemName = message.getContent().replaceFirst(Main.getSystems().getCommandPrefix() + getName(), "");
             Item item = InventoryManager.getInstance().findUnequippedItem(player.getInventory(), itemName);
             item.equipItem(player.getInventory());
             Save.getSave().saveFile(player);

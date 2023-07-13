@@ -18,8 +18,6 @@ public class LevelUpCommand extends Command {
     private static LevelUpCommand levelUpCommand;
 
     private final List<Characteristic> characteristics = new ArrayList<>();
-    private int oneLevelCost = 600;
-    private int perLevelCost = 200;
 
     private LevelUpCommand() {
         setName("level_up");
@@ -28,7 +26,7 @@ public class LevelUpCommand extends Command {
                 %s%s [характеристика которую нужно прокачать]
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName()));
 
         characteristics.addAll(List.of(Characteristic.STRENGTH,
                 Characteristic.ENDURANCE,
@@ -70,8 +68,8 @@ public class LevelUpCommand extends Command {
                         Пример: %s%s %s
                         """;
         description = String.format(description,
-                Main.systems.commandPrefix, getName(),
-                Main.systems.commandPrefix, getName(), Characteristic.STRENGTH.getName());
+                Main.getSystems().getCommandPrefix(), getName(),
+                Main.getSystems().getCommandPrefix(), getName(), Characteristic.STRENGTH.getName());
 
         MessageSender.getInstance().sendMessageInChannel(message, title, description);
 
@@ -79,7 +77,7 @@ public class LevelUpCommand extends Command {
 
     public void levelUp(Message message, Player player) {
 
-        String thisSkill = message.getContent().replaceFirst(Main.systems.commandPrefix + getName() + " ", "");
+        String thisSkill = message.getContent().replaceFirst(Main.getSystems().getCommandPrefix() + getName() + " ", "");
 
         try {
 
@@ -156,6 +154,8 @@ public class LevelUpCommand extends Command {
             case LUCK -> player.getLuck();
         };
 
+        int oneLevelCost = 600;
+        int perLevelCost = 200;
         return oneLevelCost + (perLevelCost * level);
 
     }

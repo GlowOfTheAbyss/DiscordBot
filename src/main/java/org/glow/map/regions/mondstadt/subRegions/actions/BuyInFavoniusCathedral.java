@@ -22,7 +22,7 @@ public class BuyInFavoniusCathedral extends Action {
 
     public BuyInFavoniusCathedral(Message message, Player player) {
         super(message, player);
-        setName(Main.systems.commandPrefix + BuyCommand.getBuyCommand().getName());
+        setName(Main.getSystems().getCommandPrefix() + BuyCommand.getBuyCommand().getName());
         setDescription("Купить заклинание");
     }
 

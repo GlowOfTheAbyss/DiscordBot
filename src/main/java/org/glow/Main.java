@@ -2,7 +2,7 @@ package org.glow;
 
 public class Main {
 
-    public static Systems systems;
+    private static Systems systems;
 
     public static void main(String[] args) {
 
@@ -11,4 +11,7 @@ public class Main {
 
     }
 
+    public static Systems getSystems() {
+        return systems;
+    }
 }

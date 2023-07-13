@@ -2,6 +2,8 @@ package org.glow.fileManager;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.glow.Main;
+import org.glow.Systems;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -13,10 +15,12 @@ import java.nio.file.Path;
 
 public class Load {
 
-    private static final Load load = new Load();
-    final private Path path = Path.of("src\\main\\resources\\saves").toAbsolutePath();
+    private static Load load;
+    final private Path path;
 
-    private Load() {}
+    private Load() {
+        path = Main.getSystems().getSavesPath();
+    }
 
     public void loadFile() {
 
@@ -26,7 +30,6 @@ public class Load {
         try (DirectoryStream<Path> files = Files.newDirectoryStream(path)) {
 
             for (Path filePath : files) {
-
                 if (!Files.exists(filePath)) {
                     return;
                 }
@@ -38,13 +41,17 @@ public class Load {
 
 
         } catch (IOException exception) {
-            throw new IllegalArgumentException(exception);
+            System.out.println("Ошибка при загрузке экземпляров класса Player");
         }
 
 
     }
 
     public static Load getLoad() {
+        if (load == null) {
+            load = new Load();
+        }
         return load;
     }
+
 }

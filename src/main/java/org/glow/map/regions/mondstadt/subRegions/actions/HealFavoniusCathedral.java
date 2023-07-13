@@ -16,7 +16,7 @@ public class HealFavoniusCathedral extends Action {
 
     public HealFavoniusCathedral(Message message, Player player) {
         super(message, player);
-        setName(Main.systems.commandPrefix + HealCommand.getHealCommand().getName());
+        setName(Main.getSystems().getCommandPrefix() + HealCommand.getHealCommand().getName());
         setDescription("Востановить здоровье за мору");
     }
 
@@ -24,27 +24,28 @@ public class HealFavoniusCathedral extends Action {
     public void startAction() {
 
         if (getMessage().getContent().split(" ").length == 1) {
-
             createInfo();
-
         } else {
-
             heal();
-
         }
 
     }
 
     private void createInfo() {
 
+        int price = 10;
+        int heal = 10;
+
         String description = """
                 **Вы можете заплатить, что бы вас полечили:**
                 
                 %s %s = %s %s
                 """;
+        description = String.format(description,
+                price, Parameters.COINS.getName(), heal, Parameters.HEALTH.getName());
 
-        MessageSender.getInstance().sendMessageInChannel(getMessage(), FavoniusCathedral.getFavoniusCathedral().getName(), String.format(description,
-                10, Parameters.COINS, 10, Parameters.HEALTH));
+        MessageSender.getInstance().sendMessageInChannel(getMessage(),
+                FavoniusCathedral.getFavoniusCathedral().getName(), description);
 
     }
 

@@ -23,8 +23,8 @@ public class BuyCommand extends Command {
                 %s%s [название предмета] - купить предмет
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName(),
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName(),
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override

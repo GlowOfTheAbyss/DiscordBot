@@ -37,7 +37,7 @@ public class UserToPlayerCommand extends Command {
         String description = """
                 Используй команду %s%s
                 """;
-        description = String.format(description, Main.systems.commandPrefix, HelpCommand.getHelpCommand().getName());
+        description = String.format(description, Main.getSystems().getCommandPrefix(), HelpCommand.getHelpCommand().getName());
 
         MessageSender.getInstance().sendMessageInChannel(message, title, description);
 

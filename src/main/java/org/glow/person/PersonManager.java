@@ -36,12 +36,11 @@ public class PersonManager {
 
     public String getPersonName(Person person) {
         if (person instanceof Player) {
-            return Main.systems.gateway.getUserById(getPlayerSnowflake((Player) person)).block().getUsername();
+            return Main.getSystems().getGateway().getUserById(getPlayerSnowflake((Player) person)).block().getUsername();
         } else if (person instanceof NPC) {
             return ((NPC) person).getName();
-        } else {
-            throw new IllegalArgumentException("Person name not found");
         }
+        throw new IllegalArgumentException("Имя игрока не найдено");
     }
 
     public Region getPlayerRegion(Player player) {

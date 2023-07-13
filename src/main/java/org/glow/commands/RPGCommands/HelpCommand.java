@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
                 continue;
             }
 
-            stringBuilder.append(Main.systems.commandPrefix)
+            stringBuilder.append(Main.getSystems().getCommandPrefix())
                     .append(command.getName())
                     .append(" : ")
                     .append(command.getInfo())

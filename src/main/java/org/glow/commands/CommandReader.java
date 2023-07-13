@@ -11,12 +11,12 @@ import java.util.concurrent.Executors;
 
 public class CommandReader {
 
-    private static final CommandReader commandReader = new CommandReader();
-    private final HashSet<Command> commandList;
+    private static CommandReader commandReader;
+    private final HashSet<Command> commandList = new HashSet<>();
+
+    private final ExecutorService executorService;
 
     private CommandReader() {
-
-        commandList = new HashSet<>();
 
         commandList.add(BuyCommand.getBuyCommand());
         commandList.add(CastCommand.getCastCommand());
@@ -34,15 +34,16 @@ public class CommandReader {
 
         commandList.add(ShutDownCommand.getShutDownCommand());
 
-    }
-
-    public void readCommand(Message message) {
-        String thisCommandName = getCommand(message);
-        ExecutorService executorService = Executors.newFixedThreadPool(4, r -> {
+        executorService = Executors.newFixedThreadPool(4, r -> {
             Thread thread = new Thread(r);
             thread.setDaemon(true);
             return thread;
         });
+
+    }
+
+    public void readCommand(Message message) {
+        String thisCommandName = getCommand(message);
 
         for (Command command : commandList) {
             if (command.getName().equals(thisCommandName)) {
@@ -53,7 +54,7 @@ public class CommandReader {
     }
 
     private String getCommand(Message message) {
-        return message.getContent().split(" ")[0].replaceFirst(Main.systems.commandPrefix, "");
+        return message.getContent().split(" ")[0].replaceFirst(Main.getSystems().getCommandPrefix(), "");
     }
 
     public HashSet<Command> getCommandList() {
@@ -61,6 +62,9 @@ public class CommandReader {
     }
 
     public static CommandReader getCommandReader() {
+        if (commandReader == null) {
+            commandReader = new CommandReader();
+        }
         return commandReader;
     }
 

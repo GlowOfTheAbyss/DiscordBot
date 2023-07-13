@@ -12,7 +12,7 @@ public class DigOnMtTianheng extends Action {
 
     public DigOnMtTianheng(Message message, Player player) {
         super(message, player);
-        setName(Main.systems.commandPrefix + MineCommand.getMineCommand().getName());
+        setName(Main.getSystems().getCommandPrefix() + MineCommand.getMineCommand().getName());
         setDescription("Отправиться в заброшенную шахту");
     }
 

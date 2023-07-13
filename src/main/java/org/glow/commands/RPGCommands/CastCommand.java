@@ -22,8 +22,8 @@ public class CastCommand extends Command {
                 %s%s [название заклинания] [цель заклинания]
                 """;
         setInfo(String.format(info,
-                Main.systems.commandPrefix, getName(),
-                Main.systems.commandPrefix, getName()));
+                Main.getSystems().getCommandPrefix(), getName(),
+                Main.getSystems().getCommandPrefix(), getName()));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class CastCommand extends Command {
     private Spell findSpell(Message message) {
 
         String croppedMessage = message.getContent()
-                .replaceFirst(Main.systems.commandPrefix + castCommand.getName(), "");
+                .replaceFirst(Main.getSystems().getCommandPrefix() + castCommand.getName(), "");
 
         for (Spell spell : SpellManager.getInstance().getMagicList()) {
             if (croppedMessage.contains(spell.getSpellName())) {
