@@ -1,8 +1,6 @@
 package org.glow.activities.chests;
 
 import discord4j.core.object.entity.Message;
-import org.glow.item.Item;
-import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
 public abstract class Chest {
