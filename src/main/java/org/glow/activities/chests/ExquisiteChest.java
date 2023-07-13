@@ -13,6 +13,9 @@ import org.glow.item.legs.IronLegArmor;
 import org.glow.item.legs.WhiteIronLegArmor;
 import org.glow.item.righthand.DullBlade;
 import org.glow.item.righthand.SilverSword;
+import org.glow.message.MessageSender;
+import org.glow.message.Parameters;
+import org.glow.message.TextManager;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
 
@@ -20,9 +23,6 @@ import java.util.List;
 import java.util.Random;
 
 public class ExquisiteChest extends Chest {
-
-    private final int baseItemChance = 5;
-    private final int maxItemChance = 10;
 
     public ExquisiteChest(Message message, Player player) {
         super(message, player);
@@ -34,7 +34,10 @@ public class ExquisiteChest extends Chest {
         String title = PersonManager.getInstance().getPersonName(getPlayer()) + " находит богатый сундук";
 
         int random = new Random().nextInt(101);
+        int baseItemChance = 5;
         int itemChance = baseItemChance + ((int) (0.5 * getPlayer().getLuck()));
+
+        int maxItemChance = 10;
         if (itemChance > maxItemChance) {
             itemChance = maxItemChance;
         }
@@ -49,7 +52,13 @@ public class ExquisiteChest extends Chest {
         getPlayer().setCoins(getPlayer().getCoins() + randomCoins);
         Save.getSave().saveFile(getPlayer());
 
-        coinsFindMessage(title, randomCoins);
+        String description = """
+                %s находит %s %s
+                """;
+        description = String.format(description,
+                PersonManager.getInstance().getPersonName(getPlayer()), randomCoins, Parameters.COINS.getName());
+
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), title, description);
 
     }
 
@@ -63,14 +72,41 @@ public class ExquisiteChest extends Chest {
         Item randomItem = items.get(new Random().nextInt(items.size()));
 
         if (getPlayer().getInventory().getBag().size() >= getPlayer().getInventory().getBagSize()) {
-            fullInventoryMessage(randomItem);
+
+            String title = """
+                    %s находит %s, но у него нет места в инвентаре что бы его забрать
+                    """;
+            title = String.format(title,
+                    PersonManager.getInstance().getPersonName(getPlayer()), randomItem.getName());
+
+            String description = "Предмет остается в сундуке";
+
+            MessageSender.getInstance().sendMessageInChannel(getMessage(), title, description);
             return;
         }
 
         getPlayer().getInventory().getBag().add(randomItem);
         Save.getSave().saveFile(getPlayer());
 
-        itemFindMessage(randomItem);
+        String title = """
+                %s находит %s
+                """;
+        title = String.format(title,
+                PersonManager.getInstance().getPersonName(getPlayer()), randomItem.getName());
+
+        String description = """
+                %s добавлен в инвентарь
+                
+                %s
+                
+                %s
+                """;
+        description = String.format(description,
+                randomItem.getName(),
+                TextManager.getInstance().getPlayerInventory(getPlayer()),
+                TextManager.getInstance().getPlayerParameters(getPlayer()));
+
+        MessageSender.getInstance().sendMessageInChannel(getMessage(), title, description);
 
     }
 
