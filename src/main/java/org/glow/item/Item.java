@@ -1,6 +1,6 @@
 package org.glow.item;
 
-public abstract class Item implements Equipped, Unequipped {
+public abstract class Item {
 
     private String name;
     private int price;

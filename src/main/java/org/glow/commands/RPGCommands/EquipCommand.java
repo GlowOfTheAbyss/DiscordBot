@@ -4,7 +4,9 @@ import discord4j.core.object.entity.Message;
 import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
+import org.glow.item.Armor;
 import org.glow.item.Item;
+import org.glow.item.Weapon;
 import org.glow.message.MessageSender;
 import org.glow.person.Player;
 import org.glow.storage.InventoryManager;
@@ -39,7 +41,12 @@ public class EquipCommand extends Command {
             Item item = InventoryManager.getInstance().findUnequippedItem(player.getInventory(), equipItemName);
 
             player.getInventory().getBag().remove(item);
-            item.equipItem(player.getInventory());
+
+            if (item instanceof Armor) {
+                ((Armor) item).equipItem(player.getInventory());
+            } else if (item instanceof Weapon) {
+                ((Weapon) item).equipItem(player.getInventory());
+            }
             Save.getSave().saveFile(player);
 
             String title = "Вы экипировали " + item.getName();

@@ -1,6 +1,6 @@
 package org.glow.item;
 
-public abstract class Armor extends Item {
+public abstract class Armor extends Item implements Equipped, Unequipped {
 
     private int armor;
 

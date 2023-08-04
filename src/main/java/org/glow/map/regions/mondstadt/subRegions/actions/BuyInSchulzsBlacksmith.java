@@ -6,8 +6,8 @@ import org.glow.commands.RPGCommands.BuyCommand;
 import org.glow.fileManager.Save;
 import org.glow.item.Armor;
 import org.glow.item.Item;
-import org.glow.item.lefthand.Shield;
-import org.glow.item.righthand.Weapon;
+import org.glow.item.Shield;
+import org.glow.item.Weapon;
 import org.glow.item.body.IronBodyArmor;
 import org.glow.item.body.WhiteIronBodyArmor;
 import org.glow.item.lefthand.IronShield;
@@ -29,9 +29,9 @@ import java.util.List;
 
 public class BuyInSchulzsBlacksmith extends Action {
 
-    private static final List<Weapon> shopWeaponList = List.of(new DullBlade(), new SilverSword());
-    private static final List<Shield> shopShieldList = List.of(new IronShield(), new WhiteIronShield());
-    private static final List<Armor> shopArmorList = List.of(new IronHeadArmor(), new IronBodyArmor(), new IronLegArmor(),
+    private final List<Weapon> shopWeaponList = List.of(new DullBlade(), new SilverSword());
+    private final List<Shield> shopShieldList = List.of(new IronShield(), new WhiteIronShield());
+    private final List<Armor> shopArmorList = List.of(new IronHeadArmor(), new IronBodyArmor(), new IronLegArmor(),
             new WhiteIronHeadArmor(), new WhiteIronBodyArmor(), new WhiteIronLegArmor());
 
     public BuyInSchulzsBlacksmith(Message message, Player player) {
@@ -136,6 +136,18 @@ public class BuyInSchulzsBlacksmith extends Action {
         String title = (PersonManager.getInstance().getPersonName(getPlayer()) + ", вы приобрели " + item.getName());
         MessageSender.getInstance().sendMessageInChannel(getMessage(), title, TextManager.getInstance().getPlayerParameters(getPlayer()));
 
+    }
+
+    public List<Weapon> getShopWeaponList() {
+        return shopWeaponList;
+    }
+
+    public List<Shield> getShopShieldList() {
+        return shopShieldList;
+    }
+
+    public List<Armor> getShopArmorList() {
+        return shopArmorList;
     }
 
 }

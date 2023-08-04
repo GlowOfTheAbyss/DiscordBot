@@ -16,7 +16,7 @@ import java.util.Random;
 public class Dawn extends Spell {
 
     public Dawn() {
-        setSpellName("Рассвет");
+        setName("Рассвет");
         setSpellElement(Element.PYRO);
         setSpellInfo("""
                 Собравшись на оружии пламя превращается в стремящегося вперёд феникса, который наносит большой Пиро урон всем врагам на своём пути.

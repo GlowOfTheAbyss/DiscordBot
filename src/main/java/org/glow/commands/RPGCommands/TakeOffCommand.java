@@ -4,7 +4,9 @@ import discord4j.core.object.entity.Message;
 import org.glow.Main;
 import org.glow.commands.Command;
 import org.glow.fileManager.Save;
+import org.glow.item.Armor;
 import org.glow.item.Item;
+import org.glow.item.Weapon;
 import org.glow.message.MessageSender;
 import org.glow.person.PersonManager;
 import org.glow.person.Player;
@@ -43,7 +45,12 @@ public class TakeOffCommand extends Command {
 
             String itemName = message.getContent().replaceFirst(Main.getSystems().getCommandPrefix() + getName(), "");
             Item item = InventoryManager.getInstance().findUnequippedItem(player.getInventory(), itemName);
-            item.equipItem(player.getInventory());
+
+            if (item instanceof Armor) {
+                ((Armor) item).unequipItem(player.getInventory());
+            } else if (item instanceof Weapon) {
+                ((Weapon) item).unequipItem(player.getInventory());
+            }
             Save.getSave().saveFile(player);
 
             String title = "Вы сняли " + item.getName();

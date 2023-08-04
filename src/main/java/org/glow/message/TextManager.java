@@ -111,7 +111,7 @@ public class TextManager {
         } else {
             for (Spell spell : player.getSpellBook().getListSpell()) {
 
-                stringBuilder.append(spell.getSpellName())
+                stringBuilder.append(spell.getName())
                         .append(" | ")
                         .append(spell.getCoastInMana())
                         .append(" мана")

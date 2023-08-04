@@ -1,24 +1,12 @@
 package org.glow.magic;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import discord4j.core.object.entity.Message;
-import org.glow.person.Player;
+import org.glow.item.Item;
 
-public abstract class Spell implements Castable {
+public abstract class Spell extends Item implements Castable {
 
-    private String spellName;
     private Element spellElement;
     private String spellInfo;
     private int coastInMana;
-    private int price;
-
-    public String getSpellName() {
-        return spellName;
-    }
-
-    public void setSpellName(String spellName) {
-        this.spellName = spellName;
-    }
 
     public Element getSpellElement() {
         return spellElement;
@@ -42,14 +30,6 @@ public abstract class Spell implements Castable {
 
     public void setCoastInMana(int coastInMana) {
         this.coastInMana = coastInMana;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
 }

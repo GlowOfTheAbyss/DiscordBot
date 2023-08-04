@@ -1,4 +1,4 @@
-package org.glow.item.lefthand;
+package org.glow.item;
 
 import org.glow.item.Armor;
 

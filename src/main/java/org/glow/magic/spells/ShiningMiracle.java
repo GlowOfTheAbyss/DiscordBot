@@ -13,7 +13,7 @@ import java.util.Random;
 public class ShiningMiracle extends Spell {
 
     public ShiningMiracle() {
-        setSpellName("Чудесное сияние");
+        setName("Чудесное сияние");
         setSpellElement(Element.HYDRO);
         setSpellInfo("""
                 Восстанавливает определённое количество HP любому игроку, включая самого мага.
